@@ -231,19 +231,16 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                         0.0, 12.0, 0.0, 0.0),
                                     child: InkWell(
                                       onTap: () async {
-                                        final chatsCreateData = {
-                                          ...createChatsRecordData(
-                                            userA: currentUserReference,
-                                            userB:
-                                                listViewUsersRecord.reference,
-                                            lastMessage: 'NA',
-                                            lastMessageTime:
-                                                getCurrentTimestamp,
-                                            image: listViewUsersRecord.photoUrl,
-                                            lastMesageSeen: false,
-                                          ),
-                                          'users': [currentUserReference],
-                                        };
+                                        final chatsCreateData =
+                                            createChatsRecordData(
+                                          userA: currentUserReference,
+                                          userB: listViewUsersRecord.reference,
+                                          lastMessage: 'NA',
+                                          lastMessageTime: getCurrentTimestamp,
+                                          image: listViewUsersRecord.photoUrl,
+                                          lastMesageSeen: false,
+                                          users: currentUserReference,
+                                        );
                                         var chatsRecordReference =
                                             ChatsRecord.collection.doc();
                                         await chatsRecordReference
@@ -371,18 +368,16 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                         0.0, 12.0, 0.0, 0.0),
                                     child: InkWell(
                                       onTap: () async {
-                                        final chatsCreateData = {
-                                          ...createChatsRecordData(
-                                            userA: currentUserReference,
-                                            userB: searchdataItem.reference,
-                                            lastMessage: 'NA',
-                                            lastMessageTime:
-                                                getCurrentTimestamp,
-                                            image: searchdataItem.photoUrl,
-                                            lastMesageSeen: false,
-                                          ),
-                                          'users': [currentUserReference],
-                                        };
+                                        final chatsCreateData =
+                                            createChatsRecordData(
+                                          userA: currentUserReference,
+                                          userB: searchdataItem.reference,
+                                          lastMessage: 'NA',
+                                          lastMessageTime: getCurrentTimestamp,
+                                          image: searchdataItem.photoUrl,
+                                          lastMesageSeen: false,
+                                          users: currentUserReference,
+                                        );
                                         await ChatsRecord.collection
                                             .doc()
                                             .set(chatsCreateData);

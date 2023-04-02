@@ -9,8 +9,6 @@ part 'chats_record.g.dart';
 abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
   static Serializer<ChatsRecord> get serializer => _$chatsRecordSerializer;
 
-  BuiltList<DocumentReference>? get users;
-
   @BuiltValueField(wireName: 'user_a')
   DocumentReference? get userA;
 
@@ -28,12 +26,13 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
   @BuiltValueField(wireName: 'last_mesage_seen')
   bool? get lastMesageSeen;
 
+  DocumentReference? get users;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(ChatsRecordBuilder builder) => builder
-    ..users = ListBuilder()
     ..lastMessage = ''
     ..image = ''
     ..lastMesageSeen = false;
@@ -66,18 +65,19 @@ Map<String, dynamic> createChatsRecordData({
   DateTime? lastMessageTime,
   String? image,
   bool? lastMesageSeen,
+  DocumentReference? users,
 }) {
   final firestoreData = serializers.toFirestore(
     ChatsRecord.serializer,
     ChatsRecord(
       (c) => c
-        ..users = null
         ..userA = userA
         ..userB = userB
         ..lastMessage = lastMessage
         ..lastMessageTime = lastMessageTime
         ..image = image
-        ..lastMesageSeen = lastMesageSeen,
+        ..lastMesageSeen = lastMesageSeen
+        ..users = users,
     ),
   );
 

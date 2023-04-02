@@ -1,8 +1,10 @@
 import '/auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -323,8 +325,13 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                               .override(
                                                                 fontFamily:
                                                                     'Outfit',
-                                                                color: Color(
-                                                                    0xFF272737),
+                                                                color: chitchatChatsRecord!
+                                                                            .lastMesageSeen ==
+                                                                        true
+                                                                    ? Color(
+                                                                        0xB91726D0)
+                                                                    : Color(
+                                                                        0xFF0C0C0E),
                                                                 fontSize: 12.0,
                                                               ),
                                                         ),
@@ -380,7 +387,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                             listViewIndex];
                                     return Visibility(
                                       visible: (listViewChatMessagesRecord
-                                                  .user !=
+                                                  .user ==
                                               currentUserReference) &&
                                           (listViewChatMessagesRecord.text !=
                                                   null &&
@@ -459,7 +466,10 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                           MainAxisAlignment.end,
                                                       children: [
                                                         Text(
-                                                          '9:36PM',
+                                                          dateTimeFormat(
+                                                              'jm',
+                                                              listViewChatMessagesRecord
+                                                                  .timestamp!),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
@@ -832,9 +842,101 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                       Icons.attach_file,
                                       color: Colors.black,
                                     ),
-                                    Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.black,
+                                    InkWell(
+                                      onTap: () async {
+                                        final selectedMedia =
+                                            await selectMediaWithSourceBottomSheet(
+                                          context: context,
+                                          maxWidth: 300.00,
+                                          maxHeight: 300.00,
+                                          imageQuality: 51,
+                                          allowPhoto: true,
+                                        );
+                                        if (selectedMedia != null &&
+                                            selectedMedia.every((m) =>
+                                                validateFileFormat(
+                                                    m.storagePath, context))) {
+                                          setState(() =>
+                                              _model.isDataUploading = true);
+                                          var selectedUploadedFiles =
+                                              <FFUploadedFile>[];
+                                          var downloadUrls = <String>[];
+                                          try {
+                                            showUploadMessage(
+                                              context,
+                                              'Uploading file...',
+                                              showLoading: true,
+                                            );
+                                            selectedUploadedFiles =
+                                                selectedMedia
+                                                    .map((m) => FFUploadedFile(
+                                                          name: m.storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: m.bytes,
+                                                          height: m.dimensions
+                                                              ?.height,
+                                                          width: m.dimensions
+                                                              ?.width,
+                                                        ))
+                                                    .toList();
+
+                                            downloadUrls = (await Future.wait(
+                                              selectedMedia.map(
+                                                (m) async => await uploadData(
+                                                    m.storagePath, m.bytes),
+                                              ),
+                                            ))
+                                                .where((u) => u != null)
+                                                .map((u) => u!)
+                                                .toList();
+                                          } finally {
+                                            ScaffoldMessenger.of(context)
+                                                .hideCurrentSnackBar();
+                                            _model.isDataUploading = false;
+                                          }
+                                          if (selectedUploadedFiles.length ==
+                                                  selectedMedia.length &&
+                                              downloadUrls.length ==
+                                                  selectedMedia.length) {
+                                            setState(() {
+                                              _model.uploadedLocalFile =
+                                                  selectedUploadedFiles.first;
+                                              _model.uploadedFileUrl =
+                                                  downloadUrls.first;
+                                            });
+                                            showUploadMessage(
+                                                context, 'Success!');
+                                          } else {
+                                            setState(() {});
+                                            showUploadMessage(context,
+                                                'Failed to upload data');
+                                            return;
+                                          }
+                                        }
+
+                                        final chatMessagesCreateData =
+                                            createChatMessagesRecordData(
+                                          user: currentUserReference,
+                                          chat: widget.chatUser,
+                                          image: _model.uploadedFileUrl,
+                                          timestamp: getCurrentTimestamp,
+                                        );
+                                        await ChatMessagesRecord.collection
+                                            .doc()
+                                            .set(chatMessagesCreateData);
+
+                                        final chatsUpdateData =
+                                            createChatsRecordData(
+                                          lastMessageTime: getCurrentTimestamp,
+                                        );
+                                        await chitchatChatsRecord!.reference
+                                            .update(chatsUpdateData);
+                                      },
+                                      child: Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -843,24 +945,71 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
-                              child: Container(
-                                width: 100.0,
-                                height: 100.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Icon(
-                                      Icons.send,
-                                      color: Color(0xFF272424),
-                                      size: 36.0,
-                                    ),
-                                  ],
+                              child: InkWell(
+                                onTap: () async {
+                                  if (_model.textController.text != null &&
+                                      _model.textController.text != '') {
+                                    final chatMessagesCreateData =
+                                        createChatMessagesRecordData(
+                                      user: currentUserReference,
+                                      chat: widget.chatUser,
+                                      text: _model.textController.text,
+                                      timestamp: getCurrentTimestamp,
+                                    );
+                                    await ChatMessagesRecord.collection
+                                        .doc()
+                                        .set(chatMessagesCreateData);
+
+                                    final chatsUpdateData =
+                                        createChatsRecordData(
+                                      lastMessageTime: getCurrentTimestamp,
+                                      lastMessage:
+                                          chitchatChatsRecord!.lastMessage,
+                                    );
+                                    await chitchatChatsRecord!.reference
+                                        .update(chatsUpdateData);
+                                    setState(() {
+                                      _model.textController?.clear();
+                                    });
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Please type something.....',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  width: 100.0,
+                                  height: 100.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Icon(
+                                        Icons.send,
+                                        color: Color(0xFF272424),
+                                        size: 36.0,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

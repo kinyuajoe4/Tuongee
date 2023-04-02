@@ -11,13 +11,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AsdfasdfRecord.serializer)
       ..add(ChatMessagesRecord.serializer)
       ..add(ChatsRecord.serializer)
-      ..add(UsersRecord.serializer)
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType(
-                DocumentReference, const [const FullType.nullable(Object)])
-          ]),
-          () => new ListBuilder<DocumentReference<Object?>>()))
+      ..add(UsersRecord.serializer))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint
