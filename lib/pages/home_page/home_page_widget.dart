@@ -2,9 +2,12 @@ import '/auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/book_appointment/book_appointment_widget.dart';
 import '/components/main_logo/main_logo_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/appointment_details/appointment_details_widget.dart';
+import '/pages/chitchat/chitchat_widget.dart';
+import '/pages/robotchat/robotchat_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -785,6 +788,46 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ],
                     ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 30.0,
+                        borderWidth: 1.0,
+                        buttonSize: 60.0,
+                        icon: Icon(
+                          Icons.add,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 30.0,
+                        ),
+                        onPressed: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChitchatWidget(),
+                            ),
+                          );
+                        },
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RobotchatWidget(),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.settings_outlined,
+                          color: Colors.black,
+                          size: 24.0,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

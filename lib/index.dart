@@ -17,7 +17,7 @@ export '/pages/edit_profile/edit_profile_widget.dart' show EditProfileWidget;
 export '/pages/find_symptoms/find_symptoms_widget.dart' show FindSymptomsWidget;
 export '/pages/appointment_details_profile/appointment_details_profile_widget.dart'
     show AppointmentDetailsProfileWidget;
-export '/robotchat/robotchat_widget.dart' show RobotchatWidget;
-export '/allusers/allusers_widget.dart' show AllusersWidget;
-export '/activeusers/activeusers_widget.dart' show ActiveusersWidget;
-export '/chitchat/chitchat_widget.dart' show ChitchatWidget;
+export '/pages/robotchat/robotchat_widget.dart' show RobotchatWidget;
+export '/pages/allusers/allusers_widget.dart' show AllusersWidget;
+export '/pages/activeusers/activeusers_widget.dart' show ActiveusersWidget;
+export '/pages/chitchat/chitchat_widget.dart' show ChitchatWidget;

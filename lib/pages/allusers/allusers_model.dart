@@ -1,9 +1,9 @@
-import '/activeusers/activeusers_widget.dart';
 import '/auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/chitchat/chitchat_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/activeusers/activeusers_widget.dart';
+import '/pages/chitchat/chitchat_widget.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
