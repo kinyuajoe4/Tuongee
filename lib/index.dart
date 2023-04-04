@@ -21,3 +21,6 @@ export '/pages/robotchat/robotchat_widget.dart' show RobotchatWidget;
 export '/pages/allusers/allusers_widget.dart' show AllusersWidget;
 export '/pages/activeusers/activeusers_widget.dart' show ActiveusersWidget;
 export '/pages/chitchat/chitchat_widget.dart' show ChitchatWidget;
+export '/pages/robotchat_copy/robotchat_copy_widget.dart'
+    show RobotchatCopyWidget;
+export '/errors/errors_widget.dart' show ErrorsWidget;

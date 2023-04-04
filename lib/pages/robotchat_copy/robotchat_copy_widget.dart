@@ -2,22 +2,23 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'robotchat_model.dart';
-export 'robotchat_model.dart';
+import 'robotchat_copy_model.dart';
+export 'robotchat_copy_model.dart';
 
-class RobotchatWidget extends StatefulWidget {
-  const RobotchatWidget({Key? key}) : super(key: key);
+class RobotchatCopyWidget extends StatefulWidget {
+  const RobotchatCopyWidget({Key? key}) : super(key: key);
 
   @override
-  _RobotchatWidgetState createState() => _RobotchatWidgetState();
+  _RobotchatCopyWidgetState createState() => _RobotchatCopyWidgetState();
 }
 
-class _RobotchatWidgetState extends State<RobotchatWidget> {
-  late RobotchatModel _model;
+class _RobotchatCopyWidgetState extends State<RobotchatCopyWidget> {
+  late RobotchatCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -25,7 +26,7 @@ class _RobotchatWidgetState extends State<RobotchatWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => RobotchatModel());
+    _model = createModel(context, () => RobotchatCopyModel());
 
     _model.textController1 ??= TextEditingController();
     _model.insController ??= TextEditingController();
@@ -185,36 +186,12 @@ class _RobotchatWidgetState extends State<RobotchatWidget> {
                               .asValidator(context),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
-                        child: Text(
-                          valueOrDefault<String>(
-                            TexteditCall.text(
-                              (_model.textedit?.jsonBody ?? ''),
-                            ).toString(),
-                            'first response',
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
-                        child: Text(
-                          valueOrDefault<String>(
-                            TextcompletionCall.text(
-                              (_model.completion?.jsonBody ?? ''),
-                            ).toString(),
-                            'second response',
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ),
                       FFButtonWidget(
                         onPressed: () async {
-                          _model.completion = await TextcompletionCall.call(
-                            prompt: _model.textController1.text,
+                          _model.output = await actions.getGPT3Completion(
+                            _model.textController1.text,
+                            256,
+                            .7,
                           );
                           _model.textedit = await TexteditCall.call(
                             input: _model.textController1.text,
@@ -248,17 +225,18 @@ class _RobotchatWidgetState extends State<RobotchatWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 10.0),
-                        child: Image.network(
-                          ImagegenerationCall.imageurl(
-                            (_model.image?.jsonBody ?? ''),
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
                     ],
+                  ),
+                  Container(
+                    width: 100.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: Text(
+                      _model.output!,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
                   ),
                 ],
               ),

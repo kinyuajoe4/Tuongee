@@ -171,15 +171,17 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           2.0, 2.0, 2.0, 2.0),
-                                      child: Container(
-                                        width: 60.0,
-                                        height: 60.0,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/UI_avatar_2@3x.png',
+                                      child: AuthUserStreamWidget(
+                                        builder: (context) => Container(
+                                          width: 60.0,
+                                          height: 60.0,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Image.network(
+                                            currentUserPhoto,
+                                          ),
                                         ),
                                       ),
                                     ),

@@ -21,6 +21,9 @@ abstract class ChatMessagesRecord
 
   DateTime? get timestamp;
 
+  @BuiltValueField(wireName: 'chat_user')
+  DocumentReference? get chatUser;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -57,6 +60,7 @@ Map<String, dynamic> createChatMessagesRecordData({
   String? text,
   String? image,
   DateTime? timestamp,
+  DocumentReference? chatUser,
 }) {
   final firestoreData = serializers.toFirestore(
     ChatMessagesRecord.serializer,
@@ -66,7 +70,8 @@ Map<String, dynamic> createChatMessagesRecordData({
         ..chat = chat
         ..text = text
         ..image = image
-        ..timestamp = timestamp,
+        ..timestamp = timestamp
+        ..chatUser = chatUser,
     ),
   );
 

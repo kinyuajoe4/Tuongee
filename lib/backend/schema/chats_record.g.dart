@@ -71,6 +71,13 @@ class _$ChatsRecordSerializer implements StructuredSerializer<ChatsRecord> {
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.text;
+    if (value != null) {
+      result
+        ..add('text')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -127,6 +134,10 @@ class _$ChatsRecordSerializer implements StructuredSerializer<ChatsRecord> {
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'text':
+          result.text = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -156,6 +167,8 @@ class _$ChatsRecord extends ChatsRecord {
   @override
   final DocumentReference<Object?>? users;
   @override
+  final String? text;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ChatsRecord([void Function(ChatsRecordBuilder)? updates]) =>
@@ -169,6 +182,7 @@ class _$ChatsRecord extends ChatsRecord {
       this.image,
       this.lastMesageSeen,
       this.users,
+      this.text,
       this.ffRef})
       : super._();
 
@@ -190,6 +204,7 @@ class _$ChatsRecord extends ChatsRecord {
         image == other.image &&
         lastMesageSeen == other.lastMesageSeen &&
         users == other.users &&
+        text == other.text &&
         ffRef == other.ffRef;
   }
 
@@ -203,6 +218,7 @@ class _$ChatsRecord extends ChatsRecord {
     _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jc(_$hash, lastMesageSeen.hashCode);
     _$hash = $jc(_$hash, users.hashCode);
+    _$hash = $jc(_$hash, text.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -218,6 +234,7 @@ class _$ChatsRecord extends ChatsRecord {
           ..add('image', image)
           ..add('lastMesageSeen', lastMesageSeen)
           ..add('users', users)
+          ..add('text', text)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -256,6 +273,10 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
   DocumentReference<Object?>? get users => _$this._users;
   set users(DocumentReference<Object?>? users) => _$this._users = users;
 
+  String? _text;
+  String? get text => _$this._text;
+  set text(String? text) => _$this._text = text;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -274,6 +295,7 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
       _image = $v.image;
       _lastMesageSeen = $v.lastMesageSeen;
       _users = $v.users;
+      _text = $v.text;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -304,6 +326,7 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
             image: image,
             lastMesageSeen: lastMesageSeen,
             users: users,
+            text: text,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

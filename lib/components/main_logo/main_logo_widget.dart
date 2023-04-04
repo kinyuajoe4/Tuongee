@@ -38,28 +38,42 @@ class _MainLogoWidgetState extends State<MainLogoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
-        if (!(Theme.of(context).brightness == Brightness.dark))
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-            child: Image.asset(
-              'assets/images/health-ai_logoHorz_dark@3x.png',
-              width: 120.0,
-              height: 40.0,
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-        if (Theme.of(context).brightness == Brightness.dark)
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-            child: Image.asset(
-              'assets/images/health-ai_logoHorz.png',
-              width: 120.0,
-              height: 40.0,
-              fit: BoxFit.fitWidth,
-            ),
-          ),
+        Stack(
+          children: [
+            if (!(Theme.of(context).brightness == Brightness.dark))
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                child: Image.asset(
+                  'assets/images/Group_815.png',
+                  width: 100.0,
+                  height: 80.0,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+            if (Theme.of(context).brightness == Brightness.dark)
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                child: Image.asset(
+                  'assets/images/Group_815.png',
+                  width: 100.0,
+                  height: 60.0,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+          ],
+        ),
+        Text(
+          'The Platform',
+          textAlign: TextAlign.end,
+          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                fontFamily: 'Outfit',
+                color: Color(0xFF0C0C0E),
+                fontSize: 20.0,
+              ),
+        ),
       ],
     );
   }

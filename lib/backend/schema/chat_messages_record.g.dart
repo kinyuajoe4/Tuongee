@@ -59,6 +59,14 @@ class _$ChatMessagesRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.chatUser;
+    if (value != null) {
+      result
+        ..add('chat_user')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -106,6 +114,12 @@ class _$ChatMessagesRecordSerializer
           result.timestamp = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
+        case 'chat_user':
+          result.chatUser = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -131,6 +145,8 @@ class _$ChatMessagesRecord extends ChatMessagesRecord {
   @override
   final DateTime? timestamp;
   @override
+  final DocumentReference<Object?>? chatUser;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ChatMessagesRecord(
@@ -138,7 +154,13 @@ class _$ChatMessagesRecord extends ChatMessagesRecord {
       (new ChatMessagesRecordBuilder()..update(updates))._build();
 
   _$ChatMessagesRecord._(
-      {this.user, this.chat, this.text, this.image, this.timestamp, this.ffRef})
+      {this.user,
+      this.chat,
+      this.text,
+      this.image,
+      this.timestamp,
+      this.chatUser,
+      this.ffRef})
       : super._();
 
   @override
@@ -159,6 +181,7 @@ class _$ChatMessagesRecord extends ChatMessagesRecord {
         text == other.text &&
         image == other.image &&
         timestamp == other.timestamp &&
+        chatUser == other.chatUser &&
         ffRef == other.ffRef;
   }
 
@@ -170,6 +193,7 @@ class _$ChatMessagesRecord extends ChatMessagesRecord {
     _$hash = $jc(_$hash, text.hashCode);
     _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jc(_$hash, timestamp.hashCode);
+    _$hash = $jc(_$hash, chatUser.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -183,6 +207,7 @@ class _$ChatMessagesRecord extends ChatMessagesRecord {
           ..add('text', text)
           ..add('image', image)
           ..add('timestamp', timestamp)
+          ..add('chatUser', chatUser)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -212,6 +237,11 @@ class ChatMessagesRecordBuilder
   DateTime? get timestamp => _$this._timestamp;
   set timestamp(DateTime? timestamp) => _$this._timestamp = timestamp;
 
+  DocumentReference<Object?>? _chatUser;
+  DocumentReference<Object?>? get chatUser => _$this._chatUser;
+  set chatUser(DocumentReference<Object?>? chatUser) =>
+      _$this._chatUser = chatUser;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -228,6 +258,7 @@ class ChatMessagesRecordBuilder
       _text = $v.text;
       _image = $v.image;
       _timestamp = $v.timestamp;
+      _chatUser = $v.chatUser;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -256,6 +287,7 @@ class ChatMessagesRecordBuilder
             text: text,
             image: image,
             timestamp: timestamp,
+            chatUser: chatUser,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

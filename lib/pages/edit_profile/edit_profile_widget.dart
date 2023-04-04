@@ -108,17 +108,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         color: FlutterFlowTheme.of(context).darkBackground,
                         shape: BoxShape.circle,
                       ),
-                      child: Container(
-                        width: 80.0,
-                        height: 80.0,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.network(
-                          valueOrDefault<String>(
-                            editProfileUsersRecord.photoUrl,
-                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/health-ai-mj6puy/assets/hu4vs0lstizz/UI_avatar_2@3x.png',
+                      child: AuthUserStreamWidget(
+                        builder: (context) => Container(
+                          width: 80.0,
+                          height: 80.0,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.network(
+                            currentUserPhoto,
                           ),
                         ),
                       ),
@@ -129,6 +128,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           final selectedMedia = await selectMedia(
+                            maxWidth: 200.00,
+                            maxHeight: 200.00,
+                            imageQuality: 50,
                             mediaSource: MediaSource.photoGallery,
                             multiImage: false,
                           );

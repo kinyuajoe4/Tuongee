@@ -28,6 +28,8 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
 
   DocumentReference? get users;
 
+  String? get text;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -35,7 +37,8 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
   static void _initializeBuilder(ChatsRecordBuilder builder) => builder
     ..lastMessage = ''
     ..image = ''
-    ..lastMesageSeen = false;
+    ..lastMesageSeen = false
+    ..text = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('chats');
@@ -66,6 +69,7 @@ Map<String, dynamic> createChatsRecordData({
   String? image,
   bool? lastMesageSeen,
   DocumentReference? users,
+  String? text,
 }) {
   final firestoreData = serializers.toFirestore(
     ChatsRecord.serializer,
@@ -77,7 +81,8 @@ Map<String, dynamic> createChatsRecordData({
         ..lastMessageTime = lastMessageTime
         ..image = image
         ..lastMesageSeen = lastMesageSeen
-        ..users = users,
+        ..users = users
+        ..text = text,
     ),
   );
 

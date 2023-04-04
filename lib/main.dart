@@ -88,13 +88,10 @@ class _MyAppState extends State<MyApp> {
       home: initialUser == null || displaySplashImage
           ? Builder(
               builder: (context) => Container(
-                color: Colors.transparent,
-                child: Center(
-                  child: Image.asset(
-                    'assets/images/Medical_ScheduleApp_0.0.png',
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    fit: BoxFit.fitWidth,
-                  ),
+                color: Color(0xB93A47C1),
+                child: Image.asset(
+                  'assets/images/image.jpg',
+                  fit: BoxFit.fitWidth,
                 ),
               ),
             )

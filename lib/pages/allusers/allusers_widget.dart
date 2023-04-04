@@ -1,5 +1,6 @@
 import '/auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/activeusers/activeusers_widget.dart';
@@ -94,7 +95,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                 width: 48.0,
                                 height: 48.0,
                                 decoration: BoxDecoration(
-                                  color: Color(0xFF433636),
+                                  color: FlutterFlowTheme.of(context).textColor,
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: Image.network(
@@ -102,6 +103,9 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                     ).image,
                                   ),
                                   shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Color(0xFF0C0C0E),
+                                  ),
                                 ),
                               ),
                             ),
@@ -121,9 +125,14 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                   () async {
                                     await Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ActiveusersWidget(),
+                                      PageTransition(
+                                        type: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 300),
+                                        reverseDuration:
+                                            Duration(milliseconds: 300),
+                                        child: ActiveusersWidget(
+                                          search: _model.textController.text,
+                                        ),
                                       ),
                                     );
                                   },
@@ -207,80 +216,115 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 0.0),
-                        child: StreamBuilder<List<UsersRecord>>(
-                          stream: queryUsersRecord(),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 40.0,
-                                  height: 40.0,
-                                  child: SpinKitPumpingHeart(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    size: 40.0,
-                                  ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 0.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                shape: BoxShape.circle,
+                              ),
+                              child: FlutterFlowIconButton(
+                                borderColor:
+                                    FlutterFlowTheme.of(context).darkBackground,
+                                borderRadius: 30.0,
+                                borderWidth: 1.0,
+                                buttonSize: 60.0,
+                                icon: Icon(
+                                  Icons.add,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 30.0,
                                 ),
-                              );
-                            }
-                            List<UsersRecord> rowUsersRecordList = snapshot
-                                .data!
-                                .where((u) => u.uid != currentUserUid)
-                                .toList();
-                            return SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: List.generate(
-                                    rowUsersRecordList.length, (rowIndex) {
-                                  final rowUsersRecord =
-                                      rowUsersRecordList[rowIndex];
-                                  return InkWell(
-                                    onTap: () async {
-                                      final chatsCreateData =
-                                          createChatsRecordData(
-                                        userA: currentUserReference,
-                                        userB: rowUsersRecord.reference,
-                                        lastMessage: 'NA',
-                                        lastMessageTime: getCurrentTimestamp,
-                                        image: rowUsersRecord.photoUrl,
-                                        lastMesageSeen: false,
-                                        users: currentUserReference,
-                                      );
-                                      var chatsRecordReference =
-                                          ChatsRecord.collection.doc();
-                                      await chatsRecordReference
-                                          .set(chatsCreateData);
-                                      _model.na =
-                                          ChatsRecord.getDocumentFromData(
-                                              chatsCreateData,
-                                              chatsRecordReference);
-
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                      width: 60.0,
-                                      height: 60.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xB91726D0),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: Image.network(
-                                            rowUsersRecord.photoUrl!,
-                                          ).image,
-                                        ),
-                                        shape: BoxShape.circle,
+                                onPressed: () {
+                                  print('IconButton pressed ...');
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 14.0, 0.0, 0.0),
+                            child: StreamBuilder<List<UsersRecord>>(
+                              stream: queryUsersRecord(),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      child: SpinKitPumpingHeart(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 40.0,
                                       ),
                                     ),
                                   );
-                                }),
-                              ),
-                            );
-                          },
-                        ),
+                                }
+                                List<UsersRecord> rowUsersRecordList = snapshot
+                                    .data!
+                                    .where((u) => u.uid != currentUserUid)
+                                    .toList();
+                                return SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: List.generate(
+                                        rowUsersRecordList.length, (rowIndex) {
+                                      final rowUsersRecord =
+                                          rowUsersRecordList[rowIndex];
+                                      return InkWell(
+                                        onTap: () async {
+                                          final chatsCreateData =
+                                              createChatsRecordData(
+                                            userA: currentUserReference,
+                                            userB: rowUsersRecord.reference,
+                                            lastMessage: 'NA',
+                                            lastMessageTime:
+                                                getCurrentTimestamp,
+                                            image: rowUsersRecord.photoUrl,
+                                            lastMesageSeen: false,
+                                            users: currentUserReference,
+                                          );
+                                          var chatsRecordReference =
+                                              ChatsRecord.collection.doc();
+                                          await chatsRecordReference
+                                              .set(chatsCreateData);
+                                          _model.na =
+                                              ChatsRecord.getDocumentFromData(
+                                                  chatsCreateData,
+                                                  chatsRecordReference);
+
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                          width: 60.0,
+                                          height: 60.0,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xB91726D0),
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: Image.network(
+                                                rowUsersRecord.photoUrl!,
+                                              ).image,
+                                            ),
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -391,7 +435,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                     children: [
                                                       if (currentUserReference !=
                                                           listViewChatsRecord
-                                                              .userB)
+                                                              .users)
                                                         StreamBuilder<
                                                             UsersRecord>(
                                                           stream: UsersRecord
@@ -441,7 +485,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                         ),
                                                       if (currentUserReference ==
                                                           listViewChatsRecord
-                                                              .userB)
+                                                              .users)
                                                         Container(
                                                           width: 48.0,
                                                           height: 48.0,
@@ -472,7 +516,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                           children: [
                                                             if (currentUserReference !=
                                                                 listViewChatsRecord
-                                                                    .userB)
+                                                                    .users)
                                                               StreamBuilder<
                                                                   UsersRecord>(
                                                                 stream: UsersRecord
@@ -515,7 +559,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                               ),
                                                             if (currentUserReference ==
                                                                 listViewChatsRecord
-                                                                    .userB)
+                                                                    .users)
                                                               Text(
                                                                 containerUsersRecord
                                                                     .displayName!,
@@ -551,9 +595,8 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                             context)
                                                         .bodyMedium,
                                                   ),
-                                                  if (listViewChatsRecord
-                                                          .lastMesageSeen ??
-                                                      true)
+                                                  if (!listViewChatsRecord
+                                                      .lastMesageSeen!)
                                                     Icon(
                                                       Icons.done_all,
                                                       color: Color(0xB91726D0),

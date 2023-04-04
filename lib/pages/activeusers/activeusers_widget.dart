@@ -36,7 +36,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
     super.initState();
     _model = createModel(context, () => ActiveusersModel());
 
-    _model.textController ??= TextEditingController(text: '');
+    _model.textController ??= TextEditingController(text: widget.search);
   }
 
   @override
@@ -122,6 +122,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                     '_model.textController',
                     Duration(milliseconds: 2000),
                     () async {
+                      // SACH
                       await queryUsersRecordOnce()
                           .then(
                             (records) => _model.simpleSearchResults =
@@ -131,7 +132,6 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                     (record) => TextSearchItem(record, [
                                       record.displayName!,
                                       record.email!,
-                                      record.ailments!,
                                       record.phoneNumber!
                                     ]),
                                   )
@@ -139,7 +139,6 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                             )
                                     .search(_model.textController.text)
                                     .map((r) => r.object)
-                                    .take(100)
                                     .toList(),
                           )
                           .onError((_, __) => _model.simpleSearchResults = [])
@@ -351,18 +350,35 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                           ),
                         if (_model.textController.text != null &&
                             _model.textController.text != '')
-                          Builder(
-                            builder: (context) {
-                              final searchdata =
-                                  _model.simpleSearchResults.toList();
+                          StreamBuilder<List<UsersRecord>>(
+                            stream: queryUsersRecord(),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    child: SpinKitPumpingHeart(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      size: 40.0,
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<UsersRecord> listViewUsersRecordList =
+                                  snapshot.data!
+                                      .where((u) => u.uid != currentUserUid)
+                                      .toList();
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                itemCount: searchdata.length,
-                                itemBuilder: (context, searchdataIndex) {
-                                  final searchdataItem =
-                                      searchdata[searchdataIndex];
+                                itemCount: listViewUsersRecordList.length,
+                                itemBuilder: (context, listViewIndex) {
+                                  final listViewUsersRecord =
+                                      listViewUsersRecordList[listViewIndex];
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 12.0, 0.0, 0.0),
@@ -371,10 +387,10 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                         final chatsCreateData =
                                             createChatsRecordData(
                                           userA: currentUserReference,
-                                          userB: searchdataItem.reference,
+                                          userB: listViewUsersRecord.reference,
                                           lastMessage: 'NA',
                                           lastMessageTime: getCurrentTimestamp,
-                                          image: searchdataItem.photoUrl,
+                                          image: listViewUsersRecord.photoUrl,
                                           lastMesageSeen: false,
                                           users: currentUserReference,
                                         );
@@ -419,7 +435,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                               BoxShape.circle,
                                                         ),
                                                         child: Image.network(
-                                                          searchdataItem
+                                                          listViewUsersRecord
                                                               .photoUrl!,
                                                           fit: BoxFit.cover,
                                                         ),
@@ -437,14 +453,14 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                               MainAxisSize.max,
                                                           children: [
                                                             Text(
-                                                              searchdataItem
+                                                              listViewUsersRecord
                                                                   .displayName!,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium,
                                                             ),
                                                             Text(
-                                                              searchdataItem
+                                                              listViewUsersRecord
                                                                   .email!,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
