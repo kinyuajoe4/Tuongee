@@ -46,27 +46,27 @@ class _AllusersWidgetState extends State<AllusersWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primary,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Page Title',
-          style: FlutterFlowTheme.of(context).headlineMedium.override(
-                fontFamily: 'Outfit',
-                color: Colors.white,
-                fontSize: 22.0,
-              ),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Page Title',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Outfit',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 2.0,
         ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -274,7 +274,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                 return SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
-                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: List.generate(
                                         rowUsersRecordList.length, (rowIndex) {
                                       final rowUsersRecord =
@@ -289,8 +289,8 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                             lastMessageTime:
                                                 getCurrentTimestamp,
                                             image: rowUsersRecord.photoUrl,
-                                            lastMesageSeen: false,
-                                            users: currentUserReference,
+                                            user: currentUserReference,
+                                            messageSeen: false,
                                           );
                                           var chatsRecordReference =
                                               ChatsRecord.collection.doc();
@@ -403,6 +403,8 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                               chatUser:
                                                   listViewChatsRecord.reference,
                                               userRef: currentUserReference,
+                                              userProfile:
+                                                  containerUsersRecord.photoUrl,
                                             ),
                                           ),
                                         );
@@ -435,7 +437,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                     children: [
                                                       if (currentUserReference !=
                                                           listViewChatsRecord
-                                                              .users)
+                                                              .user)
                                                         StreamBuilder<
                                                             UsersRecord>(
                                                           stream: UsersRecord
@@ -485,7 +487,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                         ),
                                                       if (currentUserReference ==
                                                           listViewChatsRecord
-                                                              .users)
+                                                              .user)
                                                         Container(
                                                           width: 48.0,
                                                           height: 48.0,
@@ -516,7 +518,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                           children: [
                                                             if (currentUserReference !=
                                                                 listViewChatsRecord
-                                                                    .users)
+                                                                    .user)
                                                               StreamBuilder<
                                                                   UsersRecord>(
                                                                 stream: UsersRecord
@@ -549,7 +551,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                                       snapshot
                                                                           .data!;
                                                                   return Text(
-                                                                    textUsersRecord
+                                                                    containerUsersRecord
                                                                         .displayName!,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -559,7 +561,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                               ),
                                                             if (currentUserReference ==
                                                                 listViewChatsRecord
-                                                                    .users)
+                                                                    .user)
                                                               Text(
                                                                 containerUsersRecord
                                                                     .displayName!,
@@ -595,20 +597,6 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                             context)
                                                         .bodyMedium,
                                                   ),
-                                                  if (!listViewChatsRecord
-                                                      .lastMesageSeen!)
-                                                    Icon(
-                                                      Icons.done_all,
-                                                      color: Color(0xB91726D0),
-                                                      size: 24.0,
-                                                    ),
-                                                  if (!listViewChatsRecord
-                                                      .lastMesageSeen!)
-                                                    Icon(
-                                                      Icons.done_all,
-                                                      color: Color(0xFF0C0C0E),
-                                                      size: 24.0,
-                                                    ),
                                                 ],
                                               ),
                                             ],

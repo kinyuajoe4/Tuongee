@@ -1,11 +1,14 @@
 import '/auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_radio_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
 import '/main.dart';
 import '/pages/add_another_profile/add_another_profile_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -295,33 +298,33 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        leading: InkWell(
-          onTap: () async {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.chevron_left_rounded,
-            color: FlutterFlowTheme.of(context).grayLight,
-            size: 32.0,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          leading: InkWell(
+            onTap: () async {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.chevron_left_rounded,
+              color: FlutterFlowTheme.of(context).grayLight,
+              size: 32.0,
+            ),
           ),
+          title: Text(
+            'Complete Profile',
+            style: FlutterFlowTheme.of(context).headlineSmall,
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 0.0,
         ),
-        title: Text(
-          'Complete Profile',
-          style: FlutterFlowTheme.of(context).headlineSmall,
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 0.0,
-      ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Row(
+        body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -345,18 +348,85 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Container(
-                        width: 120.0,
-                        height: 120.0,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.asset(
-                          'assets/images/uiAvatar@2x.png',
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['circleImageOnPageLoadAnimation']!),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            width: 120.0,
+                            height: 120.0,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.network(
+                              _model.uploadedFileUrl,
+                            ),
+                          ).animateOnPageLoad(
+                              animationsMap['circleImageOnPageLoadAnimation']!),
+                          FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 30.0,
+                            borderWidth: 1.0,
+                            buttonSize: 60.0,
+                            icon: Icon(
+                              Icons.photo_camera_sharp,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 30.0,
+                            ),
+                            onPressed: () async {
+                              final selectedMedia = await selectMedia(
+                                maxWidth: 120.00,
+                                maxHeight: 120.00,
+                                mediaSource: MediaSource.photoGallery,
+                                multiImage: false,
+                              );
+                              if (selectedMedia != null &&
+                                  selectedMedia.every((m) => validateFileFormat(
+                                      m.storagePath, context))) {
+                                setState(() => _model.isDataUploading = true);
+                                var selectedUploadedFiles = <FFUploadedFile>[];
+                                var downloadUrls = <String>[];
+                                try {
+                                  selectedUploadedFiles = selectedMedia
+                                      .map((m) => FFUploadedFile(
+                                            name: m.storagePath.split('/').last,
+                                            bytes: m.bytes,
+                                            height: m.dimensions?.height,
+                                            width: m.dimensions?.width,
+                                          ))
+                                      .toList();
+
+                                  downloadUrls = (await Future.wait(
+                                    selectedMedia.map(
+                                      (m) async => await uploadData(
+                                          m.storagePath, m.bytes),
+                                    ),
+                                  ))
+                                      .where((u) => u != null)
+                                      .map((u) => u!)
+                                      .toList();
+                                } finally {
+                                  _model.isDataUploading = false;
+                                }
+                                if (selectedUploadedFiles.length ==
+                                        selectedMedia.length &&
+                                    downloadUrls.length ==
+                                        selectedMedia.length) {
+                                  setState(() {
+                                    _model.uploadedLocalFile =
+                                        selectedUploadedFiles.first;
+                                    _model.uploadedFileUrl = downloadUrls.first;
+                                  });
+                                } else {
+                                  setState(() {});
+                                  return;
+                                }
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                       Text(
                         'Upload a photo for us to easily identify you.',
                         style: FlutterFlowTheme.of(context).bodyMedium,
@@ -646,6 +716,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                       _model.yourAgeController.text),
                                   ailments: _model.ailmentsController.text,
                                   userSex: _model.radioButtonValue,
+                                  photoUrl: _model.uploadedFileUrl,
                                 );
                                 await buttonLoginUsersRecord.reference
                                     .update(usersUpdateData);

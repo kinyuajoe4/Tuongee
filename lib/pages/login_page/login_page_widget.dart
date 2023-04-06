@@ -47,12 +47,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: SingleChildScrollView(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -80,31 +80,60 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 24.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                if (Theme.of(context).brightness ==
-                                    Brightness.dark)
-                                  Image.asset(
-                                    'assets/images/health-ai_logoVert.png',
-                                    width: 200.0,
-                                    height: 130.0,
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                                if (!(Theme.of(context).brightness ==
-                                    Brightness.dark))
-                                  Image.asset(
-                                    'assets/images/logo_darkFull@2x.png',
-                                    width: 200.0,
-                                    height: 130.0,
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                              ],
-                            ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  if (Theme.of(context).brightness ==
+                                      Brightness.dark)
+                                    Image.asset(
+                                      'assets/images/no_back.png',
+                                      width: 200.0,
+                                      height: 130.0,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                  if (!(Theme.of(context).brightness ==
+                                      Brightness.dark))
+                                    Image.asset(
+                                      'assets/images/Slide_16_9_-_6.jpg',
+                                      width: 200.0,
+                                      height: 130.0,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 15.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'TUONGEE',
+                                      style: FlutterFlowTheme.of(context)
+                                          .displayMedium,
+                                    ),
+                                    Text(
+                                      'The Platform',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: Colors.black,
+                                            fontSize: 23.0,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                           Expanded(
                             child: DefaultTabController(
@@ -390,10 +419,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                                   0.0,
                                                                   0.0,
                                                                   0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                                      color: Color(0xFF311DEC),
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -900,10 +926,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                                   0.0,
                                                                   0.0,
                                                                   0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                                      color: Color(0xFF4937D6),
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)

@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/appointment_details_profile/appointment_details_profile_widget.dart';
 import '/pages/edit_profile/edit_profile_widget.dart';
-import '/pages/login_page/login_page_widget.dart';
+import '/pages/onboarding/onboarding_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

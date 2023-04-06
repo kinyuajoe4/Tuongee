@@ -91,15 +91,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 2.0, 2.0, 2.0),
-                            child: Container(
-                              width: 60.0,
-                              height: 60.0,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.asset(
-                                'assets/images/UI_avatar_2@3x.png',
+                            child: AuthUserStreamWidget(
+                              builder: (context) => Container(
+                                width: 60.0,
+                                height: 60.0,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.network(
+                                  currentUserPhoto,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ),
                           ),
@@ -501,9 +504,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         backgroundColor: Colors.transparent,
                                         barrierColor: Color(0x00000000),
                                         context: context,
-                                        builder: (context) {
+                                        builder: (bottomSheetContext) {
                                           return Padding(
-                                            padding: MediaQuery.of(context)
+                                            padding: MediaQuery.of(
+                                                    bottomSheetContext)
                                                 .viewInsets,
                                             child: Container(
                                               height: MediaQuery.of(context)

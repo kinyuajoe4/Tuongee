@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/allusers/allusers_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -49,12 +50,12 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -76,10 +77,21 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Icon(
-                                    Icons.arrow_back,
-                                    color: Color(0xB91726D0),
-                                    size: 24.0,
+                                  InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              AllusersWidget(),
+                                        ),
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_back,
+                                      color: Color(0xB91726D0),
+                                      size: 24.0,
+                                    ),
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -132,7 +144,8 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                     (record) => TextSearchItem(record, [
                                       record.displayName!,
                                       record.email!,
-                                      record.phoneNumber!
+                                      record.phoneNumber!,
+                                      record.ailments!
                                     ]),
                                   )
                                   .toList(),
@@ -237,8 +250,8 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                           lastMessage: 'NA',
                                           lastMessageTime: getCurrentTimestamp,
                                           image: listViewUsersRecord.photoUrl,
-                                          lastMesageSeen: false,
-                                          users: currentUserReference,
+                                          user: currentUserReference,
+                                          messageSeen: false,
                                         );
                                         var chatsRecordReference =
                                             ChatsRecord.collection.doc();
@@ -391,12 +404,19 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                           lastMessage: 'NA',
                                           lastMessageTime: getCurrentTimestamp,
                                           image: listViewUsersRecord.photoUrl,
-                                          lastMesageSeen: false,
-                                          users: currentUserReference,
+                                          user: currentUserReference,
+                                          messageSeen: false,
                                         );
-                                        await ChatsRecord.collection
-                                            .doc()
+                                        var chatsRecordReference =
+                                            ChatsRecord.collection.doc();
+                                        await chatsRecordReference
                                             .set(chatsCreateData);
+                                        _model.nAn =
+                                            ChatsRecord.getDocumentFromData(
+                                                chatsCreateData,
+                                                chatsRecordReference);
+
+                                        setState(() {});
                                       },
                                       child: Container(
                                         width: 100.0,
@@ -435,8 +455,8 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                               BoxShape.circle,
                                                         ),
                                                         child: Image.network(
-                                                          listViewUsersRecord
-                                                              .photoUrl!,
+                                                          _model.textController
+                                                              .text,
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),

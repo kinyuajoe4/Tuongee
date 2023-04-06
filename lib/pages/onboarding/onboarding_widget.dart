@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/login_page/login_page_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
@@ -43,28 +44,51 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (Theme.of(context).brightness == Brightness.dark)
-                  Image.asset(
-                    'assets/images/health-ai_logoVert.png',
-                    width: 200.0,
-                    height: 100.0,
-                    fit: BoxFit.fitHeight,
-                  ),
-                if (!(Theme.of(context).brightness == Brightness.dark))
-                  Image.asset(
-                    'assets/images/logo_darkFull@2x.png',
-                    width: 200.0,
-                    height: 100.0,
-                    fit: BoxFit.fitHeight,
-                  ),
-              ],
-            ),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (Theme.of(context).brightness == Brightness.dark)
+                      Image.asset(
+                        'assets/images/health-ai_logoVert.png',
+                        width: 200.0,
+                        height: 100.0,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    if (!(Theme.of(context).brightness == Brightness.dark))
+                      Image.asset(
+                        'assets/images/no_back.png',
+                        width: 170.0,
+                        height: 70.0,
+                        fit: BoxFit.fitHeight,
+                      ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'TUONGEE',
+                      textAlign: TextAlign.center,
+                      style:
+                          FlutterFlowTheme.of(context).displayMedium.override(
+                                fontFamily: 'Poppins',
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           Row(
             mainAxisSize: MainAxisSize.max,
@@ -95,15 +119,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 20.0),
-                                        child: Image.asset(
-                                          'assets/images/onboarding_1@2x.png',
-                                          width: 320.0,
-                                          height: 300.0,
-                                          fit: BoxFit.fitWidth,
-                                        ),
+                                      Image.asset(
+                                        'assets/images/onboarding_1@2x.png',
+                                        width: 320.0,
+                                        height: 250.0,
+                                        fit: BoxFit.fitWidth,
                                       ),
                                     ],
                                   ),
@@ -114,11 +134,17 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Expanded(
-                                          child: Text(
-                                            'Stay in Touch',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .displaySmall,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 40.0),
+                                            child: Text(
+                                              'Stay in Touch',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .displaySmall,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -146,63 +172,66 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                             ),
                             Container(
                               width: 100.0,
-                              height: 100.0,
+                              height: 70.0,
                               decoration: BoxDecoration(),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 20.0),
-                                        child: Image.asset(
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 30.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
                                           'assets/images/onboarding_2@2x.png',
                                           width: 300.0,
-                                          height: 270.0,
+                                          height: 200.0,
                                           fit: BoxFit.fitHeight,
                                         ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          20.0, 0.0, 20.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              'Schedule Appointments',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .displaySmall,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 0.0, 20.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            'Schedule Appointments',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .displaySmall,
-                                          ),
-                                        ),
-                                      ],
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 0.0, 20.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            'Easily schedule appointments for checkups,  routine procedures, etc.',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          20.0, 0.0, 20.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              'Easily schedule appointments for checkups,  routine procedures, etc.',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             Container(
@@ -219,7 +248,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 30.0, 0.0, 30.0),
+                                            0.0, 0.0, 0.0, 30.0),
                                         child: Image.asset(
                                           'assets/images/onboarding_3@2x.png',
                                           width: 300.0,
@@ -313,15 +342,20 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginPageWidget(),
+                        ),
+                      );
                     },
                     text: 'Continue',
                     options: FFButtonOptions(
                       width: 200.0,
-                      height: 50.0,
+                      height: 40.0,
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:

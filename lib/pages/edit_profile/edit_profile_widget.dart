@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -108,17 +109,19 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         color: FlutterFlowTheme.of(context).darkBackground,
                         shape: BoxShape.circle,
                       ),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => Container(
-                          width: 80.0,
-                          height: 80.0,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                      child: Container(
+                        width: 80.0,
+                        height: 80.0,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: valueOrDefault<String>(
+                            _model.uploadedFileUrl,
+                            'picha',
                           ),
-                          child: Image.network(
-                            currentUserPhoto,
-                          ),
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
@@ -472,6 +475,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             age: int.tryParse(_model.yourAgeController.text),
                             ailments: _model.yourAilmentsController.text,
                             userSex: _model.radioButtonValue,
+                            photoUrl: _model.uploadedFileUrl,
                           );
                           await editProfileUsersRecord.reference
                               .update(usersUpdateData);

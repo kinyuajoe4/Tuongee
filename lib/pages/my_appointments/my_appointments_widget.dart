@@ -50,9 +50,9 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
             backgroundColor: Colors.transparent,
             barrierColor: Color(0x00000000),
             context: context,
-            builder: (context) {
+            builder: (bottomSheetContext) {
               return Padding(
-                padding: MediaQuery.of(context).viewInsets,
+                padding: MediaQuery.of(bottomSheetContext).viewInsets,
                 child: Container(
                   height: double.infinity,
                   child: BookAppointmentWidget(

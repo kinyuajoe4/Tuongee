@@ -88,9 +88,9 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
                 backgroundColor: Colors.transparent,
                 barrierColor: Color(0x230E151B),
                 context: context,
-                builder: (context) {
+                builder: (bottomSheetContext) {
                   return Padding(
-                    padding: MediaQuery.of(context).viewInsets,
+                    padding: MediaQuery.of(bottomSheetContext).viewInsets,
                     child: Container(
                       height: double.infinity,
                       child: BookAppointmentWidget(),

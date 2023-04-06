@@ -9,6 +9,8 @@ part 'chats_record.g.dart';
 abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
   static Serializer<ChatsRecord> get serializer => _$chatsRecordSerializer;
 
+  DocumentReference? get user;
+
   @BuiltValueField(wireName: 'user_a')
   DocumentReference? get userA;
 
@@ -23,12 +25,8 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
 
   String? get image;
 
-  @BuiltValueField(wireName: 'last_mesage_seen')
-  bool? get lastMesageSeen;
-
-  DocumentReference? get users;
-
-  String? get text;
+  @BuiltValueField(wireName: 'message_seen')
+  bool? get messageSeen;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -37,8 +35,7 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
   static void _initializeBuilder(ChatsRecordBuilder builder) => builder
     ..lastMessage = ''
     ..image = ''
-    ..lastMesageSeen = false
-    ..text = '';
+    ..messageSeen = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('chats');
@@ -62,27 +59,25 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
 }
 
 Map<String, dynamic> createChatsRecordData({
+  DocumentReference? user,
   DocumentReference? userA,
   DocumentReference? userB,
   String? lastMessage,
   DateTime? lastMessageTime,
   String? image,
-  bool? lastMesageSeen,
-  DocumentReference? users,
-  String? text,
+  bool? messageSeen,
 }) {
   final firestoreData = serializers.toFirestore(
     ChatsRecord.serializer,
     ChatsRecord(
       (c) => c
+        ..user = user
         ..userA = userA
         ..userB = userB
         ..lastMessage = lastMessage
         ..lastMessageTime = lastMessageTime
         ..image = image
-        ..lastMesageSeen = lastMesageSeen
-        ..users = users
-        ..text = text,
+        ..messageSeen = messageSeen,
     ),
   );
 
