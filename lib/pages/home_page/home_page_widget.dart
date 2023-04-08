@@ -2,12 +2,10 @@ import '/auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/book_appointment/book_appointment_widget.dart';
 import '/components/main_logo/main_logo_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/allusers/allusers_widget.dart';
+import '/main.dart';
 import '/pages/appointment_details/appointment_details_widget.dart';
-import '/pages/kafengo/kafengo_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -81,27 +79,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.of(context).primary,
-                          elevation: 2.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                2.0, 2.0, 2.0, 2.0),
-                            child: AuthUserStreamWidget(
-                              builder: (context) => Container(
-                                width: 60.0,
-                                height: 60.0,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.network(
-                                  currentUserPhoto,
-                                  fit: BoxFit.fitWidth,
+                        InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'profilePage'),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context).primary,
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  2.0, 2.0, 2.0, 2.0),
+                              child: AuthUserStreamWidget(
+                                builder: (context) => Container(
+                                  width: 60.0,
+                                  height: 60.0,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.network(
+                                    currentUserPhoto,
+                                    fit: BoxFit.fitWidth,
+                                  ),
                                 ),
                               ),
                             ),
@@ -125,7 +134,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 16.0, 0.0, 0.0),
                           child: Text(
-                            'Good Morning',
+                            'Hello There',
                             style: FlutterFlowTheme.of(context).displaySmall,
                           ),
                         ),
@@ -599,7 +608,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     0.0, 12.0, 0.0, 0.0),
                                 child: InkWell(
                                   onTap: () async {
-                                    await launchURL('tel:1234567890');
+                                    await launchURL('tel:0794183313');
                                   },
                                   child: Material(
                                     color: Colors.transparent,
@@ -695,8 +704,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     0.0, 12.0, 0.0, 0.0),
                                 child: InkWell(
                                   onTap: () async {
-                                    await launchURL(
-                                        'mailto:contact@health.ai.demo');
+                                    await launchURL('josendungu.k42@gmail.com');
                                   },
                                   child: Material(
                                     color: Colors.transparent,
@@ -792,46 +800,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30.0,
-                        borderWidth: 1.0,
-                        buttonSize: 60.0,
-                        icon: Icon(
-                          Icons.add,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 30.0,
-                        ),
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => KafengoWidget(),
-                            ),
-                          );
-                        },
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AllusersWidget(),
-                            ),
-                          );
-                        },
-                        child: Icon(
-                          Icons.settings_outlined,
-                          color: Colors.black,
-                          size: 24.0,
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),

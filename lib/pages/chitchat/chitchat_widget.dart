@@ -5,7 +5,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
-import '/pages/activeusers/activeusers_widget.dart';
+import '/main.dart';
+import '/review/review_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -102,101 +103,111 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    InkWell(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ActiveusersWidget(),
+                        InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ReviewWidget(),
+                              ),
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => NavBarPage(
+                                                  initialPage: 'allusers'),
+                                            ),
+                                          );
+                                        },
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          color: Color(0xB91726D0),
+                                          size: 24.0,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 0.0, 0.0),
+                                        child: Container(
+                                          width: 45.0,
+                                          height: 45.0,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
                                           ),
-                                        );
-                                      },
-                                      child: Icon(
-                                        Icons.arrow_back,
-                                        color: Color(0xB91726D0),
-                                        size: 24.0,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
-                                      child: Container(
-                                        width: 45.0,
-                                        height: 45.0,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.network(
-                                          widget.userProfile!,
-                                          fit: BoxFit.cover,
+                                          child: Image.network(
+                                            widget.userProfile!,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 6.0),
-                                            child: Text(
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 0.0, 0.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 6.0),
+                                              child: Text(
+                                                valueOrDefault<String>(
+                                                  widget.userName,
+                                                  '1',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                              ),
+                                            ),
+                                            Text(
                                               valueOrDefault<String>(
-                                                widget.userName,
-                                                '1',
+                                                widget.userEmail,
+                                                '2',
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                             ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              widget.userEmail,
-                                              '2',
-                                            ).maybeHandleOverflow(maxChars: 6),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 30.0,
-                              borderWidth: 1.0,
-                              buttonSize: 60.0,
-                              icon: Icon(
-                                Icons.more_vert_outlined,
-                                color: Color(0xB91726D0),
-                                size: 26.0,
+                                    ],
+                                  ),
+                                ],
                               ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
-                              },
-                            ),
-                          ],
+                              FlutterFlowIconButton(
+                                borderColor: Colors.transparent,
+                                borderRadius: 30.0,
+                                borderWidth: 1.0,
+                                buttonSize: 60.0,
+                                icon: Icon(
+                                  Icons.more_vert_outlined,
+                                  color: Color(0xB91726D0),
+                                  size: 26.0,
+                                ),
+                                onPressed: () {
+                                  print('IconButton pressed ...');
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                         Divider(
                           height: 48.0,
@@ -250,148 +261,41 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                     final listViewChatMessagesRecord =
                                         listViewChatMessagesRecordList[
                                             listViewIndex];
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        if ((listViewChatMessagesRecord.user !=
-                                                currentUserReference) &&
-                                            (listViewChatMessagesRecord.text !=
-                                                    null &&
-                                                listViewChatMessagesRecord
-                                                        .text !=
-                                                    ''))
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Container(
-                                                width: 36.0,
-                                                height: 36.0,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  widget.userProfile!,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 0.0, 0.0, 0.0),
-                                                child: Container(
-                                                  width: 300.0,
-                                                  constraints: BoxConstraints(
-                                                    maxWidth: 260.0,
-                                                    maxHeight: 100.0,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(24.0),
-                                                      bottomRight:
-                                                          Radius.circular(24.0),
-                                                      topLeft:
-                                                          Radius.circular(3.0),
-                                                      topRight:
-                                                          Radius.circular(24.0),
-                                                    ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12.0,
-                                                                12.0,
-                                                                12.0,
-                                                                12.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              listViewChatMessagesRecord
-                                                                  .text!,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Text(
-                                                              dateTimeFormat(
-                                                                  'jm',
-                                                                  listViewChatMessagesRecord
-                                                                      .timestamp!),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Outfit',
-                                                                    color: Color(
-                                                                        0xFF272737),
-                                                                    fontSize:
-                                                                        12.0,
-                                                                  ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        if ((listViewChatMessagesRecord.user ==
-                                                currentUserReference) &&
-                                            (listViewChatMessagesRecord.text !=
-                                                    null &&
-                                                listViewChatMessagesRecord
-                                                        .text !=
-                                                    ''))
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 16.0, 0.0, 0.0),
-                                            child: Row(
+                                    return SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          if ((listViewChatMessagesRecord
+                                                      .user !=
+                                                  currentUserReference) &&
+                                              (listViewChatMessagesRecord
+                                                          .text !=
+                                                      null &&
+                                                  listViewChatMessagesRecord
+                                                          .text !=
+                                                      ''))
+                                            Row(
                                               mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
                                               children: [
+                                                Container(
+                                                  width: 36.0,
+                                                  height: 36.0,
+                                                  clipBehavior: Clip.antiAlias,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: Image.network(
+                                                    widget.userProfile!,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           16.0, 0.0, 0.0, 0.0),
                                                   child: Container(
-                                                    width: 300.0,
                                                     constraints: BoxConstraints(
                                                       maxWidth: 260.0,
-                                                      maxHeight: 100.0,
                                                     ),
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
@@ -407,26 +311,26 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                 24.0),
                                                         topLeft:
                                                             Radius.circular(
-                                                                24.0),
+                                                                3.0),
                                                         topRight:
                                                             Radius.circular(
-                                                                3.0),
+                                                                24.0),
                                                       ),
                                                     ),
                                                     child: Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0.0,
-                                                                  24.0,
-                                                                  0.0,
-                                                                  0.0),
+                                                                  12.0,
+                                                                  12.0,
+                                                                  12.0,
+                                                                  12.0),
                                                       child: Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .spaceBetween,
+                                                                .spaceAround,
                                                         children: [
                                                           Column(
                                                             mainAxisSize:
@@ -439,6 +343,9 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                               Text(
                                                                 listViewChatMessagesRecord
                                                                     .text!,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium,
@@ -453,51 +360,23 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                 MainAxisAlignment
                                                                     .end,
                                                             children: [
-                                                              Padding(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        120.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                                child: Text(
-                                                                  dateTimeFormat(
-                                                                      'jm',
-                                                                      listViewChatMessagesRecord
-                                                                          .timestamp!),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Outfit',
-                                                                        color: Color(
-                                                                            0xFF272737),
-                                                                        fontSize:
-                                                                            12.0,
-                                                                      ),
-                                                                ),
+                                                              Text(
+                                                                dateTimeFormat(
+                                                                    'jm',
+                                                                    listViewChatMessagesRecord
+                                                                        .timestamp!),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Outfit',
+                                                                      color: Color(
+                                                                          0xFF272737),
+                                                                      fontSize:
+                                                                          12.0,
+                                                                    ),
                                                               ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceAround,
-                                                            children: [
-                                                              if (chitchatChatsRecord!
-                                                                      .messageSeen ==
-                                                                  true)
-                                                                Icon(
-                                                                  Icons
-                                                                      .done_all,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 17.0,
-                                                                ),
                                                             ],
                                                           ),
                                                         ],
@@ -507,147 +386,306 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                        if ((listViewChatMessagesRecord.user !=
-                                                currentUserReference) &&
-                                            (listViewChatMessagesRecord.image !=
-                                                    null &&
-                                                listViewChatMessagesRecord
-                                                        .image !=
-                                                    ''))
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 24.0, 0.0, 0.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 36.0,
-                                                  height: 36.0,
-                                                  clipBehavior: Clip.antiAlias,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Image.network(
-                                                    widget.userProfile!,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 300.0,
-                                                  height: 185.0,
-                                                  constraints: BoxConstraints(
-                                                    maxWidth: 260.0,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    image: DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: Image.network(
-                                                        listViewChatMessagesRecord
-                                                            .image!,
-                                                      ).image,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(24.0),
-                                                      bottomRight:
-                                                          Radius.circular(24.0),
-                                                      topLeft:
-                                                          Radius.circular(3.0),
-                                                      topRight:
-                                                          Radius.circular(24.0),
-                                                    ),
-                                                  ),
-                                                  child: Stack(
-                                                    children: [],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        if ((listViewChatMessagesRecord.user ==
-                                                currentUserReference) &&
-                                            (listViewChatMessagesRecord.image !=
-                                                    null &&
-                                                listViewChatMessagesRecord
-                                                        .image !=
-                                                    ''))
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 24.0, 0.0, 0.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 300.0,
-                                                  height: 185.0,
-                                                  constraints: BoxConstraints(
-                                                    maxWidth: 260.0,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    image: DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: Image.network(
-                                                        listViewChatMessagesRecord
-                                                            .image!,
-                                                      ).image,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(24.0),
-                                                      bottomRight:
-                                                          Radius.circular(4.0),
-                                                      topLeft:
-                                                          Radius.circular(24.0),
-                                                      topRight:
-                                                          Radius.circular(24.0),
-                                                    ),
-                                                  ),
-                                                  child: Stack(
-                                                    children: [
-                                                      Align(
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0.9, 0.85),
-                                                        child: Icon(
-                                                          Icons.done_all,
-                                                          color: chitchatChatsRecord!
-                                                                      .messageSeen ==
-                                                                  true
-                                                              ? Color(
-                                                                  0xFF0D0081)
-                                                              : Color(
-                                                                  0xFF040404),
-                                                          size: 18.0,
+                                          if ((listViewChatMessagesRecord
+                                                      .user ==
+                                                  currentUserReference) &&
+                                              (listViewChatMessagesRecord
+                                                          .text !=
+                                                      null &&
+                                                  listViewChatMessagesRecord
+                                                          .text !=
+                                                      ''))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 16.0, 0.0, 0.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: Container(
+                                                      constraints:
+                                                          BoxConstraints(
+                                                        maxWidth: 260.0,
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  24.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  24.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  24.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  3.0),
                                                         ),
                                                       ),
-                                                    ],
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    24.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            SingleChildScrollView(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    listViewChatMessagesRecord
+                                                                        .text!,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          120.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    dateTimeFormat(
+                                                                        'jm',
+                                                                        listViewChatMessagesRecord
+                                                                            .timestamp!),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Outfit',
+                                                                          color:
+                                                                              Color(0xFF272737),
+                                                                          fontSize:
+                                                                              12.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
+                                                              children: [
+                                                                if (chitchatChatsRecord!
+                                                                        .messageSeen ==
+                                                                    true)
+                                                                  Icon(
+                                                                    Icons
+                                                                        .done_all,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    size: 17.0,
+                                                                  ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                      ],
+                                          if ((listViewChatMessagesRecord
+                                                      .user !=
+                                                  currentUserReference) &&
+                                              (listViewChatMessagesRecord
+                                                          .image !=
+                                                      null &&
+                                                  listViewChatMessagesRecord
+                                                          .image !=
+                                                      ''))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 24.0, 0.0, 0.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: 36.0,
+                                                    height: 36.0,
+                                                    clipBehavior:
+                                                        Clip.antiAlias,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Image.network(
+                                                      widget.userProfile!,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: 300.0,
+                                                    height: 185.0,
+                                                    constraints: BoxConstraints(
+                                                      maxWidth: 260.0,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: Image.network(
+                                                          listViewChatMessagesRecord
+                                                              .image!,
+                                                        ).image,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                24.0),
+                                                        bottomRight:
+                                                            Radius.circular(
+                                                                24.0),
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                3.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                24.0),
+                                                      ),
+                                                    ),
+                                                    child: Stack(
+                                                      children: [],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          if ((listViewChatMessagesRecord
+                                                      .user ==
+                                                  currentUserReference) &&
+                                              (listViewChatMessagesRecord
+                                                          .image !=
+                                                      null &&
+                                                  listViewChatMessagesRecord
+                                                          .image !=
+                                                      ''))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 24.0, 0.0, 0.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: 300.0,
+                                                    height: 185.0,
+                                                    constraints: BoxConstraints(
+                                                      maxWidth: 260.0,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: Image.network(
+                                                          listViewChatMessagesRecord
+                                                              .image!,
+                                                        ).image,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                24.0),
+                                                        bottomRight:
+                                                            Radius.circular(
+                                                                4.0),
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                24.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                24.0),
+                                                      ),
+                                                    ),
+                                                    child: Stack(
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.9, 0.85),
+                                                          child: Icon(
+                                                            Icons.done_all,
+                                                            color: chitchatChatsRecord!
+                                                                        .messageSeen ==
+                                                                    true
+                                                                ? Color(
+                                                                    0xFF0D0081)
+                                                                : Color(
+                                                                    0xFF040404),
+                                                            size: 18.0,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                        ],
+                                      ),
                                     );
                                   },
                                 );
@@ -673,9 +711,16 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                   0.0, 22.0, 0.0, 0.0),
                               child: Container(
                                 width: 260.0,
+                                height: 50.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(18.0),
+                                    bottomRight: Radius.circular(0.0),
+                                    topLeft: Radius.circular(18.0),
+                                    topRight: Radius.circular(0.0),
+                                  ),
                                 ),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -744,6 +789,8 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
+                                          maxLines: 9,
+                                          minLines: 1,
                                           validator: _model
                                               .textControllerValidator
                                               .asValidator(context),
@@ -911,10 +958,16 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                 },
                                 child: Container(
                                   width: 100.0,
-                                  height: 100.0,
+                                  height: 50.0,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(5.0),
+                                      bottomRight: Radius.circular(90.0),
+                                      topLeft: Radius.circular(5.0),
+                                      topRight: Radius.circular(90.0),
+                                    ),
                                   ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,

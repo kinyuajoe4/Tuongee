@@ -11,6 +11,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AsdfasdfRecord.serializer)
       ..add(ChatMessagesRecord.serializer)
       ..add(ChatsRecord.serializer)
+      ..add(ReviewsRecord.serializer)
       ..add(UsersRecord.serializer))
     .build();
 

@@ -6,6 +6,7 @@ import 'appointments_record.dart';
 import 'asdfasdf_record.dart';
 import 'chats_record.dart';
 import 'chat_messages_record.dart';
+import 'reviews_record.dart';
 
 import 'index.dart';
 
@@ -21,6 +22,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   AsdfasdfRecord,
   ChatsRecord,
   ChatMessagesRecord,
+  ReviewsRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

@@ -55,9 +55,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                   children: [
                     if (Theme.of(context).brightness == Brightness.dark)
                       Image.asset(
-                        'assets/images/health-ai_logoVert.png',
-                        width: 200.0,
-                        height: 100.0,
+                        'assets/images/no_back.png',
+                        width: 170.0,
+                        height: 70.0,
                         fit: BoxFit.fitHeight,
                       ),
                     if (!(Theme.of(context).brightness == Brightness.dark))

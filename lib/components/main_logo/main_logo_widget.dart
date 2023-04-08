@@ -59,7 +59,7 @@ class _MainLogoWidgetState extends State<MainLogoWidget> {
                 child: Image.asset(
                   'assets/images/Group_815.png',
                   width: 100.0,
-                  height: 60.0,
+                  height: 80.0,
                   fit: BoxFit.fitWidth,
                 ),
               ),

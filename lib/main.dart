@@ -129,7 +129,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'homePage': HomePageWidget(),
       'myAppointments': MyAppointmentsWidget(),
-      'findSymptoms': FindSymptomsWidget(),
+      'kafengo': KafengoWidget(),
+      'allusers': AllusersWidget(),
       'profilePage': ProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -174,14 +175,18 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.favorite_border_rounded,
+              Icons.subway_sharp,
               size: 24.0,
             ),
-            activeIcon: Icon(
-              Icons.favorite_rounded,
+            label: '.',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite,
               size: 24.0,
             ),
-            label: '•',
+            label: '.',
             tooltip: '',
           ),
           BottomNavigationBarItem(

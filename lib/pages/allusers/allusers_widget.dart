@@ -3,9 +3,9 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/main.dart';
 import '/pages/activeusers/activeusers_widget.dart';
 import '/pages/chitchat/chitchat_widget.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -52,14 +52,15 @@ class _AllusersWidgetState extends State<AllusersWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: Color(0xFF111417),
           automaticallyImplyLeading: false,
           title: Text(
-            'Page Title',
+            'Communities & health professionals',
+            textAlign: TextAlign.start,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
-                  fontSize: 22.0,
+                  fontSize: 21.0,
                 ),
           ),
           actions: [],
@@ -82,13 +83,22 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Image.asset(
-                              'assets/images/hjkk.jpeg',
-                              width: 100.0,
-                              height: 50.0,
+                              'assets/images/Group_815.png',
+                              width: 150.0,
+                              height: 80.0,
                               fit: BoxFit.contain,
+                            ),
+                            Text(
+                              'Doc Chat',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    fontSize: 20.0,
+                                  ),
                             ),
                             AuthUserStreamWidget(
                               builder: (context) => Container(
@@ -140,7 +150,8 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  hintText: 'search users',
+                                  hintText:
+                                      'search communities &health proffesion',
                                   hintStyle:
                                       FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
@@ -241,8 +252,14 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                       FlutterFlowTheme.of(context).primaryText,
                                   size: 30.0,
                                 ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          NavBarPage(initialPage: 'allusers'),
+                                    ),
+                                  );
                                 },
                               ),
                             ),
@@ -285,7 +302,7 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                               createChatsRecordData(
                                             userA: currentUserReference,
                                             userB: rowUsersRecord.reference,
-                                            lastMessage: 'NA',
+                                            lastMessage: 'tap to view',
                                             lastMessageTime:
                                                 getCurrentTimestamp,
                                             image: rowUsersRecord.photoUrl,
@@ -365,154 +382,90 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                             itemBuilder: (context, listViewIndex) {
                               final listViewChatsRecord =
                                   listViewChatsRecordList[listViewIndex];
-                              return Visibility(
-                                visible: (currentUserReference ==
-                                        listViewChatsRecord.userA) ||
-                                    (currentUserReference ==
-                                        listViewChatsRecord.userB),
-                                child: StreamBuilder<UsersRecord>(
-                                  stream: UsersRecord.getDocument(
-                                      listViewChatsRecord.userB!),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 40.0,
-                                          height: 40.0,
-                                          child: SpinKitPumpingHeart(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 40.0,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    final containerUsersRecord = snapshot.data!;
-                                    return InkWell(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ChitchatWidget(
-                                              userName: containerUsersRecord
-                                                  .displayName,
-                                              userEmail:
-                                                  containerUsersRecord.email,
-                                              chatUser:
-                                                  listViewChatsRecord.reference,
-                                              userRef: currentUserReference,
-                                              userProfile:
-                                                  containerUsersRecord.photoUrl,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        width: 100.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 16.0, 16.0, 16.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      if (currentUserReference !=
-                                                          listViewChatsRecord
-                                                              .user)
-                                                        StreamBuilder<
-                                                            UsersRecord>(
-                                                          stream: UsersRecord
-                                                              .getDocument(
-                                                                  listViewChatsRecord
-                                                                      .userA!),
-                                                          builder: (context,
-                                                              snapshot) {
-                                                            // Customize what your widget looks like when it's loading.
-                                                            if (!snapshot
-                                                                .hasData) {
-                                                              return Center(
-                                                                child: SizedBox(
-                                                                  width: 40.0,
-                                                                  height: 40.0,
-                                                                  child:
-                                                                      SpinKitPumpingHeart(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                    size: 40.0,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }
-                                                            final circleImageUsersRecord =
-                                                                snapshot.data!;
-                                                            return Container(
-                                                              width: 48.0,
-                                                              height: 48.0,
-                                                              clipBehavior: Clip
-                                                                  .antiAlias,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                              ),
-                                                              child:
-                                                                  Image.network(
-                                                                circleImageUsersRecord
-                                                                    .photoUrl!,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            );
-                                                          },
-                                                        ),
-                                                      if (currentUserReference ==
-                                                          listViewChatsRecord
-                                                              .user)
-                                                        Container(
-                                                          width: 48.0,
-                                                          height: 48.0,
-                                                          clipBehavior:
-                                                              Clip.antiAlias,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                          child: Image.network(
-                                                            containerUsersRecord
-                                                                .photoUrl!,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Column(
+                              return SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    if ((currentUserReference ==
+                                            listViewChatsRecord.userA) ||
+                                        (currentUserReference ==
+                                            listViewChatsRecord.userB))
+                                      StreamBuilder<UsersRecord>(
+                                        stream: UsersRecord.getDocument(
+                                            listViewChatsRecord.userB!),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 40.0,
+                                                height: 40.0,
+                                                child: SpinKitPumpingHeart(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 40.0,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          final containerUsersRecord =
+                                              snapshot.data!;
+                                          return InkWell(
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ChitchatWidget(
+                                                    userName:
+                                                        containerUsersRecord
+                                                            .displayName,
+                                                    userEmail:
+                                                        containerUsersRecord
+                                                            .email,
+                                                    chatUser:
+                                                        listViewChatsRecord
+                                                            .reference,
+                                                    userRef:
+                                                        currentUserReference,
+                                                    userProfile:
+                                                        containerUsersRecord
+                                                            .photoUrl,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 100.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        16.0, 16.0, 16.0, 16.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
@@ -547,64 +500,154 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                                       ),
                                                                     );
                                                                   }
-                                                                  final textUsersRecord =
+                                                                  final circleImageUsersRecord =
                                                                       snapshot
                                                                           .data!;
-                                                                  return Text(
-                                                                    containerUsersRecord
-                                                                        .displayName!,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium,
+                                                                  return Container(
+                                                                    width: 48.0,
+                                                                    height:
+                                                                        48.0,
+                                                                    clipBehavior:
+                                                                        Clip.antiAlias,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                    ),
+                                                                    child: Image
+                                                                        .network(
+                                                                      circleImageUsersRecord
+                                                                          .photoUrl!,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
                                                                   );
                                                                 },
                                                               ),
                                                             if (currentUserReference ==
                                                                 listViewChatsRecord
                                                                     .user)
-                                                              Text(
-                                                                containerUsersRecord
-                                                                    .displayName!,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium,
+                                                              Container(
+                                                                width: 48.0,
+                                                                height: 48.0,
+                                                                clipBehavior: Clip
+                                                                    .antiAlias,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                ),
+                                                                child: Image
+                                                                    .network(
+                                                                  containerUsersRecord
+                                                                      .photoUrl!,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
                                                               ),
-                                                            Text(
-                                                              listViewChatsRecord
-                                                                  .lastMessage!,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  if (currentUserReference !=
+                                                                      listViewChatsRecord
+                                                                          .user)
+                                                                    StreamBuilder<
+                                                                        UsersRecord>(
+                                                                      stream: UsersRecord.getDocument(
+                                                                          listViewChatsRecord
+                                                                              .userA!),
+                                                                      builder:
+                                                                          (context,
+                                                                              snapshot) {
+                                                                        // Customize what your widget looks like when it's loading.
+                                                                        if (!snapshot
+                                                                            .hasData) {
+                                                                          return Center(
+                                                                            child:
+                                                                                SizedBox(
+                                                                              width: 40.0,
+                                                                              height: 40.0,
+                                                                              child: SpinKitPumpingHeart(
+                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                size: 40.0,
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        }
+                                                                        final textUsersRecord =
+                                                                            snapshot.data!;
+                                                                        return Text(
+                                                                          containerUsersRecord
+                                                                              .displayName!,
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                  if (currentUserReference ==
+                                                                      listViewChatsRecord
+                                                                          .user)
+                                                                    Text(
+                                                                      containerUsersRecord
+                                                                          .displayName!,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium,
+                                                                    ),
+                                                                  Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      listViewChatsRecord
+                                                                          .lastMessage,
+                                                                      '.......',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium,
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          dateTimeFormat(
+                                                              'jm',
+                                                              listViewChatsRecord
+                                                                  .lastMessageTime!),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    dateTimeFormat(
-                                                        'jm',
-                                                        listViewChatsRecord
-                                                            .lastMessageTime!),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                            ),
+                                          );
+                                        },
                                       ),
-                                    );
-                                  },
+                                  ],
                                 ),
                               );
                             },
