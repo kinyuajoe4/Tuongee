@@ -22,4 +22,3 @@ export '/pages/activeusers/activeusers_widget.dart' show ActiveusersWidget;
 export '/pages/chitchat/chitchat_widget.dart' show ChitchatWidget;
 export '/pages/kafengo/kafengo_widget.dart' show KafengoWidget;
 export '/review/review_widget.dart' show ReviewWidget;
-export '/pages/chitchat_copy/chitchat_copy_widget.dart' show ChitchatCopyWidget;

@@ -370,6 +370,112 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                       child: TextFormField(
+                        controller: _model.specialityController1 ??=
+                            TextEditingController(
+                          text: editProfileUsersRecord.speciality,
+                        ),
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Your Speciality',
+                          labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                          hintText: 'i.e. 34',
+                          hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          filled: true,
+                          fillColor:
+                              FlutterFlowTheme.of(context).primaryBackground,
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 20.0, 24.0),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        validator: _model.specialityController1Validator
+                            .asValidator(context),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                      child: TextFormField(
+                        controller: _model.specialityController2 ??=
+                            TextEditingController(
+                          text: editProfileUsersRecord.locality,
+                        ),
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Hospital location',
+                          labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                          hintText: 'i.e. 34',
+                          hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          filled: true,
+                          fillColor:
+                              FlutterFlowTheme.of(context).primaryBackground,
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 20.0, 24.0),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        validator: _model.specialityController2Validator
+                            .asValidator(context),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                      child: TextFormField(
                         controller: _model.yourAilmentsController ??=
                             TextEditingController(
                           text: editProfileUsersRecord.ailments,
@@ -476,6 +582,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             ailments: _model.yourAilmentsController.text,
                             userSex: _model.radioButtonValue,
                             photoUrl: _model.uploadedFileUrl,
+                            speciality: _model.specialityController1.text,
+                            locality: _model.specialityController2.text,
                           );
                           await editProfileUsersRecord.reference
                               .update(usersUpdateData);

@@ -24,6 +24,8 @@ class ChitchatWidget extends StatefulWidget {
     this.userRef,
     this.userProfile,
     this.user,
+    this.special,
+    this.locall,
   }) : super(key: key);
 
   final String? userName;
@@ -32,6 +34,8 @@ class ChitchatWidget extends StatefulWidget {
   final DocumentReference? userRef;
   final String? userProfile;
   final DocumentReference? user;
+  final String? special;
+  final String? locall;
 
   @override
   _ChitchatWidgetState createState() => _ChitchatWidgetState();

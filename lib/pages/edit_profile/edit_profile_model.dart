@@ -31,6 +31,12 @@ class EditProfileModel extends FlutterFlowModel {
   // State field(s) for yourAge widget.
   TextEditingController? yourAgeController;
   String? Function(BuildContext, String?)? yourAgeControllerValidator;
+  // State field(s) for speciality widget.
+  TextEditingController? specialityController1;
+  String? Function(BuildContext, String?)? specialityController1Validator;
+  // State field(s) for speciality widget.
+  TextEditingController? specialityController2;
+  String? Function(BuildContext, String?)? specialityController2Validator;
   // State field(s) for yourAilments widget.
   TextEditingController? yourAilmentsController;
   String? Function(BuildContext, String?)? yourAilmentsControllerValidator;
@@ -45,6 +51,8 @@ class EditProfileModel extends FlutterFlowModel {
     yourNameController?.dispose();
     yourEmailController?.dispose();
     yourAgeController?.dispose();
+    specialityController1?.dispose();
+    specialityController2?.dispose();
     yourAilmentsController?.dispose();
   }
 

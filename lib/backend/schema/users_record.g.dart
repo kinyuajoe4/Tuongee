@@ -95,6 +95,20 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.speciality;
+    if (value != null) {
+      result
+        ..add('speciality')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.locality;
+    if (value != null) {
+      result
+        ..add('locality')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -161,6 +175,14 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.userSex = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'speciality':
+          result.speciality = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'locality':
+          result.locality = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -198,6 +220,10 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? userSex;
   @override
+  final String? speciality;
+  @override
+  final String? locality;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -215,6 +241,8 @@ class _$UsersRecord extends UsersRecord {
       this.photoUrl,
       this.createdTime,
       this.userSex,
+      this.speciality,
+      this.locality,
       this.ffRef})
       : super._();
 
@@ -240,6 +268,8 @@ class _$UsersRecord extends UsersRecord {
         photoUrl == other.photoUrl &&
         createdTime == other.createdTime &&
         userSex == other.userSex &&
+        speciality == other.speciality &&
+        locality == other.locality &&
         ffRef == other.ffRef;
   }
 
@@ -257,6 +287,8 @@ class _$UsersRecord extends UsersRecord {
     _$hash = $jc(_$hash, photoUrl.hashCode);
     _$hash = $jc(_$hash, createdTime.hashCode);
     _$hash = $jc(_$hash, userSex.hashCode);
+    _$hash = $jc(_$hash, speciality.hashCode);
+    _$hash = $jc(_$hash, locality.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -276,6 +308,8 @@ class _$UsersRecord extends UsersRecord {
           ..add('photoUrl', photoUrl)
           ..add('createdTime', createdTime)
           ..add('userSex', userSex)
+          ..add('speciality', speciality)
+          ..add('locality', locality)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -328,6 +362,14 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? get userSex => _$this._userSex;
   set userSex(String? userSex) => _$this._userSex = userSex;
 
+  String? _speciality;
+  String? get speciality => _$this._speciality;
+  set speciality(String? speciality) => _$this._speciality = speciality;
+
+  String? _locality;
+  String? get locality => _$this._locality;
+  set locality(String? locality) => _$this._locality = locality;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -350,6 +392,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _photoUrl = $v.photoUrl;
       _createdTime = $v.createdTime;
       _userSex = $v.userSex;
+      _speciality = $v.speciality;
+      _locality = $v.locality;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -384,6 +428,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
             photoUrl: photoUrl,
             createdTime: createdTime,
             userSex: userSex,
+            speciality: speciality,
+            locality: locality,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

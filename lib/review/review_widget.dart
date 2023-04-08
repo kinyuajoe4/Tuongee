@@ -185,81 +185,51 @@ class _ReviewWidgetState extends State<ReviewWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-                child: StreamBuilder<List<ChatsRecord>>(
-                  stream: queryChatsRecord(
-                    singleRecord: true,
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 4.0,
+                        color: Color(0x33000000),
+                        offset: Offset(0.0, 2.0),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 40.0,
-                          height: 40.0,
-                          child: SpinKitPumpingHeart(
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 40.0,
-                          ),
-                        ),
-                      );
-                    }
-                    List<ChatsRecord> containerChatsRecordList = snapshot.data!;
-                    // Return an empty Container when the item does not exist.
-                    if (snapshot.data!.isEmpty) {
-                      return Container();
-                    }
-                    final containerChatsRecord =
-                        containerChatsRecordList.isNotEmpty
-                            ? containerChatsRecordList.first
-                            : null;
-                    return Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4.0,
-                            color: Color(0x33000000),
-                            offset: Offset(0.0, 2.0),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 4.0, 16.0, 12.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Colors.black,
-                                              fontSize: 14.0,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 4.0, 16.0, 12.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: Colors.black,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ),
               Padding(
@@ -389,17 +359,38 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                 0.0, 30.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                final reviewsCreateData =
-                                    createReviewsRecordData(
-                                  name: currentUserDisplayName,
-                                  comment: _model.textController.text,
-                                );
-                                await ReviewsRecord.collection
-                                    .doc()
-                                    .set(reviewsCreateData);
-                                setState(() {
-                                  _model.textController?.clear();
-                                });
+                                if (_model.textController.text != null &&
+                                    _model.textController.text != '') {
+                                  final reviewsCreateData =
+                                      createReviewsRecordData(
+                                    name: currentUserDisplayName,
+                                    comment: _model.textController.text,
+                                  );
+                                  await ReviewsRecord.collection
+                                      .doc()
+                                      .set(reviewsCreateData);
+                                  setState(() {
+                                    _model.textController?.clear();
+                                  });
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Please Type Something',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
+                                  );
+                                }
                               },
                               text: 'Submit',
                               options: FFButtonOptions(
@@ -436,7 +427,10 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                 ),
               ),
               StreamBuilder<List<ReviewsRecord>>(
-                stream: queryReviewsRecord(),
+                stream: queryReviewsRecord(
+                  queryBuilder: (reviewsRecord) =>
+                      reviewsRecord.orderBy('comment'),
+                ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
                   if (!snapshot.hasData) {

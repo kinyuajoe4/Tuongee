@@ -28,6 +28,10 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
   @BuiltValueField(wireName: 'message_seen')
   bool? get messageSeen;
 
+  DocumentReference? get spec;
+
+  DocumentReference? get loca;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -66,6 +70,8 @@ Map<String, dynamic> createChatsRecordData({
   DateTime? lastMessageTime,
   String? image,
   bool? messageSeen,
+  DocumentReference? spec,
+  DocumentReference? loca,
 }) {
   final firestoreData = serializers.toFirestore(
     ChatsRecord.serializer,
@@ -77,7 +83,9 @@ Map<String, dynamic> createChatsRecordData({
         ..lastMessage = lastMessage
         ..lastMessageTime = lastMessageTime
         ..image = image
-        ..messageSeen = messageSeen,
+        ..messageSeen = messageSeen
+        ..spec = spec
+        ..loca = loca,
     ),
   );
 

@@ -71,6 +71,22 @@ class _$ChatsRecordSerializer implements StructuredSerializer<ChatsRecord> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.spec;
+    if (value != null) {
+      result
+        ..add('spec')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
+    value = object.loca;
+    if (value != null) {
+      result
+        ..add('loca')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -127,6 +143,18 @@ class _$ChatsRecordSerializer implements StructuredSerializer<ChatsRecord> {
           result.messageSeen = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'spec':
+          result.spec = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
+        case 'loca':
+          result.loca = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -156,6 +184,10 @@ class _$ChatsRecord extends ChatsRecord {
   @override
   final bool? messageSeen;
   @override
+  final DocumentReference<Object?>? spec;
+  @override
+  final DocumentReference<Object?>? loca;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ChatsRecord([void Function(ChatsRecordBuilder)? updates]) =>
@@ -169,6 +201,8 @@ class _$ChatsRecord extends ChatsRecord {
       this.lastMessageTime,
       this.image,
       this.messageSeen,
+      this.spec,
+      this.loca,
       this.ffRef})
       : super._();
 
@@ -190,6 +224,8 @@ class _$ChatsRecord extends ChatsRecord {
         lastMessageTime == other.lastMessageTime &&
         image == other.image &&
         messageSeen == other.messageSeen &&
+        spec == other.spec &&
+        loca == other.loca &&
         ffRef == other.ffRef;
   }
 
@@ -203,6 +239,8 @@ class _$ChatsRecord extends ChatsRecord {
     _$hash = $jc(_$hash, lastMessageTime.hashCode);
     _$hash = $jc(_$hash, image.hashCode);
     _$hash = $jc(_$hash, messageSeen.hashCode);
+    _$hash = $jc(_$hash, spec.hashCode);
+    _$hash = $jc(_$hash, loca.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -218,6 +256,8 @@ class _$ChatsRecord extends ChatsRecord {
           ..add('lastMessageTime', lastMessageTime)
           ..add('image', image)
           ..add('messageSeen', messageSeen)
+          ..add('spec', spec)
+          ..add('loca', loca)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -255,6 +295,14 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
   bool? get messageSeen => _$this._messageSeen;
   set messageSeen(bool? messageSeen) => _$this._messageSeen = messageSeen;
 
+  DocumentReference<Object?>? _spec;
+  DocumentReference<Object?>? get spec => _$this._spec;
+  set spec(DocumentReference<Object?>? spec) => _$this._spec = spec;
+
+  DocumentReference<Object?>? _loca;
+  DocumentReference<Object?>? get loca => _$this._loca;
+  set loca(DocumentReference<Object?>? loca) => _$this._loca = loca;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -273,6 +321,8 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
       _lastMessageTime = $v.lastMessageTime;
       _image = $v.image;
       _messageSeen = $v.messageSeen;
+      _spec = $v.spec;
+      _loca = $v.loca;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -303,6 +353,8 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
             lastMessageTime: lastMessageTime,
             image: image,
             messageSeen: messageSeen,
+            spec: spec,
+            loca: loca,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

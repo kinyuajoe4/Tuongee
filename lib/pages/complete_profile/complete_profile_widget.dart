@@ -441,7 +441,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                           decoration: InputDecoration(
                             labelText: 'Your Name',
                             labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                            hintText: 'Please enter a valid number...',
+                            hintText: 'Please enter a valid username...',
                             hintStyle: FlutterFlowTheme.of(context).bodySmall,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
