@@ -21,9 +21,11 @@ class HomePageWidget extends StatefulWidget {
   const HomePageWidget({
     Key? key,
     this.test,
+    this.pm,
   }) : super(key: key);
 
   final AsdfasdfRecord? test;
+  final String? pm;
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();

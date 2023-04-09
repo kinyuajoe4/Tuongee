@@ -476,6 +476,59 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                       child: TextFormField(
+                        controller: _model.yourscheduleController ??=
+                            TextEditingController(
+                          text: editProfileUsersRecord.schedule,
+                        ),
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Appointment Schedule',
+                          labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                          hintText: 'eg. mon-sun ,8AM-5PM',
+                          hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          filled: true,
+                          fillColor:
+                              FlutterFlowTheme.of(context).primaryBackground,
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 20.0, 24.0),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        validator: _model.yourscheduleControllerValidator
+                            .asValidator(context),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                      child: TextFormField(
                         controller: _model.yourAilmentsController ??=
                             TextEditingController(
                           text: editProfileUsersRecord.ailments,
@@ -584,6 +637,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             photoUrl: _model.uploadedFileUrl,
                             speciality: _model.specialityController1.text,
                             locality: _model.specialityController2.text,
+                            schedule: _model.yourscheduleController.text,
                           );
                           await editProfileUsersRecord.reference
                               .update(usersUpdateData);

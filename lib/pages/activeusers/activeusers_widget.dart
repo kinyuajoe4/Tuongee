@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/main.dart';
-import '/pages/chitchat/chitchat_widget.dart';
+import 'package:map_launcher/map_launcher.dart' as $ml;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +32,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -117,8 +118,14 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                               color: Color(0xB91726D0),
                               size: 27.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              currentUserLocationValue =
+                                  await getCurrentUserLocation(
+                                      defaultLocation: LatLng(0.0, 0.0));
+                              await launchMap(
+                                location: currentUserLocationValue,
+                                title: '',
+                              );
                             },
                           ),
                         ],
@@ -146,7 +153,9 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                       record.displayName!,
                                       record.email!,
                                       record.phoneNumber!,
-                                      record.ailments!
+                                      record.speciality!,
+                                      record.locality!,
+                                      record.schedule!
                                     ]),
                                   )
                                   .toList(),
@@ -419,10 +428,17 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                             ChatsRecord.collection.doc();
                                         await chatsRecordReference
                                             .set(chatsCreateData);
-                                        _model.nAn =
+                                        _model.nAj =
                                             ChatsRecord.getDocumentFromData(
                                                 chatsCreateData,
                                                 chatsRecordReference);
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => NavBarPage(
+                                                initialPage: 'allusers'),
+                                          ),
+                                        );
 
                                         setState(() {});
                                       },
@@ -438,110 +454,82 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 16.0, 16.0, 16.0),
-                                          child: InkWell(
-                                            onTap: () async {
-                                              await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ChitchatWidget(
-                                                    userName:
-                                                        listViewUsersRecord
-                                                            .displayName,
-                                                    userEmail:
-                                                        listViewUsersRecord
-                                                            .email,
-                                                    userRef:
-                                                        currentUserReference,
-                                                    userProfile:
-                                                        listViewUsersRecord
-                                                            .photoUrl,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Container(
+                                                        width: 48.0,
+                                                        height: 48.0,
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Image.network(
+                                                          _model.textController
+                                                              .text,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              listViewUsersRecord
+                                                                  .displayName!,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                            ),
+                                                            Text(
+                                                              listViewUsersRecord
+                                                                  .email!,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Container(
-                                                          width: 48.0,
-                                                          height: 48.0,
-                                                          clipBehavior:
-                                                              Clip.antiAlias,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                          child: Image.network(
-                                                            _model
-                                                                .textController
-                                                                .text,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      12.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                listViewUsersRecord
-                                                                    .displayName!,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium,
-                                                              ),
-                                                              Text(
-                                                                listViewUsersRecord
-                                                                    .email!,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.double_arrow,
-                                                      color: Color(0xB91726D0),
-                                                      size: 15.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
+                                                ],
+                                              ),
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.double_arrow,
+                                                    color: Color(0xB91726D0),
+                                                    size: 15.0,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),

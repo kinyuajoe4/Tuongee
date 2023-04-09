@@ -47,7 +47,7 @@ class _MainLogoWidgetState extends State<MainLogoWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Image.asset(
-                  'assets/images/Group_815.png',
+                  'assets/images/no_back.png',
                   width: 100.0,
                   height: 80.0,
                   fit: BoxFit.fitWidth,
@@ -57,7 +57,7 @@ class _MainLogoWidgetState extends State<MainLogoWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Image.asset(
-                  'assets/images/Group_815.png',
+                  'assets/images/no_back.png',
                   width: 100.0,
                   height: 80.0,
                   fit: BoxFit.fitWidth,
@@ -66,11 +66,21 @@ class _MainLogoWidgetState extends State<MainLogoWidget> {
           ],
         ),
         Text(
-          'The Platform',
+          'TUONGEE',
           textAlign: TextAlign.end,
           style: FlutterFlowTheme.of(context).bodyMedium.override(
                 fontFamily: 'Outfit',
-                color: Color(0xFF0C0C0E),
+                color: Color(0xFF040404),
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        Text(
+          'The Platform',
+          textAlign: TextAlign.center,
+          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                fontFamily: 'Outfit',
+                color: Color(0xFF040404),
                 fontSize: 20.0,
               ),
         ),

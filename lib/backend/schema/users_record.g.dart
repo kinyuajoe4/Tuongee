@@ -109,6 +109,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.schedule;
+    if (value != null) {
+      result
+        ..add('schedule')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -183,6 +190,10 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.locality = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'schedule':
+          result.schedule = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -224,6 +235,8 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? locality;
   @override
+  final String? schedule;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -243,6 +256,7 @@ class _$UsersRecord extends UsersRecord {
       this.userSex,
       this.speciality,
       this.locality,
+      this.schedule,
       this.ffRef})
       : super._();
 
@@ -270,6 +284,7 @@ class _$UsersRecord extends UsersRecord {
         userSex == other.userSex &&
         speciality == other.speciality &&
         locality == other.locality &&
+        schedule == other.schedule &&
         ffRef == other.ffRef;
   }
 
@@ -289,6 +304,7 @@ class _$UsersRecord extends UsersRecord {
     _$hash = $jc(_$hash, userSex.hashCode);
     _$hash = $jc(_$hash, speciality.hashCode);
     _$hash = $jc(_$hash, locality.hashCode);
+    _$hash = $jc(_$hash, schedule.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -310,6 +326,7 @@ class _$UsersRecord extends UsersRecord {
           ..add('userSex', userSex)
           ..add('speciality', speciality)
           ..add('locality', locality)
+          ..add('schedule', schedule)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -370,6 +387,10 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? get locality => _$this._locality;
   set locality(String? locality) => _$this._locality = locality;
 
+  String? _schedule;
+  String? get schedule => _$this._schedule;
+  set schedule(String? schedule) => _$this._schedule = schedule;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -394,6 +415,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _userSex = $v.userSex;
       _speciality = $v.speciality;
       _locality = $v.locality;
+      _schedule = $v.schedule;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -430,6 +452,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
             userSex: userSex,
             speciality: speciality,
             locality: locality,
+            schedule: schedule,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

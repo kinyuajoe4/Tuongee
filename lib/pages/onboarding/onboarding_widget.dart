@@ -283,7 +283,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Easily find symptoms and common factors that affect you daily.',
+                                            'Easily find symptoms and common factors that affect you daily on our Health.Ai Doc',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium,

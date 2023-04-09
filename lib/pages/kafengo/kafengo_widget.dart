@@ -101,29 +101,31 @@ class _KafengoWidgetState extends State<KafengoWidget> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
-                                      width: 100.0,
+                                      width: 109.0,
                                       height: 70.0,
                                       child: Stack(
                                         children: [
                                           Image.asset(
-                                            'assets/images/Group_815.png',
+                                            'assets/images/no_back.png',
                                             width: 700.0,
                                             height: 1000.0,
                                             fit: BoxFit.fitWidth,
                                           ),
                                           Align(
                                             alignment:
-                                                AlignmentDirectional(1.0, 1.0),
+                                                AlignmentDirectional(-0.6, 1.0),
                                             child: Text(
-                                              'DoctorGPT',
+                                              'TUONGEE ',
+                                              textAlign: TextAlign.justify,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Outfit',
+                                                        fontSize: 17.0,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                       ),
@@ -131,6 +133,15 @@ class _KafengoWidgetState extends State<KafengoWidget> {
                                           ),
                                         ],
                                       ),
+                                    ),
+                                    Text(
+                                      'Health. AI',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            fontSize: 24.0,
+                                          ),
                                     ),
                                   ],
                                 ),

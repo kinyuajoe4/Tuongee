@@ -32,6 +32,8 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
 
   DocumentReference? get loca;
 
+  DocumentReference? get schedulability;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -72,6 +74,7 @@ Map<String, dynamic> createChatsRecordData({
   bool? messageSeen,
   DocumentReference? spec,
   DocumentReference? loca,
+  DocumentReference? schedulability,
 }) {
   final firestoreData = serializers.toFirestore(
     ChatsRecord.serializer,
@@ -85,7 +88,8 @@ Map<String, dynamic> createChatsRecordData({
         ..image = image
         ..messageSeen = messageSeen
         ..spec = spec
-        ..loca = loca,
+        ..loca = loca
+        ..schedulability = schedulability,
     ),
   );
 

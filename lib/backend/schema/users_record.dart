@@ -39,6 +39,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
 
   String? get locality;
 
+  String? get schedule;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -54,7 +56,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..photoUrl = ''
     ..userSex = ''
     ..speciality = ''
-    ..locality = '';
+    ..locality = ''
+    ..schedule = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -91,6 +94,7 @@ Map<String, dynamic> createUsersRecordData({
   String? userSex,
   String? speciality,
   String? locality,
+  String? schedule,
 }) {
   final firestoreData = serializers.toFirestore(
     UsersRecord.serializer,
@@ -108,7 +112,8 @@ Map<String, dynamic> createUsersRecordData({
         ..createdTime = createdTime
         ..userSex = userSex
         ..speciality = speciality
-        ..locality = locality,
+        ..locality = locality
+        ..schedule = schedule,
     ),
   );
 

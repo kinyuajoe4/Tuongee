@@ -87,6 +87,14 @@ class _$ChatsRecordSerializer implements StructuredSerializer<ChatsRecord> {
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.schedulability;
+    if (value != null) {
+      result
+        ..add('schedulability')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -155,6 +163,12 @@ class _$ChatsRecordSerializer implements StructuredSerializer<ChatsRecord> {
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'schedulability':
+          result.schedulability = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -188,6 +202,8 @@ class _$ChatsRecord extends ChatsRecord {
   @override
   final DocumentReference<Object?>? loca;
   @override
+  final DocumentReference<Object?>? schedulability;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ChatsRecord([void Function(ChatsRecordBuilder)? updates]) =>
@@ -203,6 +219,7 @@ class _$ChatsRecord extends ChatsRecord {
       this.messageSeen,
       this.spec,
       this.loca,
+      this.schedulability,
       this.ffRef})
       : super._();
 
@@ -226,6 +243,7 @@ class _$ChatsRecord extends ChatsRecord {
         messageSeen == other.messageSeen &&
         spec == other.spec &&
         loca == other.loca &&
+        schedulability == other.schedulability &&
         ffRef == other.ffRef;
   }
 
@@ -241,6 +259,7 @@ class _$ChatsRecord extends ChatsRecord {
     _$hash = $jc(_$hash, messageSeen.hashCode);
     _$hash = $jc(_$hash, spec.hashCode);
     _$hash = $jc(_$hash, loca.hashCode);
+    _$hash = $jc(_$hash, schedulability.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -258,6 +277,7 @@ class _$ChatsRecord extends ChatsRecord {
           ..add('messageSeen', messageSeen)
           ..add('spec', spec)
           ..add('loca', loca)
+          ..add('schedulability', schedulability)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -303,6 +323,11 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
   DocumentReference<Object?>? get loca => _$this._loca;
   set loca(DocumentReference<Object?>? loca) => _$this._loca = loca;
 
+  DocumentReference<Object?>? _schedulability;
+  DocumentReference<Object?>? get schedulability => _$this._schedulability;
+  set schedulability(DocumentReference<Object?>? schedulability) =>
+      _$this._schedulability = schedulability;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -323,6 +348,7 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
       _messageSeen = $v.messageSeen;
       _spec = $v.spec;
       _loca = $v.loca;
+      _schedulability = $v.schedulability;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -355,6 +381,7 @@ class ChatsRecordBuilder implements Builder<ChatsRecord, ChatsRecordBuilder> {
             messageSeen: messageSeen,
             spec: spec,
             loca: loca,
+            schedulability: schedulability,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
