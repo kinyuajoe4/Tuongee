@@ -153,9 +153,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                       record.displayName!,
                                       record.email!,
                                       record.phoneNumber!,
-                                      record.speciality!,
-                                      record.locality!,
-                                      record.schedule!
+                                      record.ailments!
                                     ]),
                                   )
                                   .toList(),
@@ -257,7 +255,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                             createChatsRecordData(
                                           userA: currentUserReference,
                                           userB: listViewUsersRecord.reference,
-                                          lastMessage: 'NA',
+                                          lastMessage: 'tap to view😊',
                                           lastMessageTime: getCurrentTimestamp,
                                           image: listViewUsersRecord.photoUrl,
                                           user: currentUserReference,
@@ -349,6 +347,33 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                                       .of(context)
                                                                   .bodyMedium,
                                                             ),
+                                                            Text(
+                                                              listViewUsersRecord
+                                                                  .speciality!,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Outfit',
+                                                                    color: Color(
+                                                                        0xFF0D0081),
+                                                                  ),
+                                                            ),
+                                                            Text(
+                                                              listViewUsersRecord
+                                                                  .locality!,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Outfit',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .success,
+                                                                  ),
+                                                            ),
                                                           ],
                                                         ),
                                                       ),
@@ -378,167 +403,220 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                               );
                             },
                           ),
-                        if (_model.textController.text != null &&
-                            _model.textController.text != '')
-                          StreamBuilder<List<UsersRecord>>(
-                            stream: queryUsersRecord(),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    child: SpinKitPumpingHeart(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      size: 40.0,
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<UsersRecord> listViewUsersRecordList =
-                                  snapshot.data!
-                                      .where((u) => u.uid != currentUserUid)
-                                      .toList();
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: listViewUsersRecordList.length,
-                                itemBuilder: (context, listViewIndex) {
-                                  final listViewUsersRecord =
-                                      listViewUsersRecordList[listViewIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 12.0, 0.0, 0.0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        final chatsCreateData =
-                                            createChatsRecordData(
-                                          userA: currentUserReference,
-                                          userB: listViewUsersRecord.reference,
-                                          lastMessage: 'NA',
-                                          lastMessageTime: getCurrentTimestamp,
-                                          image: listViewUsersRecord.photoUrl,
-                                          user: currentUserReference,
-                                          messageSeen: false,
-                                        );
-                                        var chatsRecordReference =
-                                            ChatsRecord.collection.doc();
-                                        await chatsRecordReference
-                                            .set(chatsCreateData);
-                                        _model.nAj =
-                                            ChatsRecord.getDocumentFromData(
-                                                chatsCreateData,
-                                                chatsRecordReference);
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => NavBarPage(
-                                                initialPage: 'allusers'),
+                        SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              if (_model.textController.text != null &&
+                                  _model.textController.text != '')
+                                StreamBuilder<List<UsersRecord>>(
+                                  stream: queryUsersRecord(),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          child: SpinKitPumpingHeart(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 40.0,
                                           ),
-                                        );
-
-                                        setState(() {});
-                                      },
-                                      child: Container(
-                                        width: 100.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
                                         ),
-                                        child: Padding(
+                                      );
+                                    }
+                                    List<UsersRecord> listViewUsersRecordList =
+                                        snapshot.data!
+                                            .where(
+                                                (u) => u.uid != currentUserUid)
+                                            .toList();
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: listViewUsersRecordList.length,
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewUsersRecord =
+                                            listViewUsersRecordList[
+                                                listViewIndex];
+                                        return Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 16.0, 16.0, 16.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Container(
-                                                        width: 48.0,
-                                                        height: 48.0,
-                                                        clipBehavior:
-                                                            Clip.antiAlias,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        child: Image.network(
-                                                          _model.textController
-                                                              .text,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Column(
+                                                  0.0, 12.0, 0.0, 0.0),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              final chatsCreateData =
+                                                  createChatsRecordData(
+                                                userA: currentUserReference,
+                                                userB: listViewUsersRecord
+                                                    .reference,
+                                                lastMessage: 'NA',
+                                                lastMessageTime:
+                                                    getCurrentTimestamp,
+                                                image: listViewUsersRecord
+                                                    .photoUrl,
+                                                user: currentUserReference,
+                                                messageSeen: false,
+                                              );
+                                              var chatsRecordReference =
+                                                  ChatsRecord.collection.doc();
+                                              await chatsRecordReference
+                                                  .set(chatsCreateData);
+                                              _model.nAj = ChatsRecord
+                                                  .getDocumentFromData(
+                                                      chatsCreateData,
+                                                      chatsRecordReference);
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      NavBarPage(
+                                                          initialPage:
+                                                              'allusers'),
+                                                ),
+                                              );
+
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                              width: 100.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        16.0, 16.0, 16.0, 16.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            Text(
-                                                              listViewUsersRecord
-                                                                  .displayName!,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
+                                                            Container(
+                                                              width: 48.0,
+                                                              height: 48.0,
+                                                              clipBehavior: Clip
+                                                                  .antiAlias,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                              ),
+                                                              child:
+                                                                  Image.network(
+                                                                _model
+                                                                    .textController
+                                                                    .text,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
                                                             ),
-                                                            Text(
-                                                              listViewUsersRecord
-                                                                  .email!,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Text(
+                                                                    listViewUsersRecord
+                                                                        .displayName!,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium,
+                                                                  ),
+                                                                  Text(
+                                                                    listViewUsersRecord
+                                                                        .email!,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium,
+                                                                  ),
+                                                                  Text(
+                                                                    listViewUsersRecord
+                                                                        .speciality!,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Outfit',
+                                                                          color:
+                                                                              Color(0xFF0D0081),
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    listViewUsersRecord
+                                                                        .locality!,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Outfit',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).success,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.double_arrow,
+                                                          color:
+                                                              Color(0xB91726D0),
+                                                          size: 15.0,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.double_arrow,
-                                                    color: Color(0xB91726D0),
-                                                    size: 15.0,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                            ],
                           ),
+                        ),
                       ],
                     ),
                   ),

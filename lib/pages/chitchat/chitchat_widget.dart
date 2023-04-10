@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import '/main.dart';
+import '/pages/appointment_details/appointment_details_widget.dart';
 import '/review/review_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -186,7 +187,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                         MainAxisAlignment.start,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
-                                                            .center,
+                                                            .start,
                                                     children: [
                                                       Padding(
                                                         padding:
@@ -213,29 +214,23 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                               ),
                                                         ),
                                                       ),
-                                                      Align(
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                -0.05, 0.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            widget.userEmail,
-                                                            '2',
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
+                                                      Text(
+                                                        valueOrDefault<String>(
+                                                          widget.userEmail,
+                                                          '2',
                                                         ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Outfit',
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
                                                       ),
                                                       Text(
-                                                        'Professional${widget.special}',
+                                                        'Professional ${widget.special}',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -244,11 +239,11 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                   fontFamily:
                                                                       'Outfit',
                                                                   color: Color(
-                                                                      0xFF110198),
+                                                                      0xFF0D0081),
                                                                 ),
                                                       ),
                                                       Text(
-                                                        'Currently in ${widget.locall}',
+                                                        widget.locall!,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -270,9 +265,8 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                 .override(
                                                                   fontFamily:
                                                                       'Outfit',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .success,
+                                                                  color: Color(
+                                                                      0xFF0D0081),
                                                                 ),
                                                       ),
                                                     ],
@@ -288,7 +282,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                           borderWidth: 1.0,
                                           buttonSize: 60.0,
                                           icon: Icon(
-                                            Icons.more_vert_outlined,
+                                            Icons.touch_app,
                                             color: Color(0xB91726D0),
                                             size: 26.0,
                                           ),
@@ -297,9 +291,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage:
-                                                            'myAppointments'),
+                                                    AppointmentDetailsWidget(),
                                               ),
                                             );
                                           },
