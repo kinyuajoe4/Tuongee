@@ -212,7 +212,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                                    'At Tuongee your reviews and comments are  highly valued and appreciated as they help up improve the quality of services we offer to you.',
                                     style: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
