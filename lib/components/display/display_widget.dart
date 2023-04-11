@@ -80,7 +80,7 @@ class _DisplayWidgetState extends State<DisplayWidget> {
                 children: [
                   SelectionArea(
                       child: AutoSizeText(
-                    'You can write down your symptoms here and our DoctorGPT will give you suggestions🤯\n\nThis infomation is only visible to you.No Second Party  🎉',
+                    'You can write down your symptoms here and our DoctorG will give you suggestions🤯\n\nThis infomation is only visible to you.No Second Party  🎉',
                     style: FlutterFlowTheme.of(context).titleMedium.override(
                           fontFamily: 'Outfit',
                           color: FlutterFlowTheme.of(context).primaryBtnText,

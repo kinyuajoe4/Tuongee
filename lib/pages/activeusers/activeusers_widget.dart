@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/main.dart';
-import 'package:map_launcher/map_launcher.dart' as $ml;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,6 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
-  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -115,17 +113,11 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                             buttonSize: 48.0,
                             icon: Icon(
                               Icons.keyboard_control,
-                              color: Color(0xB91726D0),
+                              color: Color(0xFF1A1F24),
                               size: 27.0,
                             ),
-                            onPressed: () async {
-                              currentUserLocationValue =
-                                  await getCurrentUserLocation(
-                                      defaultLocation: LatLng(0.0, 0.0));
-                              await launchMap(
-                                location: currentUserLocationValue,
-                                title: '',
-                              );
+                            onPressed: () {
+                              print('IconButton pressed ...');
                             },
                           ),
                         ],
@@ -153,7 +145,9 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                       record.displayName!,
                                       record.email!,
                                       record.phoneNumber!,
-                                      record.ailments!
+                                      record.speciality!,
+                                      record.locality!,
+                                      record.schedule!
                                     ]),
                                   )
                                   .toList(),

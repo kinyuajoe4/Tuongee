@@ -158,7 +158,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.home_rounded,
               size: 24.0,
             ),
-            label: '•',
+            label: 'home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -170,7 +170,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.date_range_rounded,
               size: 24.0,
             ),
-            label: '•',
+            label: ' schedule',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -178,7 +178,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.subway_sharp,
               size: 24.0,
             ),
-            label: '.',
+            label: 'med bot',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -186,7 +186,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.favorite,
               size: 24.0,
             ),
-            label: '.',
+            label: 'doc chat',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -198,7 +198,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.account_circle_rounded,
               size: 24.0,
             ),
-            label: '•',
+            label: 'profile',
             tooltip: '',
           )
         ],

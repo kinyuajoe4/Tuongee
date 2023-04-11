@@ -244,127 +244,138 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                             ],
                           ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 0.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: FlutterFlowIconButton(
-                                  borderColor: FlutterFlowTheme.of(context)
-                                      .darkBackground,
-                                  borderRadius: 30.0,
-                                  borderWidth: 1.0,
-                                  buttonSize: 60.0,
-                                  icon: Icon(
-                                    Icons.add,
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 10.0, 0.0, 0.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 30.0,
+                                        .secondaryBackground,
+                                    shape: BoxShape.circle,
                                   ),
-                                  onPressed: () async {
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ActiveusersWidget(),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 8.0, 0.0),
+                                    child: FlutterFlowIconButton(
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .darkBackground,
+                                      borderRadius: 30.0,
+                                      borderWidth: 1.0,
+                                      buttonSize: 60.0,
+                                      icon: Icon(
+                                        Icons.add,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 30.0,
+                                      ),
+                                      onPressed: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ActiveusersWidget(),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 14.0, 0.0, 0.0),
+                                child: StreamBuilder<List<UsersRecord>>(
+                                  stream: queryUsersRecord(),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          child: SpinKitPumpingHeart(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 40.0,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<UsersRecord> rowUsersRecordList =
+                                        snapshot.data!
+                                            .where(
+                                                (u) => u.uid != currentUserUid)
+                                            .toList();
+                                    return SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: List.generate(
+                                            rowUsersRecordList.length,
+                                            (rowIndex) {
+                                          final rowUsersRecord =
+                                              rowUsersRecordList[rowIndex];
+                                          return Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 13.0, 0.0),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                final chatsCreateData =
+                                                    createChatsRecordData(
+                                                  userA: currentUserReference,
+                                                  userB:
+                                                      rowUsersRecord.reference,
+                                                  lastMessage: 'tap to view😊',
+                                                  lastMessageTime:
+                                                      getCurrentTimestamp,
+                                                  image:
+                                                      rowUsersRecord.photoUrl,
+                                                  user: currentUserReference,
+                                                  messageSeen: false,
+                                                );
+                                                var chatsRecordReference =
+                                                    ChatsRecord.collection
+                                                        .doc();
+                                                await chatsRecordReference
+                                                    .set(chatsCreateData);
+                                                _model.na = ChatsRecord
+                                                    .getDocumentFromData(
+                                                        chatsCreateData,
+                                                        chatsRecordReference);
+
+                                                setState(() {});
+                                              },
+                                              child: Container(
+                                                width: 60.0,
+                                                height: 60.0,
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xB91726D0),
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: Image.network(
+                                                      rowUsersRecord.photoUrl!,
+                                                    ).image,
+                                                  ),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }),
                                       ),
                                     );
                                   },
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 14.0, 0.0, 0.0),
-                              child: StreamBuilder<List<UsersRecord>>(
-                                stream: queryUsersRecord(),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        child: SpinKitPumpingHeart(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 40.0,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<UsersRecord> rowUsersRecordList =
-                                      snapshot.data!
-                                          .where((u) => u.uid != currentUserUid)
-                                          .toList();
-                                  return SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: List.generate(
-                                          rowUsersRecordList.length,
-                                          (rowIndex) {
-                                        final rowUsersRecord =
-                                            rowUsersRecordList[rowIndex];
-                                        return Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 13.0, 0.0),
-                                          child: InkWell(
-                                            onTap: () async {
-                                              final chatsCreateData =
-                                                  createChatsRecordData(
-                                                userA: currentUserReference,
-                                                userB: rowUsersRecord.reference,
-                                                lastMessage: 'tap to view😊',
-                                                lastMessageTime:
-                                                    getCurrentTimestamp,
-                                                image: rowUsersRecord.photoUrl,
-                                                user: currentUserReference,
-                                                messageSeen: false,
-                                              );
-                                              var chatsRecordReference =
-                                                  ChatsRecord.collection.doc();
-                                              await chatsRecordReference
-                                                  .set(chatsCreateData);
-                                              _model.na = ChatsRecord
-                                                  .getDocumentFromData(
-                                                      chatsCreateData,
-                                                      chatsRecordReference);
-
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                              width: 60.0,
-                                              height: 60.0,
-                                              decoration: BoxDecoration(
-                                                color: Color(0xB91726D0),
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: Image.network(
-                                                    rowUsersRecord.photoUrl!,
-                                                  ).image,
-                                                ),
-                                                shape: BoxShape.circle,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -744,18 +755,51 @@ class _AllusersWidgetState extends State<AllusersWidget> {
                                                               if (currentUserReference !=
                                                                   listViewChatsRecord
                                                                       .user)
-                                                                Text(
-                                                                  containerUsersRecord
-                                                                      .locality!,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Outfit',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .success,
-                                                                      ),
+                                                                StreamBuilder<
+                                                                    UsersRecord>(
+                                                                  stream: UsersRecord
+                                                                      .getDocument(
+                                                                          listViewChatsRecord
+                                                                              .loca!),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              40.0,
+                                                                          height:
+                                                                              40.0,
+                                                                          child:
+                                                                              SpinKitPumpingHeart(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                40.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    final textUsersRecord =
+                                                                        snapshot
+                                                                            .data!;
+                                                                    return Text(
+                                                                      containerUsersRecord
+                                                                          .locality!,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Outfit',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).success,
+                                                                          ),
+                                                                    );
+                                                                  },
                                                                 ),
                                                               if (currentUserReference ==
                                                                   listViewChatsRecord
