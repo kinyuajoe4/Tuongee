@@ -378,7 +378,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         decoration: InputDecoration(
                           labelText: 'Your Speciality',
                           labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                          hintText: 'i.e. 34',
+                          hintText: 'i.e. Psychatrist',
                           hintStyle: FlutterFlowTheme.of(context).bodySmall,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -431,7 +431,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         decoration: InputDecoration(
                           labelText: 'Hospital location',
                           labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                          hintText: 'i.e. 34',
+                          hintText: 'i.e. Nairobi, Equity afya',
                           hintStyle: FlutterFlowTheme.of(context).bodySmall,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
