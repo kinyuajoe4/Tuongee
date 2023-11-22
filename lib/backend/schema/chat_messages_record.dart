@@ -1,55 +1,86 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'chat_messages_record.g.dart';
+class ChatMessagesRecord extends FirestoreRecord {
+  ChatMessagesRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ChatMessagesRecord
-    implements Built<ChatMessagesRecord, ChatMessagesRecordBuilder> {
-  static Serializer<ChatMessagesRecord> get serializer =>
-      _$chatMessagesRecordSerializer;
+  // "user" field.
+  DocumentReference? _user;
+  DocumentReference? get user => _user;
+  bool hasUser() => _user != null;
 
-  DocumentReference? get user;
+  // "chat_user" field.
+  DocumentReference? _chatUser;
+  DocumentReference? get chatUser => _chatUser;
+  bool hasChatUser() => _chatUser != null;
 
-  @BuiltValueField(wireName: 'chat_user')
-  DocumentReference? get chatUser;
+  // "text" field.
+  String? _text;
+  String get text => _text ?? '';
+  bool hasText() => _text != null;
 
-  String? get text;
+  // "timestamp" field.
+  DateTime? _timestamp;
+  DateTime? get timestamp => _timestamp;
+  bool hasTimestamp() => _timestamp != null;
 
-  DateTime? get timestamp;
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  bool hasImage() => _image != null;
 
-  String? get image;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(ChatMessagesRecordBuilder builder) => builder
-    ..text = ''
-    ..image = '';
+  void _initializeFields() {
+    _user = snapshotData['user'] as DocumentReference?;
+    _chatUser = snapshotData['chat_user'] as DocumentReference?;
+    _text = snapshotData['text'] as String?;
+    _timestamp = snapshotData['timestamp'] as DateTime?;
+    _image = snapshotData['image'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('chat_messages');
 
-  static Stream<ChatMessagesRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<ChatMessagesRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => ChatMessagesRecord.fromSnapshot(s));
 
   static Future<ChatMessagesRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => ChatMessagesRecord.fromSnapshot(s));
 
-  ChatMessagesRecord._();
-  factory ChatMessagesRecord(
-          [void Function(ChatMessagesRecordBuilder) updates]) =
-      _$ChatMessagesRecord;
+  static ChatMessagesRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      ChatMessagesRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static ChatMessagesRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ChatMessagesRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'ChatMessagesRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is ChatMessagesRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createChatMessagesRecordData({
@@ -59,17 +90,36 @@ Map<String, dynamic> createChatMessagesRecordData({
   DateTime? timestamp,
   String? image,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ChatMessagesRecord.serializer,
-    ChatMessagesRecord(
-      (c) => c
-        ..user = user
-        ..chatUser = chatUser
-        ..text = text
-        ..timestamp = timestamp
-        ..image = image,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'user': user,
+      'chat_user': chatUser,
+      'text': text,
+      'timestamp': timestamp,
+      'image': image,
+    }.withoutNulls,
   );
 
   return firestoreData;
+}
+
+class ChatMessagesRecordDocumentEquality
+    implements Equality<ChatMessagesRecord> {
+  const ChatMessagesRecordDocumentEquality();
+
+  @override
+  bool equals(ChatMessagesRecord? e1, ChatMessagesRecord? e2) {
+    return e1?.user == e2?.user &&
+        e1?.chatUser == e2?.chatUser &&
+        e1?.text == e2?.text &&
+        e1?.timestamp == e2?.timestamp &&
+        e1?.image == e2?.image;
+  }
+
+  @override
+  int hash(ChatMessagesRecord? e) => const ListEquality()
+      .hash([e?.user, e?.chatUser, e?.text, e?.timestamp, e?.image]);
+
+  @override
+  bool isValidKey(Object? o) => o is ChatMessagesRecord;
 }

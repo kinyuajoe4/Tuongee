@@ -35,6 +35,7 @@ class FlutterFlowRadioButton extends StatefulWidget {
     required this.controller,
     required this.optionHeight,
     required this.textStyle,
+    this.optionWidth,
     this.selectedTextStyle,
     this.textPadding = EdgeInsets.zero,
     this.buttonPosition = RadioButtonPosition.left,
@@ -50,6 +51,7 @@ class FlutterFlowRadioButton extends StatefulWidget {
   final Function(String?)? onChanged;
   final FormFieldController<String> controller;
   final double optionHeight;
+  final double? optionWidth;
   final TextStyle textStyle;
   final TextStyle? selectedTextStyle;
   final EdgeInsetsGeometry textPadding;
@@ -104,6 +106,7 @@ class _FlutterFlowRadioButtonState extends State<FlutterFlowRadioButton> {
         selectedTextStyle: widget.selectedTextStyle ?? widget.textStyle,
         textPadding: widget.textPadding,
         optionHeight: widget.optionHeight,
+        optionWidth: widget.optionWidth,
         horizontalAlignment: widget.horizontalAlignment,
         verticalAlignment: widget.verticalAlignment,
         items: effectiveOptions,
@@ -141,6 +144,7 @@ class RadioButton<T> extends StatelessWidget {
     required this.textStyle,
     required this.selectedTextStyle,
     required this.textPadding,
+    this.shouldFlex = false,
   });
 
   final String description;
@@ -153,18 +157,22 @@ class RadioButton<T> extends StatelessWidget {
   final TextStyle textStyle;
   final TextStyle selectedTextStyle;
   final EdgeInsetsGeometry textPadding;
+  final bool shouldFlex;
 
   @override
   Widget build(BuildContext context) {
     final selectedStyle = selectedTextStyle;
     final isSelected = value == groupValue;
-    final radioButtonText = Padding(
+    Widget radioButtonText = Padding(
       padding: textPadding,
       child: Text(
         description,
         style: isSelected ? selectedStyle : textStyle,
       ),
     );
+    if (shouldFlex) {
+      radioButtonText = Flexible(child: radioButtonText);
+    }
     return InkWell(
       onTap: () => onChanged!(value),
       child: Row(
@@ -199,6 +207,7 @@ class RadioGroup<T> extends StatelessWidget {
     required this.textStyle,
     required this.selectedTextStyle,
     required this.textPadding,
+    this.optionWidth,
     this.verticalAlignment = WrapCrossAlignment.center,
   });
 
@@ -208,6 +217,7 @@ class RadioGroup<T> extends StatelessWidget {
   final void Function(T?)? onChanged;
   final Axis direction;
   final double optionHeight;
+  final double? optionWidth;
   final WrapAlignment horizontalAlignment;
   final WrapCrossAlignment verticalAlignment;
   final Color activeColor;
@@ -221,6 +231,7 @@ class RadioGroup<T> extends StatelessWidget {
           final radioButtonBuilder = itemBuilder(item);
           return Container(
             height: optionHeight,
+            width: optionWidth,
             child: RadioButton(
               description: radioButtonBuilder.description,
               value: item,
@@ -232,6 +243,7 @@ class RadioGroup<T> extends StatelessWidget {
               textStyle: textStyle,
               selectedTextStyle: selectedTextStyle,
               textPadding: textPadding,
+              shouldFlex: optionWidth != null,
             ),
           );
         },

@@ -2,20 +2,25 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'auth/firebase_user_provider.dart';
-import 'auth/auth_util.dart';
+import 'auth/firebase_auth/firebase_user_provider.dart';
+import 'auth/firebase_auth/auth_util.dart';
 
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
+import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  usePathUrlStrategy();
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
@@ -36,21 +41,25 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
-  late Stream<TuongeeFirebaseUser> userStream;
-  TuongeeFirebaseUser? initialUser;
-  bool displaySplashImage = true;
+  late Stream<BaseAuthUser> userStream;
+
+  late AppStateNotifier _appStateNotifier;
+  late GoRouter _router;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
 
   @override
   void initState() {
     super.initState();
+
+    _appStateNotifier = AppStateNotifier.instance;
+    _router = createRouter(_appStateNotifier);
     userStream = tuongeeFirebaseUserStream()
-      ..listen((user) => initialUser ?? setState(() => initialUser = user));
+      ..listen((user) => _appStateNotifier.update(user));
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      Duration(seconds: 1),
-      () => setState(() => displaySplashImage = false),
+      Duration(milliseconds: 1000),
+      () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
 
@@ -72,7 +81,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Tuongee',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
@@ -82,22 +91,16 @@ class _MyAppState extends State<MyApp> {
       ],
       locale: _locale,
       supportedLocales: const [Locale('en', '')],
-      theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        scrollbarTheme: ScrollbarThemeData(),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scrollbarTheme: ScrollbarThemeData(),
+      ),
       themeMode: _themeMode,
-      home: initialUser == null || displaySplashImage
-          ? Builder(
-              builder: (context) => Container(
-                color: Color(0xB93A47C1),
-                child: Image.asset(
-                  'assets/images/image.jpg',
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-            )
-          : currentUser!.loggedIn
-              ? NavBarPage()
-              : OnboardingWidget(),
+      routerConfig: _router,
     );
   }
 }
@@ -128,15 +131,23 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'homePage': HomePageWidget(),
-      'myAppointments': MyAppointmentsWidget(),
+      'categoriespage': CategoriespageWidget(),
+      'fillpage': FillpageWidget(),
       'kafengo': KafengoWidget(),
-      'allusers': AllusersWidget(),
       'profilePage': ProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
+
+    final MediaQueryData queryData = MediaQuery.of(context);
+
     return Scaffold(
-      body: _currentPage ?? tabs[_currentPageName],
-      bottomNavigationBar: BottomNavigationBar(
+      body: MediaQuery(
+          data: queryData
+              .removeViewInsets(removeBottom: true)
+              .removeViewPadding(removeBottom: true),
+          child: _currentPage ?? tabs[_currentPageName]!),
+      extendBody: true,
+      bottomNavigationBar: FloatingNavbar(
         currentIndex: currentIndex,
         onTap: (i) => setState(() {
           _currentPage = null;
@@ -144,62 +155,90 @@ class _NavBarPageState extends State<NavBarPage> {
         }),
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         selectedItemColor: FlutterFlowTheme.of(context).primary,
-        unselectedItemColor: FlutterFlowTheme.of(context).grayLight,
-        showSelectedLabels: true,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              size: 24.0,
+        unselectedItemColor: FlutterFlowTheme.of(context).accent2,
+        selectedBackgroundColor: Color(0x00000000),
+        borderRadius: 12.0,
+        itemBorderRadius: 8.0,
+        margin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+        width: 300.0,
+        elevation: 0.0,
+        items: [
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  currentIndex == 0
+                      ? FontAwesomeIcons.home
+                      : FontAwesomeIcons.home,
+                  color: currentIndex == 0
+                      ? FlutterFlowTheme.of(context).primary
+                      : FlutterFlowTheme.of(context).accent2,
+                  size: currentIndex == 0 ? 24.0 : 24.0,
+                ),
+              ],
             ),
-            activeIcon: Icon(
-              Icons.home_rounded,
-              size: 24.0,
-            ),
-            label: 'home',
-            tooltip: '',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.date_range_outlined,
-              size: 24.0,
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.solidFolderOpen,
+                  color: currentIndex == 1
+                      ? FlutterFlowTheme.of(context).primary
+                      : FlutterFlowTheme.of(context).accent2,
+                  size: 24.0,
+                ),
+              ],
             ),
-            activeIcon: Icon(
-              Icons.date_range_rounded,
-              size: 24.0,
-            ),
-            label: ' schedule',
-            tooltip: '',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.subway_sharp,
-              size: 24.0,
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  currentIndex == 2
+                      ? Icons.add_circle_outlined
+                      : Icons.add_circle,
+                  color: currentIndex == 2
+                      ? FlutterFlowTheme.of(context).primary
+                      : FlutterFlowTheme.of(context).accent2,
+                  size: currentIndex == 2 ? 54.0 : 54.0,
+                ),
+              ],
             ),
-            label: 'med bot',
-            tooltip: '',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite,
-              size: 24.0,
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.chat_bubble,
+                  color: currentIndex == 3
+                      ? FlutterFlowTheme.of(context).primary
+                      : FlutterFlowTheme.of(context).accent2,
+                  size: 24.0,
+                ),
+              ],
             ),
-            label: 'doc chat',
-            tooltip: '',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_circle_outlined,
-              size: 24.0,
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  currentIndex == 4
+                      ? Icons.account_circle_rounded
+                      : Icons.account_circle_outlined,
+                  color: currentIndex == 4
+                      ? FlutterFlowTheme.of(context).primary
+                      : FlutterFlowTheme.of(context).accent2,
+                  size: currentIndex == 4 ? 24.0 : 24.0,
+                ),
+              ],
             ),
-            activeIcon: Icon(
-              Icons.account_circle_rounded,
-              size: 24.0,
-            ),
-            label: 'profile',
-            tooltip: '',
           )
         ],
       ),

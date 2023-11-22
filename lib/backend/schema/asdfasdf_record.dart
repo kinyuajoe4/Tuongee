@@ -1,55 +1,87 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'asdfasdf_record.g.dart';
+class AsdfasdfRecord extends FirestoreRecord {
+  AsdfasdfRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class AsdfasdfRecord
-    implements Built<AsdfasdfRecord, AsdfasdfRecordBuilder> {
-  static Serializer<AsdfasdfRecord> get serializer =>
-      _$asdfasdfRecordSerializer;
+  // "asdfasdf" field.
+  double? _asdfasdf;
+  double get asdfasdf => _asdfasdf ?? 0.0;
+  bool hasAsdfasdf() => _asdfasdf != null;
 
-  double? get asdfasdf;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(AsdfasdfRecordBuilder builder) =>
-      builder..asdfasdf = 0.0;
+  void _initializeFields() {
+    _asdfasdf = castToType<double>(snapshotData['asdfasdf']);
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('asdfasdf');
 
-  static Stream<AsdfasdfRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<AsdfasdfRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => AsdfasdfRecord.fromSnapshot(s));
 
-  static Future<AsdfasdfRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<AsdfasdfRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => AsdfasdfRecord.fromSnapshot(s));
 
-  AsdfasdfRecord._();
-  factory AsdfasdfRecord([void Function(AsdfasdfRecordBuilder) updates]) =
-      _$AsdfasdfRecord;
+  static AsdfasdfRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      AsdfasdfRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static AsdfasdfRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      AsdfasdfRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'AsdfasdfRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is AsdfasdfRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createAsdfasdfRecordData({
   double? asdfasdf,
 }) {
-  final firestoreData = serializers.toFirestore(
-    AsdfasdfRecord.serializer,
-    AsdfasdfRecord(
-      (a) => a..asdfasdf = asdfasdf,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'asdfasdf': asdfasdf,
+    }.withoutNulls,
   );
 
   return firestoreData;
+}
+
+class AsdfasdfRecordDocumentEquality implements Equality<AsdfasdfRecord> {
+  const AsdfasdfRecordDocumentEquality();
+
+  @override
+  bool equals(AsdfasdfRecord? e1, AsdfasdfRecord? e2) {
+    return e1?.asdfasdf == e2?.asdfasdf;
+  }
+
+  @override
+  int hash(AsdfasdfRecord? e) => const ListEquality().hash([e?.asdfasdf]);
+
+  @override
+  bool isValidKey(Object? o) => o is AsdfasdfRecord;
 }

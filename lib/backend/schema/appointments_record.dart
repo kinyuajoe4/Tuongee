@@ -1,58 +1,99 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'appointments_record.g.dart';
+class AppointmentsRecord extends FirestoreRecord {
+  AppointmentsRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class AppointmentsRecord
-    implements Built<AppointmentsRecord, AppointmentsRecordBuilder> {
-  static Serializer<AppointmentsRecord> get serializer =>
-      _$appointmentsRecordSerializer;
+  // "appointmentName" field.
+  String? _appointmentName;
+  String get appointmentName => _appointmentName ?? '';
+  bool hasAppointmentName() => _appointmentName != null;
 
-  String? get appointmentName;
+  // "appointmentDescription" field.
+  String? _appointmentDescription;
+  String get appointmentDescription => _appointmentDescription ?? '';
+  bool hasAppointmentDescription() => _appointmentDescription != null;
 
-  String? get appointmentDescription;
+  // "appointmentPerson" field.
+  DocumentReference? _appointmentPerson;
+  DocumentReference? get appointmentPerson => _appointmentPerson;
+  bool hasAppointmentPerson() => _appointmentPerson != null;
 
-  DocumentReference? get appointmentPerson;
+  // "appointmentTime" field.
+  DateTime? _appointmentTime;
+  DateTime? get appointmentTime => _appointmentTime;
+  bool hasAppointmentTime() => _appointmentTime != null;
 
-  DateTime? get appointmentTime;
+  // "appointmentType" field.
+  String? _appointmentType;
+  String get appointmentType => _appointmentType ?? '';
+  bool hasAppointmentType() => _appointmentType != null;
 
-  String? get appointmentType;
+  // "appointmentEmail" field.
+  String? _appointmentEmail;
+  String get appointmentEmail => _appointmentEmail ?? '';
+  bool hasAppointmentEmail() => _appointmentEmail != null;
 
-  String? get appointmentEmail;
+  // "institution" field.
+  String? _institution;
+  String get institution => _institution ?? '';
+  bool hasInstitution() => _institution != null;
 
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(AppointmentsRecordBuilder builder) => builder
-    ..appointmentName = ''
-    ..appointmentDescription = ''
-    ..appointmentType = ''
-    ..appointmentEmail = '';
+  void _initializeFields() {
+    _appointmentName = snapshotData['appointmentName'] as String?;
+    _appointmentDescription = snapshotData['appointmentDescription'] as String?;
+    _appointmentPerson =
+        snapshotData['appointmentPerson'] as DocumentReference?;
+    _appointmentTime = snapshotData['appointmentTime'] as DateTime?;
+    _appointmentType = snapshotData['appointmentType'] as String?;
+    _appointmentEmail = snapshotData['appointmentEmail'] as String?;
+    _institution = snapshotData['institution'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('appointments');
 
-  static Stream<AppointmentsRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<AppointmentsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => AppointmentsRecord.fromSnapshot(s));
 
   static Future<AppointmentsRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => AppointmentsRecord.fromSnapshot(s));
 
-  AppointmentsRecord._();
-  factory AppointmentsRecord(
-          [void Function(AppointmentsRecordBuilder) updates]) =
-      _$AppointmentsRecord;
+  static AppointmentsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      AppointmentsRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static AppointmentsRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      AppointmentsRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'AppointmentsRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is AppointmentsRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createAppointmentsRecordData({
@@ -62,19 +103,49 @@ Map<String, dynamic> createAppointmentsRecordData({
   DateTime? appointmentTime,
   String? appointmentType,
   String? appointmentEmail,
+  String? institution,
 }) {
-  final firestoreData = serializers.toFirestore(
-    AppointmentsRecord.serializer,
-    AppointmentsRecord(
-      (a) => a
-        ..appointmentName = appointmentName
-        ..appointmentDescription = appointmentDescription
-        ..appointmentPerson = appointmentPerson
-        ..appointmentTime = appointmentTime
-        ..appointmentType = appointmentType
-        ..appointmentEmail = appointmentEmail,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'appointmentName': appointmentName,
+      'appointmentDescription': appointmentDescription,
+      'appointmentPerson': appointmentPerson,
+      'appointmentTime': appointmentTime,
+      'appointmentType': appointmentType,
+      'appointmentEmail': appointmentEmail,
+      'institution': institution,
+    }.withoutNulls,
   );
 
   return firestoreData;
+}
+
+class AppointmentsRecordDocumentEquality
+    implements Equality<AppointmentsRecord> {
+  const AppointmentsRecordDocumentEquality();
+
+  @override
+  bool equals(AppointmentsRecord? e1, AppointmentsRecord? e2) {
+    return e1?.appointmentName == e2?.appointmentName &&
+        e1?.appointmentDescription == e2?.appointmentDescription &&
+        e1?.appointmentPerson == e2?.appointmentPerson &&
+        e1?.appointmentTime == e2?.appointmentTime &&
+        e1?.appointmentType == e2?.appointmentType &&
+        e1?.appointmentEmail == e2?.appointmentEmail &&
+        e1?.institution == e2?.institution;
+  }
+
+  @override
+  int hash(AppointmentsRecord? e) => const ListEquality().hash([
+        e?.appointmentName,
+        e?.appointmentDescription,
+        e?.appointmentPerson,
+        e?.appointmentTime,
+        e?.appointmentType,
+        e?.appointmentEmail,
+        e?.institution
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is AppointmentsRecord;
 }

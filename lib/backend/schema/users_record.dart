@@ -1,83 +1,151 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'users_record.g.dart';
+class UsersRecord extends FirestoreRecord {
+  UsersRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
-  static Serializer<UsersRecord> get serializer => _$usersRecordSerializer;
+  // "display_name" field.
+  String? _displayName;
+  String get displayName => _displayName ?? '';
+  bool hasDisplayName() => _displayName != null;
 
-  @BuiltValueField(wireName: 'display_name')
-  String? get displayName;
+  // "email" field.
+  String? _email;
+  String get email => _email ?? '';
+  bool hasEmail() => _email != null;
 
-  String? get email;
+  // "password" field.
+  String? _password;
+  String get password => _password ?? '';
+  bool hasPassword() => _password != null;
 
-  String? get password;
+  // "uid" field.
+  String? _uid;
+  String get uid => _uid ?? '';
+  bool hasUid() => _uid != null;
 
-  String? get uid;
+  // "age" field.
+  int? _age;
+  int get age => _age ?? 0;
+  bool hasAge() => _age != null;
 
-  int? get age;
+  // "ailments" field.
+  String? _ailments;
+  String get ailments => _ailments ?? '';
+  bool hasAilments() => _ailments != null;
 
-  String? get ailments;
+  // "location" field.
+  LatLng? _location;
+  LatLng? get location => _location;
+  bool hasLocation() => _location != null;
 
-  LatLng? get location;
+  // "phone_number" field.
+  String? _phoneNumber;
+  String get phoneNumber => _phoneNumber ?? '';
+  bool hasPhoneNumber() => _phoneNumber != null;
 
-  @BuiltValueField(wireName: 'phone_number')
-  String? get phoneNumber;
+  // "photo_url" field.
+  String? _photoUrl;
+  String get photoUrl => _photoUrl ?? '';
+  bool hasPhotoUrl() => _photoUrl != null;
 
-  @BuiltValueField(wireName: 'photo_url')
-  String? get photoUrl;
+  // "created_time" field.
+  DateTime? _createdTime;
+  DateTime? get createdTime => _createdTime;
+  bool hasCreatedTime() => _createdTime != null;
 
-  @BuiltValueField(wireName: 'created_time')
-  DateTime? get createdTime;
+  // "userSex" field.
+  String? _userSex;
+  String get userSex => _userSex ?? '';
+  bool hasUserSex() => _userSex != null;
 
-  String? get userSex;
+  // "speciality" field.
+  String? _speciality;
+  String get speciality => _speciality ?? '';
+  bool hasSpeciality() => _speciality != null;
 
-  String? get speciality;
+  // "locality" field.
+  String? _locality;
+  String get locality => _locality ?? '';
+  bool hasLocality() => _locality != null;
 
-  String? get locality;
+  // "schedule" field.
+  String? _schedule;
+  String get schedule => _schedule ?? '';
+  bool hasSchedule() => _schedule != null;
 
-  String? get schedule;
+  // "ordertime" field.
+  DateTime? _ordertime;
+  DateTime? get ordertime => _ordertime;
+  bool hasOrdertime() => _ordertime != null;
 
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "tittle" field.
+  String? _tittle;
+  String get tittle => _tittle ?? '';
+  bool hasTittle() => _tittle != null;
 
-  static void _initializeBuilder(UsersRecordBuilder builder) => builder
-    ..displayName = ''
-    ..email = ''
-    ..password = ''
-    ..uid = ''
-    ..age = 0
-    ..ailments = ''
-    ..phoneNumber = ''
-    ..photoUrl = ''
-    ..userSex = ''
-    ..speciality = ''
-    ..locality = ''
-    ..schedule = '';
+  void _initializeFields() {
+    _displayName = snapshotData['display_name'] as String?;
+    _email = snapshotData['email'] as String?;
+    _password = snapshotData['password'] as String?;
+    _uid = snapshotData['uid'] as String?;
+    _age = castToType<int>(snapshotData['age']);
+    _ailments = snapshotData['ailments'] as String?;
+    _location = snapshotData['location'] as LatLng?;
+    _phoneNumber = snapshotData['phone_number'] as String?;
+    _photoUrl = snapshotData['photo_url'] as String?;
+    _createdTime = snapshotData['created_time'] as DateTime?;
+    _userSex = snapshotData['userSex'] as String?;
+    _speciality = snapshotData['speciality'] as String?;
+    _locality = snapshotData['locality'] as String?;
+    _schedule = snapshotData['schedule'] as String?;
+    _ordertime = snapshotData['ordertime'] as DateTime?;
+    _tittle = snapshotData['tittle'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
 
-  static Stream<UsersRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<UsersRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => UsersRecord.fromSnapshot(s));
 
-  static Future<UsersRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<UsersRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => UsersRecord.fromSnapshot(s));
 
-  UsersRecord._();
-  factory UsersRecord([void Function(UsersRecordBuilder) updates]) =
-      _$UsersRecord;
+  static UsersRecord fromSnapshot(DocumentSnapshot snapshot) => UsersRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static UsersRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      UsersRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'UsersRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is UsersRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createUsersRecordData({
@@ -95,27 +163,76 @@ Map<String, dynamic> createUsersRecordData({
   String? speciality,
   String? locality,
   String? schedule,
+  DateTime? ordertime,
+  String? tittle,
 }) {
-  final firestoreData = serializers.toFirestore(
-    UsersRecord.serializer,
-    UsersRecord(
-      (u) => u
-        ..displayName = displayName
-        ..email = email
-        ..password = password
-        ..uid = uid
-        ..age = age
-        ..ailments = ailments
-        ..location = location
-        ..phoneNumber = phoneNumber
-        ..photoUrl = photoUrl
-        ..createdTime = createdTime
-        ..userSex = userSex
-        ..speciality = speciality
-        ..locality = locality
-        ..schedule = schedule,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'display_name': displayName,
+      'email': email,
+      'password': password,
+      'uid': uid,
+      'age': age,
+      'ailments': ailments,
+      'location': location,
+      'phone_number': phoneNumber,
+      'photo_url': photoUrl,
+      'created_time': createdTime,
+      'userSex': userSex,
+      'speciality': speciality,
+      'locality': locality,
+      'schedule': schedule,
+      'ordertime': ordertime,
+      'tittle': tittle,
+    }.withoutNulls,
   );
 
   return firestoreData;
+}
+
+class UsersRecordDocumentEquality implements Equality<UsersRecord> {
+  const UsersRecordDocumentEquality();
+
+  @override
+  bool equals(UsersRecord? e1, UsersRecord? e2) {
+    return e1?.displayName == e2?.displayName &&
+        e1?.email == e2?.email &&
+        e1?.password == e2?.password &&
+        e1?.uid == e2?.uid &&
+        e1?.age == e2?.age &&
+        e1?.ailments == e2?.ailments &&
+        e1?.location == e2?.location &&
+        e1?.phoneNumber == e2?.phoneNumber &&
+        e1?.photoUrl == e2?.photoUrl &&
+        e1?.createdTime == e2?.createdTime &&
+        e1?.userSex == e2?.userSex &&
+        e1?.speciality == e2?.speciality &&
+        e1?.locality == e2?.locality &&
+        e1?.schedule == e2?.schedule &&
+        e1?.ordertime == e2?.ordertime &&
+        e1?.tittle == e2?.tittle;
+  }
+
+  @override
+  int hash(UsersRecord? e) => const ListEquality().hash([
+        e?.displayName,
+        e?.email,
+        e?.password,
+        e?.uid,
+        e?.age,
+        e?.ailments,
+        e?.location,
+        e?.phoneNumber,
+        e?.photoUrl,
+        e?.createdTime,
+        e?.userSex,
+        e?.speciality,
+        e?.locality,
+        e?.schedule,
+        e?.ordertime,
+        e?.tittle
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is UsersRecord;
 }

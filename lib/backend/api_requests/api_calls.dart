@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../../flutter_flow/flutter_flow_util.dart';
-
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -23,9 +22,9 @@ class SendFullPromptCall {
   Future<ApiCallResponse> call({
     String? apiKey = '',
     dynamic? promptJson,
-  }) {
+  }) async {
     final prompt = _serializeJson(promptJson);
-    final body = '''
+    final ffApiRequestBody = '''
 {
   "model": "gpt-3.5-turbo",
   "messages": ${prompt}
@@ -35,12 +34,11 @@ class SendFullPromptCall {
       apiUrl: '${OpenAIChatGPTGroup.baseUrl}/chat/completions',
       callType: ApiCallType.POST,
       headers: {
-        ...OpenAIChatGPTGroup.headers,
-        'Authorization':
-            'Bearer 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',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer sk-1N15gEjz',
       },
       params: {},
-      body: body,
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -66,14 +64,13 @@ class SendFullPromptCall {
 /// End OpenAI ChatGPT Group Code
 
 class OpenAimodelCall {
-  static Future<ApiCallResponse> call() {
+  static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
       callName: 'OpenAimodel',
       apiUrl: 'https://api.openai.com/v1/models',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization':
-            'Bearer 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',
+        'Authorization': 'Bearer sk-1N15gEjz',
       },
       params: {},
       returnBody: true,
@@ -88,8 +85,8 @@ class TextcompletionCall {
   static Future<ApiCallResponse> call({
     String? model = 'text-davinci-003',
     String? prompt = '',
-  }) {
-    final body = '''
+  }) async {
+    final ffApiRequestBody = '''
 {
   "model": "${model}",
   "prompt": "${prompt}"
@@ -100,10 +97,10 @@ class TextcompletionCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
-            'Bearer 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',
+            'Bearer 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',
       },
       params: {},
-      body: body,
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -135,8 +132,8 @@ class TexteditCall {
     String? model = 'text-davinci-003',
     String? input = '',
     String? instruction = '',
-  }) {
-    final body = '''
+  }) async {
+    final ffApiRequestBody = '''
 {
   "model": "${model}",
   "input": "${input}",
@@ -147,11 +144,10 @@ class TexteditCall {
       apiUrl: 'https://api.openai.com/v1/edits',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization':
-            'Bearer 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',
+        'Authorization': 'Bearer sk-1N15gEjz',
       },
       params: {},
-      body: body,
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -173,8 +169,8 @@ class TexteditCall {
 class ImagegenerationCall {
   static Future<ApiCallResponse> call({
     String? prompt = '',
-  }) {
-    final body = '''
+  }) async {
+    final ffApiRequestBody = '''
 {
   
   "prompt": "${prompt}"
@@ -184,11 +180,10 @@ class ImagegenerationCall {
       apiUrl: 'https://api.openai.com/v1/images/generations',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization':
-            'Bearer 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',
+        'Authorization': 'Bearer sk-1N15gEjz',
       },
       params: {},
-      body: body,
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -228,11 +223,11 @@ String _serializeList(List? list) {
   }
 }
 
-String _serializeJson(dynamic jsonVar) {
-  jsonVar ??= {};
+String _serializeJson(dynamic jsonVar, [bool isList = false]) {
+  jsonVar ??= (isList ? [] : {});
   try {
     return json.encode(jsonVar);
   } catch (_) {
-    return '{}';
+    return isList ? '[]' : '{}';
   }
 }
