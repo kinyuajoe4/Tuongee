@@ -10,15 +10,14 @@ import 'schema/appointments_record.dart';
 import 'schema/asdfasdf_record.dart';
 import 'schema/chats_record.dart';
 import 'schema/chat_messages_record.dart';
-import 'schema/reviews_record.dart';
-import 'schema/hospitals_record.dart';
 import 'schema/campaigns_record.dart';
 import 'schema/channels_record.dart';
 import 'schema/channelmessage_record.dart';
-import 'schema/ambulance_record.dart';
+import 'schema/courses_record.dart';
 
 export 'dart:async' show StreamSubscription;
-export 'package:cloud_firestore/cloud_firestore.dart';
+export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
+export 'package:firebase_core/firebase_core.dart';
 export 'schema/index.dart';
 export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
@@ -28,12 +27,10 @@ export 'schema/appointments_record.dart';
 export 'schema/asdfasdf_record.dart';
 export 'schema/chats_record.dart';
 export 'schema/chat_messages_record.dart';
-export 'schema/reviews_record.dart';
-export 'schema/hospitals_record.dart';
 export 'schema/campaigns_record.dart';
 export 'schema/channels_record.dart';
 export 'schema/channelmessage_record.dart';
-export 'schema/ambulance_record.dart';
+export 'schema/courses_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -220,80 +217,6 @@ Future<List<ChatMessagesRecord>> queryChatMessagesRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query ReviewsRecords (as a Stream and as a Future).
-Future<int> queryReviewsRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      ReviewsRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<ReviewsRecord>> queryReviewsRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      ReviewsRecord.collection,
-      ReviewsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<ReviewsRecord>> queryReviewsRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      ReviewsRecord.collection,
-      ReviewsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query HospitalsRecords (as a Stream and as a Future).
-Future<int> queryHospitalsRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      HospitalsRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<HospitalsRecord>> queryHospitalsRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      HospitalsRecord.collection,
-      HospitalsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<HospitalsRecord>> queryHospitalsRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      HospitalsRecord.collection,
-      HospitalsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query CampaignsRecords (as a Stream and as a Future).
 Future<int> queryCampaignsRecordCount({
   Query Function(Query)? queryBuilder,
@@ -408,38 +331,38 @@ Future<List<ChannelmessageRecord>> queryChannelmessageRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query AmbulanceRecords (as a Stream and as a Future).
-Future<int> queryAmbulanceRecordCount({
+/// Functions to query CoursesRecords (as a Stream and as a Future).
+Future<int> queryCoursesRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      AmbulanceRecord.collection,
+      CoursesRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<AmbulanceRecord>> queryAmbulanceRecord({
+Stream<List<CoursesRecord>> queryCoursesRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      AmbulanceRecord.collection,
-      AmbulanceRecord.fromSnapshot,
+      CoursesRecord.collection,
+      CoursesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<AmbulanceRecord>> queryAmbulanceRecordOnce({
+Future<List<CoursesRecord>> queryCoursesRecordOnce({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      AmbulanceRecord.collection,
-      AmbulanceRecord.fromSnapshot,
+      CoursesRecord.collection,
+      CoursesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
@@ -458,7 +381,7 @@ Future<int> queryCollectionCount(
 
   return query.count().get().catchError((err) {
     print('Error querying $collection: $err');
-  }).then((value) => value.count);
+  }).then((value) => value.count!);
 }
 
 Stream<List<T>> queryCollection<T>(
@@ -511,6 +434,15 @@ Future<List<T>> queryCollectionOnce<T>(
       .toList());
 }
 
+Filter filterIn(String field, List? list) => (list?.isEmpty ?? true)
+    ? Filter(field, whereIn: null)
+    : Filter(field, whereIn: list);
+
+Filter filterArrayContainsAny(String field, List? list) =>
+    (list?.isEmpty ?? true)
+        ? Filter(field, arrayContainsAny: null)
+        : Filter(field, arrayContainsAny: list);
+
 extension QueryExtension on Query {
   Query whereIn(String field, List? list) => (list?.isEmpty ?? true)
       ? where(field, whereIn: null)
@@ -555,7 +487,7 @@ Future<FFFirestorePage<T>> queryCollectionPage<T>(
   } else {
     docSnapshot = await query.get();
   }
-  final getDocs = (QuerySnapshot s) => s.docs
+  getDocs(QuerySnapshot s) => s.docs
       .map(
         (d) => safeGet(
           () => recordBuilder(d),

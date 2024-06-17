@@ -19,7 +19,7 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Tuongee">
+  <meta name="apple-mobile-web-app-title" content="Tuongee Project">
 
   
 
@@ -29,15 +29,15 @@
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <!-- Open Graph & SEO tags -->
-  <meta property="og:title" content="Tuongee" />
+  <meta property="og:title" content="Tuongee Project" />
   <meta property="og:description" content="Built with FlutterFlow." />
   <meta property="og:image" content="https://storage.googleapis.com/flutterflow-prod-hosting/og_splash_gradient.png" /> 
-  <meta name="twitter:title" content="Tuongee" />
+  <meta name="twitter:title" content="Tuongee Project" />
   <meta name="twitter:description" content="Built with FlutterFlow." />
   <meta name="twitter:image" content="https://storage.googleapis.com/flutterflow-prod-hosting/og_splash_gradient.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <title> Tuongee </title>
+  <title> Tuongee Project </title>
   <meta name="description" content="Built with FlutterFlow." />
     
 
@@ -52,10 +52,15 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+  
 </head>
 <body>
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJoncf1vnF3dirDkhwJ8fTZ_YaoqaGioI"></script>
+  
+  
+  
   <script>
-    
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
@@ -66,16 +71,12 @@
         },
         onEntrypointLoaded: async function(engineInitializer) {
           // Initialize the Flutter engine
-          let appRunner = await engineInitializer.initializeEngine();
+          let appRunner = await engineInitializer.initializeEngine({});
           // Run the app
           await appRunner.runApp();
         }
       });
     });
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJoncf1vnF3dirDkhwJ8fTZ_YaoqaGioI"></script>
-  
-  
-  
 </body>
 </html>

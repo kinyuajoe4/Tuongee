@@ -1,28 +1,23 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'doc_details_model.dart';
 export 'doc_details_model.dart';
 
 class DocDetailsWidget extends StatefulWidget {
   const DocDetailsWidget({
-    Key? key,
+    super.key,
     this.docdetails,
     this.chatdoc,
-  }) : super(key: key);
+  });
 
   final UsersRecord? docdetails;
   final ChatsRecord? chatdoc;
 
   @override
-  _DocDetailsWidgetState createState() => _DocDetailsWidgetState();
+  State<DocDetailsWidget> createState() => _DocDetailsWidgetState();
 }
 
 class _DocDetailsWidgetState extends State<DocDetailsWidget> {
@@ -52,7 +47,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 12.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 12.0),
       child: StreamBuilder<List<ChatsRecord>>(
         stream: queryChatsRecord(
           singleRecord: true,
@@ -83,30 +78,33 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
             width: double.infinity,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   blurRadius: 3.0,
                   color: Color(0x33000000),
-                  offset: Offset(0.0, 1.0),
+                  offset: Offset(
+                    0.0,
+                    1.0,
+                  ),
                 )
               ],
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -128,7 +126,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     5.0, 0.0, 0.0, 0.0),
                                 child: Icon(
                                   Icons.arrow_back_ios,
@@ -141,11 +139,16 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               79.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'Doctor Details',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ),
                       ],
@@ -167,7 +170,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               12.0, 8.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -185,10 +188,11 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                         .bodyLarge
                                         .override(
                                           fontFamily: 'Poppins',
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                         ),
                                   ),
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         2.0, 0.0, 0.0, 0.0),
                                     child: Icon(
@@ -200,7 +204,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                 ],
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 4.0),
                                 child: SelectionArea(
                                     child: Text(
@@ -214,13 +218,14 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                         fontFamily: 'Outfit',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                       ),
                                 )),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 2.0, 0.0, 0.0),
                                     child: Icon(
@@ -230,7 +235,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: SelectionArea(
                                         child: Text(
@@ -241,6 +246,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                             fontFamily: 'Outfit',
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
+                                            letterSpacing: 0.0,
                                           ),
                                     )),
                                   ),
@@ -250,7 +256,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 2.0, 2.0, 0.0),
                                     child: Icon(
                                       Icons.location_pin,
@@ -260,7 +266,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: SelectionArea(
                                         child: Text(
@@ -271,6 +277,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                             fontFamily: 'Outfit',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
+                                            letterSpacing: 0.0,
                                           ),
                                     )),
                                   ),
@@ -283,12 +290,12 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 3.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 3.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 4.0, 0.0, 0.0),
                           child: SelectionArea(
                               child: Text(
@@ -299,6 +306,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                                   fontFamily: 'Outfit',
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
+                                  letterSpacing: 0.0,
                                 ),
                           )),
                         ),
@@ -306,15 +314,18 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                     child: Text(
                       'Notes & descriptions go here they will maybe help explain when it needs done.',
-                      style: FlutterFlowTheme.of(context).labelMedium,
+                      style: FlutterFlowTheme.of(context).labelMedium.override(
+                            fontFamily: 'Poppins',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 4.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 4.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -323,109 +334,39 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
                           width: 130.0,
                           height: 50.0,
                           decoration: BoxDecoration(
-                            color: Color(0xFF031031),
+                            color: const Color(0xFF031031),
                             borderRadius: BorderRadius.circular(12.0),
                           ),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              var chatsRecordReference =
-                                  ChatsRecord.collection.doc();
-                              await chatsRecordReference
-                                  .set(createChatsRecordData(
-                                userA: currentUserReference,
-                                userB: widget.docdetails?.reference,
-                                lastMessage: 'tap to view😊',
-                                lastMessageTime: getCurrentTimestamp,
-                                image: widget.docdetails?.photoUrl,
-                                user: currentUserReference,
-                                messageSeen: false,
-                              ));
-                              _model.na = ChatsRecord.getDocumentFromData(
-                                  createChatsRecordData(
-                                    userA: currentUserReference,
-                                    userB: widget.docdetails?.reference,
-                                    lastMessage: 'tap to view😊',
-                                    lastMessageTime: getCurrentTimestamp,
-                                    image: widget.docdetails?.photoUrl,
-                                    user: currentUserReference,
-                                    messageSeen: false,
-                                  ),
-                                  chatsRecordReference);
-
-                              context.pushNamed(
-                                'chitchat',
-                                queryParameters: {
-                                  'userName': serializeParam(
-                                    widget.docdetails?.displayName,
-                                    ParamType.String,
-                                  ),
-                                  'userEmail': serializeParam(
-                                    widget.docdetails?.email,
-                                    ParamType.String,
-                                  ),
-                                  'chatUser': serializeParam(
-                                    cardTask3ChatsRecord?.reference,
-                                    ParamType.DocumentReference,
-                                  ),
-                                  'userRef': serializeParam(
-                                    currentUserReference,
-                                    ParamType.DocumentReference,
-                                  ),
-                                  'userProfile': serializeParam(
-                                    widget.docdetails?.photoUrl,
-                                    ParamType.String,
-                                  ),
-                                  'special': serializeParam(
-                                    widget.docdetails?.speciality,
-                                    ParamType.String,
-                                  ),
-                                  'locall': serializeParam(
-                                    widget.docdetails?.locality,
-                                    ParamType.String,
-                                  ),
-                                  'sched': serializeParam(
-                                    widget.docdetails?.schedule,
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                              );
-
-                              setState(() {});
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 3.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.chat_sharp,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 17.0,
-                                  ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 3.0, 0.0, 0.0),
+                                child: Icon(
+                                  Icons.chat_sharp,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 17.0,
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      9.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Message',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .success,
-                                        ),
-                                  ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    9.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Message',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .success,
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

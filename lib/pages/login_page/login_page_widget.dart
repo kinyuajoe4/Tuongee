@@ -3,18 +3,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'login_page_model.dart';
 export 'login_page_model.dart';
 
 class LoginPageWidget extends StatefulWidget {
-  const LoginPageWidget({Key? key}) : super(key: key);
+  const LoginPageWidget({super.key});
 
   @override
-  _LoginPageWidgetState createState() => _LoginPageWidgetState();
+  State<LoginPageWidget> createState() => _LoginPageWidgetState();
 }
 
 class _LoginPageWidgetState extends State<LoginPageWidget>
@@ -33,19 +29,19 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
       length: 2,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    _model.emailAddressLoginController ??= TextEditingController();
+    _model.emailAddressLoginTextController ??= TextEditingController();
     _model.emailAddressLoginFocusNode ??= FocusNode();
 
-    _model.passwordLoginController ??= TextEditingController();
+    _model.passwordLoginTextController ??= TextEditingController();
     _model.passwordLoginFocusNode ??= FocusNode();
 
-    _model.emailAddressController ??= TextEditingController();
+    _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
-    _model.passwordCreateController ??= TextEditingController();
+    _model.passwordCreateTextController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
 
-    _model.passwordConfirmController ??= TextEditingController();
+    _model.passwordConfirmTextController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -60,15 +56,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return Title(
         title: 'loginPage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -90,12 +77,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                       Container(
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         height: MediaQuery.sizeOf(context).height * 1.0,
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           maxWidth: 600.0,
                         ),
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 70.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -128,7 +115,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                     ],
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 15.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -140,7 +127,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                         Text(
                                           'TUONGEE',
                                           style: FlutterFlowTheme.of(context)
-                                              .displayMedium,
+                                              .displayMedium
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                         Text(
                                           'The Platform',
@@ -152,6 +143,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 fontSize: 23.0,
+                                                letterSpacing: 0.0,
                                               ),
                                         ),
                                       ],
@@ -163,7 +155,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                 child: Column(
                                   children: [
                                     Align(
-                                      alignment: Alignment(0.0, 0),
+                                      alignment: const Alignment(0.0, 0),
                                       child: TabBar(
                                         isScrollable: true,
                                         labelColor: FlutterFlowTheme.of(context)
@@ -172,16 +164,20 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                             FlutterFlowTheme.of(context)
                                                 .grayLight,
                                         labelPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
+                                            const EdgeInsetsDirectional.fromSTEB(
                                                 24.0, 0.0, 24.0, 0.0),
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall,
-                                        unselectedLabelStyle: TextStyle(),
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        unselectedLabelStyle: const TextStyle(),
                                         indicatorColor:
                                             FlutterFlowTheme.of(context)
                                                 .tertiary,
                                         indicatorWeight: 3.0,
-                                        tabs: [
+                                        tabs: const [
                                           Tab(
                                             text: 'Login',
                                           ),
@@ -190,6 +186,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                           ),
                                         ],
                                         controller: _model.tabBarController,
+                                        onTap: (i) async {
+                                          [() async {}, () async {}][i]();
+                                        },
                                       ),
                                     ),
                                     Expanded(
@@ -198,7 +197,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 24.0, 0.0),
                                             child: SingleChildScrollView(
                                               child: Column(
@@ -206,12 +205,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 20.0,
                                                                 0.0, 0.0),
                                                     child: TextFormField(
                                                       controller: _model
-                                                          .emailAddressLoginController,
+                                                          .emailAddressLoginTextController,
                                                       focusNode: _model
                                                           .emailAddressLoginFocusNode,
                                                       obscureText: false,
@@ -222,17 +221,29 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         hintText:
                                                             'Enter your email...',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -245,7 +256,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -258,7 +269,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         errorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -271,7 +282,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedErrorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -287,30 +298,34 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                     context)
                                                                 .primaryBackground,
                                                         contentPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     20.0,
                                                                     24.0,
                                                                     20.0,
                                                                     24.0),
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
                                                       validator: _model
-                                                          .emailAddressLoginControllerValidator
+                                                          .emailAddressLoginTextControllerValidator
                                                           .asValidator(context),
                                                     ),
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 12.0,
                                                                 0.0, 0.0),
                                                     child: TextFormField(
                                                       controller: _model
-                                                          .passwordLoginController,
+                                                          .passwordLoginTextController,
                                                       focusNode: _model
                                                           .passwordLoginFocusNode,
                                                       obscureText: !_model
@@ -321,17 +336,29 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         hintText:
                                                             'Enter your password...',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -344,7 +371,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -357,7 +384,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         errorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -370,7 +397,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedErrorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -386,7 +413,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                     context)
                                                                 .primaryBackground,
                                                         contentPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     20.0,
                                                                     24.0,
@@ -415,18 +442,22 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                           ),
                                                         ),
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
                                                       validator: _model
-                                                          .passwordLoginControllerValidator
+                                                          .passwordLoginTextControllerValidator
                                                           .asValidator(context),
                                                     ),
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 24.0,
                                                                 0.0, 0.0),
                                                     child: FFButtonWidget(
@@ -439,10 +470,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                 .signInWithEmail(
                                                           context,
                                                           _model
-                                                              .emailAddressLoginController
+                                                              .emailAddressLoginTextController
                                                               .text,
                                                           _model
-                                                              .passwordLoginController
+                                                              .passwordLoginTextController
                                                               .text,
                                                         );
                                                         if (user == null) {
@@ -458,21 +489,21 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         width: 230.0,
                                                         height: 50.0,
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         color:
-                                                            Color(0xFF311DEC),
+                                                            const Color(0xFF311DEC),
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -483,9 +514,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .textColor,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                           width: 1.0,
@@ -498,7 +531,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 20.0,
                                                                 0.0, 24.0),
                                                     child: FFButtonWidget(
@@ -511,14 +544,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         width: 185.0,
                                                         height: 40.0,
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -537,9 +570,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                         elevation: 0.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                           width: 1.0,
@@ -556,7 +591,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 24.0, 0.0),
                                             child: SingleChildScrollView(
                                               child: Column(
@@ -564,12 +599,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 20.0,
                                                                 0.0, 0.0),
                                                     child: TextFormField(
                                                       controller: _model
-                                                          .emailAddressController,
+                                                          .emailAddressTextController,
                                                       focusNode: _model
                                                           .emailAddressFocusNode,
                                                       obscureText: false,
@@ -580,17 +615,29 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         hintText:
                                                             'Enter your email...',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -603,7 +650,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -616,7 +663,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         errorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -629,7 +676,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedErrorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -645,30 +692,34 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                     context)
                                                                 .primaryBackground,
                                                         contentPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     20.0,
                                                                     24.0,
                                                                     20.0,
                                                                     24.0),
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
                                                       validator: _model
-                                                          .emailAddressControllerValidator
+                                                          .emailAddressTextControllerValidator
                                                           .asValidator(context),
                                                     ),
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 12.0,
                                                                 0.0, 0.0),
                                                     child: TextFormField(
                                                       controller: _model
-                                                          .passwordCreateController,
+                                                          .passwordCreateTextController,
                                                       focusNode: _model
                                                           .passwordCreateFocusNode,
                                                       obscureText: !_model
@@ -679,17 +730,29 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         hintText:
                                                             'Enter your password...',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -702,7 +765,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -715,7 +778,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         errorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -728,7 +791,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedErrorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -744,7 +807,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                     context)
                                                                 .primaryBackground,
                                                         contentPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     20.0,
                                                                     24.0,
@@ -766,29 +829,33 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                     .visibility_outlined
                                                                 : Icons
                                                                     .visibility_off_outlined,
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0x98FFFFFF),
                                                             size: 20.0,
                                                           ),
                                                         ),
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
                                                       validator: _model
-                                                          .passwordCreateControllerValidator
+                                                          .passwordCreateTextControllerValidator
                                                           .asValidator(context),
                                                     ),
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 12.0,
                                                                 0.0, 0.0),
                                                     child: TextFormField(
                                                       controller: _model
-                                                          .passwordConfirmController,
+                                                          .passwordConfirmTextController,
                                                       focusNode: _model
                                                           .passwordConfirmFocusNode,
                                                       obscureText: !_model
@@ -800,17 +867,29 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         hintText:
                                                             'Enter your password...',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodySmall,
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -823,7 +902,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -836,7 +915,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         errorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -849,7 +928,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         focusedErrorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -865,7 +944,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                     context)
                                                                 .primaryBackground,
                                                         contentPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     20.0,
                                                                     24.0,
@@ -887,24 +966,28 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                     .visibility_outlined
                                                                 : Icons
                                                                     .visibility_off_outlined,
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0x98FFFFFF),
                                                             size: 20.0,
                                                           ),
                                                         ),
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
                                                       validator: _model
-                                                          .passwordConfirmControllerValidator
+                                                          .passwordConfirmTextControllerValidator
                                                           .asValidator(context),
                                                     ),
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 24.0,
                                                                 0.0, 24.0),
                                                     child: FFButtonWidget(
@@ -917,10 +1000,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                 .createAccountWithEmail(
                                                           context,
                                                           _model
-                                                              .emailAddressController
+                                                              .emailAddressTextController
                                                               .text,
                                                           _model
-                                                              .passwordCreateController
+                                                              .passwordCreateTextController
                                                               .text,
                                                         );
                                                         if (user == null) {
@@ -936,21 +1019,21 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         width: 230.0,
                                                         height: 50.0,
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         color:
-                                                            Color(0xFF4937D6),
+                                                            const Color(0xFF4937D6),
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -961,9 +1044,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .textColor,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                           width: 1.0,
@@ -976,7 +1061,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 20.0,
                                                                 0.0, 24.0),
                                                     child: FFButtonWidget(
@@ -1000,14 +1085,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                         width: 230.0,
                                                         height: 50.0,
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -1026,9 +1111,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                         elevation: 0.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                           width: 1.0,

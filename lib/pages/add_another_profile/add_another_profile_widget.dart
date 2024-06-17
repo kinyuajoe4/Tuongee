@@ -4,18 +4,14 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'add_another_profile_model.dart';
 export 'add_another_profile_model.dart';
 
 class AddAnotherProfileWidget extends StatefulWidget {
-  const AddAnotherProfileWidget({Key? key}) : super(key: key);
+  const AddAnotherProfileWidget({super.key});
 
   @override
-  _AddAnotherProfileWidgetState createState() =>
+  State<AddAnotherProfileWidget> createState() =>
       _AddAnotherProfileWidgetState();
 }
 
@@ -29,16 +25,16 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
     super.initState();
     _model = createModel(context, () => AddAnotherProfileModel());
 
-    _model.phoneNumberController1 ??= TextEditingController();
+    _model.phoneNumberTextController1 ??= TextEditingController();
     _model.phoneNumberFocusNode1 ??= FocusNode();
 
-    _model.phoneNumberController2 ??= TextEditingController();
+    _model.phoneNumberTextController2 ??= TextEditingController();
     _model.phoneNumberFocusNode2 ??= FocusNode();
 
-    _model.phoneNumberController3 ??= TextEditingController();
+    _model.phoneNumberTextController3 ??= TextEditingController();
     _model.phoneNumberFocusNode3 ??= FocusNode();
 
-    _model.phoneNumberController4 ??= TextEditingController();
+    _model.phoneNumberTextController4 ??= TextEditingController();
     _model.phoneNumberFocusNode4 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -53,15 +49,6 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return Title(
         title: 'addAnotherProfile',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -87,18 +74,21 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
             ),
             title: Text(
               'Add Another Profile',
-              style: FlutterFlowTheme.of(context).headlineSmall,
+              style: FlutterFlowTheme.of(context).headlineSmall.override(
+                    fontFamily: 'Outfit',
+                    letterSpacing: 0.0,
+                  ),
             ),
-            actions: [],
+            actions: const [],
             centerTitle: false,
             elevation: 0.0,
           ),
           body: Container(
             width: MediaQuery.sizeOf(context).width * 1.0,
             height: MediaQuery.sizeOf(context).height * 1.0,
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -107,7 +97,7 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                       width: 120.0,
                       height: 120.0,
                       clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
                       child: Image.asset(
@@ -121,16 +111,21 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                           child: Text(
                             'Upload a photo for us to easily identify this person.',
                             textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ),
                       ],
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                       child: TextFormField(
-                        controller: _model.phoneNumberController1,
+                        controller: _model.phoneNumberTextController1,
                         focusNode: _model.phoneNumberFocusNode1,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -140,6 +135,7 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                               .override(
                                 fontFamily: 'Outfit',
                                 color: FlutterFlowTheme.of(context).grayLight,
+                                letterSpacing: 0.0,
                               ),
                           hintText: 'Official name here...',
                           hintStyle: FlutterFlowTheme.of(context)
@@ -148,30 +144,31 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                                 fontFamily: 'Outfit',
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
+                                letterSpacing: 0.0,
                               ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
@@ -180,22 +177,23 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                           filled: true,
                           fillColor:
                               FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 20.0, 24.0),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Outfit',
                               color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
                             ),
-                        validator: _model.phoneNumberController1Validator
+                        validator: _model.phoneNumberTextController1Validator
                             .asValidator(context),
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                       child: TextFormField(
-                        controller: _model.phoneNumberController2,
+                        controller: _model.phoneNumberTextController2,
                         focusNode: _model.phoneNumberFocusNode2,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -205,6 +203,7 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                               .override(
                                 fontFamily: 'Outfit',
                                 color: FlutterFlowTheme.of(context).grayLight,
+                                letterSpacing: 0.0,
                               ),
                           hintText: 'i.e. 34',
                           hintStyle: FlutterFlowTheme.of(context)
@@ -213,30 +212,31 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                                 fontFamily: 'Outfit',
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
+                                letterSpacing: 0.0,
                               ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
@@ -245,23 +245,24 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                           filled: true,
                           fillColor:
                               FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 20.0, 24.0),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Outfit',
                               color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
                             ),
                         keyboardType: TextInputType.number,
-                        validator: _model.phoneNumberController2Validator
+                        validator: _model.phoneNumberTextController2Validator
                             .asValidator(context),
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                       child: TextFormField(
-                        controller: _model.phoneNumberController3,
+                        controller: _model.phoneNumberTextController3,
                         focusNode: _model.phoneNumberFocusNode3,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -271,6 +272,7 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                               .override(
                                 fontFamily: 'Outfit',
                                 color: FlutterFlowTheme.of(context).grayLight,
+                                letterSpacing: 0.0,
                               ),
                           hintText: 'What types of allergies do they have..',
                           hintStyle: FlutterFlowTheme.of(context)
@@ -279,30 +281,31 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                                 fontFamily: 'Outfit',
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
+                                letterSpacing: 0.0,
                               ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
@@ -311,22 +314,23 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                           filled: true,
                           fillColor:
                               FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 20.0, 24.0),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Outfit',
                               color: FlutterFlowTheme.of(context).textColor,
+                              letterSpacing: 0.0,
                             ),
-                        validator: _model.phoneNumberController3Validator
+                        validator: _model.phoneNumberTextController3Validator
                             .asValidator(context),
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                       child: TextFormField(
-                        controller: _model.phoneNumberController4,
+                        controller: _model.phoneNumberTextController4,
                         focusNode: _model.phoneNumberFocusNode4,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -336,6 +340,7 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                               .override(
                                 fontFamily: 'Outfit',
                                 color: FlutterFlowTheme.of(context).grayLight,
+                                letterSpacing: 0.0,
                               ),
                           hintText: 'Please enter a valid email...',
                           hintStyle: FlutterFlowTheme.of(context)
@@ -344,30 +349,31 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                                 fontFamily: 'Outfit',
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
+                                letterSpacing: 0.0,
                               ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
@@ -376,35 +382,41 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                           filled: true,
                           fillColor:
                               FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 20.0, 24.0),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Outfit',
                               color: FlutterFlowTheme.of(context).textColor,
+                              letterSpacing: 0.0,
                             ),
                         keyboardType: TextInputType.streetAddress,
-                        validator: _model.phoneNumberController4Validator
+                        validator: _model.phoneNumberTextController4Validator
                             .asValidator(context),
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
                             'Persons Birth Sex',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ],
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 12.0, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -412,7 +424,7 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                           children: [
                             Expanded(
                               child: Align(
-                                alignment: AlignmentDirectional(0.00, 0.00),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: FlutterFlowRadioButton(
                                   options: ['Male', 'Female', 'Undisclosed']
                                       .toList(),
@@ -421,8 +433,12 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                                       _model.radioButtonValueController ??=
                                           FormFieldController<String>(null),
                                   optionHeight: 25.0,
-                                  textStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        letterSpacing: 0.0,
+                                      ),
                                   selectedTextStyle:
                                       FlutterFlowTheme.of(context)
                                           .titleSmall
@@ -430,8 +446,9 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                                             fontFamily: 'Outfit',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
+                                            letterSpacing: 0.0,
                                           ),
-                                  textPadding: EdgeInsetsDirectional.fromSTEB(
+                                  textPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 12.0, 0.0),
                                   buttonPosition: RadioButtonPosition.left,
                                   direction: Axis.horizontal,
@@ -451,7 +468,7 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.pushNamed('homePage');
@@ -460,9 +477,9 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                         options: FFButtonOptions(
                           width: 230.0,
                           height: 50.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
@@ -470,9 +487,10 @@ class _AddAnotherProfileWidgetState extends State<AddAnotherProfileWidget> {
                               .override(
                                 fontFamily: 'Outfit',
                                 color: FlutterFlowTheme.of(context).textColor,
+                                letterSpacing: 0.0,
                               ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),

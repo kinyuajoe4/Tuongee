@@ -1,19 +1,7 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/backend/firebase_storage/storage.dart';
-import '/flutter_flow/flutter_flow_radio_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/upload_data.dart';
 import 'edit_profile_widget.dart' show EditProfileWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   ///  State fields for stateful widgets in this page.
@@ -25,65 +13,62 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
 
   // State field(s) for yourName widget.
   FocusNode? yourNameFocusNode;
-  TextEditingController? yourNameController;
-  String? Function(BuildContext, String?)? yourNameControllerValidator;
+  TextEditingController? yourNameTextController;
+  String? Function(BuildContext, String?)? yourNameTextControllerValidator;
   // State field(s) for yourEmail widget.
   FocusNode? yourEmailFocusNode;
-  TextEditingController? yourEmailController;
-  String? Function(BuildContext, String?)? yourEmailControllerValidator;
+  TextEditingController? yourEmailTextController;
+  String? Function(BuildContext, String?)? yourEmailTextControllerValidator;
   // State field(s) for yourAge widget.
   FocusNode? yourAgeFocusNode;
-  TextEditingController? yourAgeController;
-  String? Function(BuildContext, String?)? yourAgeControllerValidator;
+  TextEditingController? yourAgeTextController;
+  String? Function(BuildContext, String?)? yourAgeTextControllerValidator;
   // State field(s) for speciality widget.
   FocusNode? specialityFocusNode1;
-  TextEditingController? specialityController1;
-  String? Function(BuildContext, String?)? specialityController1Validator;
+  TextEditingController? specialityTextController1;
+  String? Function(BuildContext, String?)? specialityTextController1Validator;
   // State field(s) for speciality widget.
   FocusNode? specialityFocusNode2;
-  TextEditingController? specialityController2;
-  String? Function(BuildContext, String?)? specialityController2Validator;
+  TextEditingController? specialityTextController2;
+  String? Function(BuildContext, String?)? specialityTextController2Validator;
   // State field(s) for Yourschedule widget.
   FocusNode? yourscheduleFocusNode;
-  TextEditingController? yourscheduleController;
-  String? Function(BuildContext, String?)? yourscheduleControllerValidator;
+  TextEditingController? yourscheduleTextController;
+  String? Function(BuildContext, String?)? yourscheduleTextControllerValidator;
   // State field(s) for yourAilments widget.
   FocusNode? yourAilmentsFocusNode;
-  TextEditingController? yourAilmentsController;
-  String? Function(BuildContext, String?)? yourAilmentsControllerValidator;
+  TextEditingController? yourAilmentsTextController;
+  String? Function(BuildContext, String?)? yourAilmentsTextControllerValidator;
   // State field(s) for RadioButton widget.
   FormFieldController<String>? radioButtonValueController;
 
-  /// Initialization and disposal methods.
-
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {
     yourNameFocusNode?.dispose();
-    yourNameController?.dispose();
+    yourNameTextController?.dispose();
 
     yourEmailFocusNode?.dispose();
-    yourEmailController?.dispose();
+    yourEmailTextController?.dispose();
 
     yourAgeFocusNode?.dispose();
-    yourAgeController?.dispose();
+    yourAgeTextController?.dispose();
 
     specialityFocusNode1?.dispose();
-    specialityController1?.dispose();
+    specialityTextController1?.dispose();
 
     specialityFocusNode2?.dispose();
-    specialityController2?.dispose();
+    specialityTextController2?.dispose();
 
     yourscheduleFocusNode?.dispose();
-    yourscheduleController?.dispose();
+    yourscheduleTextController?.dispose();
 
     yourAilmentsFocusNode?.dispose();
-    yourAilmentsController?.dispose();
+    yourAilmentsTextController?.dispose();
   }
 
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
-
+  /// Additional helper methods.
   String? get radioButtonValue => radioButtonValueController?.value;
 }

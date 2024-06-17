@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 Future initFirebase() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
-        options: FirebaseOptions(
-            apiKey: "AIzaSyD3EpHaRoSvnV1yJqDuoirK0IE_YZiCc_A",
-            authDomain: "newstart-637b5.firebaseapp.com",
-            projectId: "newstart-637b5",
-            storageBucket: "newstart-637b5.appspot.com",
-            messagingSenderId: "596821974378",
-            appId: "1:596821974378:web:54f27a4895edbd54301913"));
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyBbMtfHlziJwZvff3EXaS6Y1UeCuaS3NJQ",
+            authDomain: "newstart-d676d.firebaseapp.com",
+            projectId: "newstart-d676d",
+            storageBucket: "newstart-d676d.appspot.com",
+            messagingSenderId: "174250027381",
+            appId: "1:174250027381:web:e39908b1b726b17479cb3c"));
   } else {
     await Firebase.initializeApp();
   }

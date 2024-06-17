@@ -2,18 +2,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/components/book_appointment/book_appointment_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'popo_model.dart';
 export 'popo_model.dart';
 
 class PopoWidget extends StatefulWidget {
-  const PopoWidget({Key? key}) : super(key: key);
+  const PopoWidget({super.key});
 
   @override
-  _PopoWidgetState createState() => _PopoWidgetState();
+  State<PopoWidget> createState() => _PopoWidgetState();
 }
 
 class _PopoWidgetState extends State<PopoWidget> {
@@ -43,23 +39,26 @@ class _PopoWidgetState extends State<PopoWidget> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 blurRadius: 0.0,
                 color: Color(0xFFEFF7F5),
-                offset: Offset(0.0, 1.0),
+                offset: Offset(
+                  0.0,
+                  1.0,
+                ),
               )
             ],
             borderRadius: BorderRadius.circular(0.0),
             border: Border.all(
-              color: Color(0xFFEFF7F5),
+              color: const Color(0xFFEFF7F5),
               width: 1.0,
             ),
           ),
@@ -67,7 +66,7 @@ class _PopoWidgetState extends State<PopoWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 12.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 12.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -82,7 +81,7 @@ class _PopoWidgetState extends State<PopoWidget> {
                       builder: (context) {
                         return Padding(
                           padding: MediaQuery.viewInsetsOf(context),
-                          child: BookAppointmentWidget(),
+                          child: const BookAppointmentWidget(),
                         );
                       },
                     ).then((value) => safeSetState(() {}));
@@ -92,8 +91,8 @@ class _PopoWidgetState extends State<PopoWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: AlignmentDirectional(0.00, -1.00),
+                      const Align(
+                        alignment: AlignmentDirectional(0.0, -1.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 0.0, 0.0),
@@ -106,7 +105,7 @@ class _PopoWidgetState extends State<PopoWidget> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 16.0, 0.0),
                           child: Text(
                             'Book Direct Appointment',
@@ -114,14 +113,15 @@ class _PopoWidgetState extends State<PopoWidget> {
                                 .titleMedium
                                 .override(
                                   fontFamily: 'Roboto',
-                                  color: Color(0xFF111417),
+                                  color: const Color(0xFF111417),
                                   fontSize: 18.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w500,
                                 ),
                           ),
                         ),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.chevron_right_rounded,
                         color: Color(0xFF57636C),
                         size: 24.0,
@@ -131,7 +131,7 @@ class _PopoWidgetState extends State<PopoWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 12.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 12.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -145,8 +145,8 @@ class _PopoWidgetState extends State<PopoWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: AlignmentDirectional(0.00, -1.00),
+                      const Align(
+                        alignment: AlignmentDirectional(0.0, -1.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 0.0, 0.0),
@@ -159,7 +159,7 @@ class _PopoWidgetState extends State<PopoWidget> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 16.0, 0.0),
                           child: Text(
                             'Nearest Hospital',
@@ -167,14 +167,15 @@ class _PopoWidgetState extends State<PopoWidget> {
                                 .titleMedium
                                 .override(
                                   fontFamily: 'Roboto',
-                                  color: Color(0xFF111417),
+                                  color: const Color(0xFF111417),
                                   fontSize: 18.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w500,
                                 ),
                           ),
                         ),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.chevron_right_rounded,
                         color: Color(0xFF57636C),
                         size: 24.0,

@@ -11,7 +11,7 @@ import 'place.dart';
 
 class FlutterFlowPlacePicker extends StatefulWidget {
   const FlutterFlowPlacePicker({
-    Key? key,
+    super.key,
     required this.iOSGoogleMapsApiKey,
     required this.androidGoogleMapsApiKey,
     required this.webGoogleMapsApiKey,
@@ -20,7 +20,7 @@ class FlutterFlowPlacePicker extends StatefulWidget {
     required this.buttonOptions,
     required this.onSelect,
     this.proxyBaseUrl,
-  }) : super(key: key);
+  });
 
   final String iOSGoogleMapsApiKey;
   final String androidGoogleMapsApiKey;
@@ -56,29 +56,33 @@ class _FFPlacePickerState extends State<FlutterFlowPlacePicker> {
   }
 
   @override
-  Widget build(BuildContext context) => FFButtonWidget(
-        text: _selectedPlace ?? widget.defaultText ?? 'Search places',
-        icon: widget.icon,
-        onPressed: () async {
-          final p = await PlacesAutocomplete.show(
-            context: context,
-            apiKey: googleMapsApiKey,
-            onError: (response) =>
-                print('Error occured when getting places response:'
-                    '\n${response.errorMessage}'),
-            mode: Mode.overlay,
-            types: [],
-            components: [],
-            strictbounds: false,
-            proxyBaseUrl: widget.proxyBaseUrl,
-          );
+  Widget build(BuildContext context) {
+    String? languageCode = Localizations.localeOf(context).languageCode;
+    return FFButtonWidget(
+      text: _selectedPlace ?? widget.defaultText ?? 'Search places',
+      icon: widget.icon,
+      onPressed: () async {
+        final p = await PlacesAutocomplete.show(
+          context: context,
+          apiKey: googleMapsApiKey,
+          onError: (response) =>
+              print('Error occured when getting places response:'
+                  '\n${response.errorMessage}'),
+          mode: Mode.overlay,
+          types: [],
+          components: [],
+          strictbounds: false,
+          proxyBaseUrl: widget.proxyBaseUrl,
+          language: languageCode,
+        );
 
-          await displayPrediction(p);
-        },
-        options: widget.buttonOptions,
-      );
+        await displayPrediction(p, languageCode);
+      },
+      options: widget.buttonOptions,
+    );
+  }
 
-  Future displayPrediction(Prediction? p) async {
+  Future displayPrediction(Prediction? p, String? languageCode) async {
     if (p == null) {
       return;
     }
@@ -86,12 +90,13 @@ class _FFPlacePickerState extends State<FlutterFlowPlacePicker> {
     if (placeId == null) {
       return;
     }
-    GoogleMapsPlaces _places = GoogleMapsPlaces(
+    GoogleMapsPlaces places = GoogleMapsPlaces(
       apiKey: googleMapsApiKey,
       baseUrl: widget.proxyBaseUrl,
       apiHeaders: await const GoogleApiHeaders().getHeaders(),
     );
-    PlacesDetailsResponse detail = await _places.getDetailsByPlaceId(placeId);
+    PlacesDetailsResponse detail =
+        await places.getDetailsByPlaceId(placeId, language: languageCode);
     setState(() {
       _selectedPlace = detail.result.name;
     });

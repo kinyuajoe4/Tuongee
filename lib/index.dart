@@ -39,3 +39,11 @@ export '/medrefill/medrefill_widget.dart' show MedrefillWidget;
 export '/scanpage/scanpage_widget.dart' show ScanpageWidget;
 export '/homecarepage/homecarepage_widget.dart' show HomecarepageWidget;
 export '/nopage/nopage_widget.dart' show NopageWidget;
+export '/channels_page/channels_page_widget.dart' show ChannelsPageWidget;
+export '/pages/make_channel_page/make_channel_page_widget.dart'
+    show MakeChannelPageWidget;
+export '/test_cam/test_cam_widget.dart' show TestCamWidget;
+export '/add_captionpage/add_captionpage_widget.dart' show AddCaptionpageWidget;
+export '/testchannel/testchannel_widget.dart' show TestchannelWidget;
+export '/pages/editchanneldetails/editchanneldetails_widget.dart'
+    show EditchanneldetailsWidget;

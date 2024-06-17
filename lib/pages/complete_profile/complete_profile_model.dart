@@ -1,68 +1,50 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/backend/firebase_storage/storage.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_radio_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/upload_data.dart';
-import '/flutter_flow/permissions_util.dart';
 import 'complete_profile_widget.dart' show CompleteProfileWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class CompleteProfileModel extends FlutterFlowModel<CompleteProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
-
   // State field(s) for yourName widget.
   FocusNode? yourNameFocusNode;
-  TextEditingController? yourNameController;
-  String? Function(BuildContext, String?)? yourNameControllerValidator;
-  // State field(s) for yourAge widget.
-  FocusNode? yourAgeFocusNode;
-  TextEditingController? yourAgeController;
-  String? Function(BuildContext, String?)? yourAgeControllerValidator;
-  // State field(s) for ailments widget.
-  FocusNode? ailmentsFocusNode;
-  TextEditingController? ailmentsController;
-  String? Function(BuildContext, String?)? ailmentsControllerValidator;
-  // State field(s) for RadioButton widget.
-  FormFieldController<String>? radioButtonValueController;
+  TextEditingController? yourNameTextController;
+  String? Function(BuildContext, String?)? yourNameTextControllerValidator;
+  // State field(s) for RadioButton001 widget.
+  FormFieldController<String>? radioButton001ValueController;
+  // State field(s) for RadioButton02 widget.
+  FormFieldController<String>? radioButton02ValueController;
+  // State field(s) for RadioButton03 widget.
+  FormFieldController<String>? radioButton03ValueController;
+  // State field(s) for RadioButton04 widget.
+  FormFieldController<String>? radioButton04ValueController;
+  // State field(s) for RadioButton05 widget.
+  FormFieldController<String>? radioButton05ValueController;
+  // State field(s) for RadioButton06 widget.
+  FormFieldController<String>? radioButton06ValueController;
+  // State field(s) for RadioButton07 widget.
+  FormFieldController<String>? radioButton07ValueController;
+  // State field(s) for RadioButton08 widget.
+  FormFieldController<String>? radioButton08ValueController;
 
-  /// Initialization and disposal methods.
-
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     yourNameFocusNode?.dispose();
-    yourNameController?.dispose();
-
-    yourAgeFocusNode?.dispose();
-    yourAgeController?.dispose();
-
-    ailmentsFocusNode?.dispose();
-    ailmentsController?.dispose();
+    yourNameTextController?.dispose();
   }
 
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
-
-  String? get radioButtonValue => radioButtonValueController?.value;
+  /// Additional helper methods.
+  String? get radioButton001Value => radioButton001ValueController?.value;
+  String? get radioButton02Value => radioButton02ValueController?.value;
+  String? get radioButton03Value => radioButton03ValueController?.value;
+  String? get radioButton04Value => radioButton04ValueController?.value;
+  String? get radioButton05Value => radioButton05ValueController?.value;
+  String? get radioButton06Value => radioButton06ValueController?.value;
+  String? get radioButton07Value => radioButton07ValueController?.value;
+  String? get radioButton08Value => radioButton08ValueController?.value;
 }

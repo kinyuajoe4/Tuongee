@@ -1,28 +1,26 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'channelchatpage_model.dart';
 export 'channelchatpage_model.dart';
 
 class ChannelchatpageWidget extends StatefulWidget {
   const ChannelchatpageWidget({
-    Key? key,
+    super.key,
     this.chaneldetail,
-  }) : super(key: key);
+  });
 
   final ChannelsRecord? chaneldetail;
 
   @override
-  _ChannelchatpageWidgetState createState() => _ChannelchatpageWidgetState();
+  State<ChannelchatpageWidget> createState() => _ChannelchatpageWidgetState();
 }
 
 class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
@@ -34,6 +32,9 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ChannelchatpageModel());
+
+    _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -47,15 +48,6 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return Title(
         title: 'channelchatpage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -73,7 +65,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -105,7 +97,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 6.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -142,7 +134,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -151,7 +143,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
@@ -162,11 +154,12 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Outfit',
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w800,
                                               ),
                                         ),
                                       ),
-                                      Padding(
+                                      const Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             3.0, 0.0, 0.0, 0.0),
                                         child: Icon(
@@ -184,6 +177,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                         .override(
                                           fontFamily: 'Outfit',
                                           fontSize: 11.0,
+                                          letterSpacing: 0.0,
                                         ),
                                   ),
                                 ],
@@ -193,7 +187,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                               children: [
                                 if (widget.chaneldetail?.following == false)
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         20.0, 0.0, 10.0, 0.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -210,7 +204,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                         width: 71.0,
                                         height: 25.0,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFF0A3521),
+                                          color: const Color(0xFF0A3521),
                                           borderRadius:
                                               BorderRadius.circular(16.0),
                                           shape: BoxShape.rectangle,
@@ -218,7 +212,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                         child: Stack(
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 3.0, 0.0, 0.0),
                                               child: Text(
@@ -231,6 +225,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .textColor,
+                                                          letterSpacing: 0.0,
                                                         ),
                                               ),
                                             ),
@@ -241,7 +236,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                   ),
                                 if (widget.chaneldetail?.following == true)
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         20.0, 0.0, 10.0, 0.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -258,7 +253,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                         width: 71.0,
                                         height: 25.0,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFF0A3521),
+                                          color: const Color(0xFF0A3521),
                                           borderRadius:
                                               BorderRadius.circular(16.0),
                                           shape: BoxShape.rectangle,
@@ -266,7 +261,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                         child: Stack(
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 3.0, 0.0, 0.0),
                                               child: Text(
@@ -279,6 +274,7 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .textColor,
+                                                          letterSpacing: 0.0,
                                                         ),
                                               ),
                                             ),
@@ -306,9 +302,9 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                       ),
                     ),
                     child: Align(
-                      alignment: AlignmentDirectional(0.00, -1.00),
+                      alignment: const AlignmentDirectional(0.0, -1.0),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             12.0, 0.0, 12.0, 0.0),
                         child: StreamBuilder<List<ChannelmessageRecord>>(
                           stream: queryChannelmessageRecord(
@@ -344,21 +340,118 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                     listViewChannelmessageRecordList[
                                         listViewIndex];
                                 return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 12.0, 0.0, 0.0),
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 10.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      if (listViewChannelmessageRecord.image ==
-                                              null ||
-                                          listViewChannelmessageRecord.image ==
+                                      if (listViewChannelmessageRecord.image !=
                                               '')
-                                        Row(
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 3.0, 0.0, 0.0),
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await Navigator.push(
+                                                      context,
+                                                      PageTransition(
+                                                        type: PageTransitionType
+                                                            .fade,
+                                                        child:
+                                                            FlutterFlowExpandedImageView(
+                                                          image:
+                                                              CachedNetworkImage(
+                                                            fadeInDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        1300),
+                                                            fadeOutDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        1300),
+                                                            imageUrl: listViewChannelmessageRecord
+                                                                            .image ==
+                                                                        ''
+                                                                ? 'https://firebasestorage.googleapis.com/v0/b/newstart-d676d.appspot.com/o/Screenshot%20from%202024-06-12%2001-19-16.png?alt=media&token=26021a73-015b-4111-8094-514fc497d3e7'
+                                                                : listViewChannelmessageRecord
+                                                                    .image,
+                                                            fit: BoxFit.contain,
+                                                          ),
+                                                          allowRotation: false,
+                                                          tag: listViewChannelmessageRecord
+                                                                          .image ==
+                                                                      ''
+                                                              ? 'https://firebasestorage.googleapis.com/v0/b/newstart-d676d.appspot.com/o/Screenshot%20from%202024-06-12%2001-19-16.png?alt=media&token=26021a73-015b-4111-8094-514fc497d3e7'
+                                                              : listViewChannelmessageRecord
+                                                                  .image,
+                                                          useHeroAnimation:
+                                                              true,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Hero(
+                                                    tag: listViewChannelmessageRecord
+                                                                    .image ==
+                                                                ''
+                                                        ? 'https://firebasestorage.googleapis.com/v0/b/newstart-d676d.appspot.com/o/Screenshot%20from%202024-06-12%2001-19-16.png?alt=media&token=26021a73-015b-4111-8094-514fc497d3e7'
+                                                        : listViewChannelmessageRecord
+                                                            .image,
+                                                    transitionOnUserGestures:
+                                                        true,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: CachedNetworkImage(
+                                                        fadeInDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    1300),
+                                                        fadeOutDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    1300),
+                                                        imageUrl: listViewChannelmessageRecord
+                                                                        .image ==
+                                                                    ''
+                                                            ? 'https://firebasestorage.googleapis.com/v0/b/newstart-d676d.appspot.com/o/Screenshot%20from%202024-06-12%2001-19-16.png?alt=media&token=26021a73-015b-4111-8094-514fc497d3e7'
+                                                            : listViewChannelmessageRecord
+                                                                .image,
+                                                        width: 350.0,
+                                                        height: 250.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 0.0, 0.0, 0.0),
+                                        child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                              MainAxisAlignment.start,
                                           children: [
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -385,32 +478,33 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                                     }(),
                                                   ),
                                                   decoration: BoxDecoration(
-                                                    color: Color(0x2C0022FF),
-                                                    boxShadow: [
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                    boxShadow: const [
                                                       BoxShadow(
                                                         blurRadius: 3.0,
                                                         color:
                                                             Color(0x33000000),
-                                                        offset:
-                                                            Offset(0.0, 1.0),
+                                                        offset: Offset(
+                                                          0.0,
+                                                          1.0,
+                                                        ),
                                                       )
                                                     ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             12.0),
                                                     border: Border.all(
-                                                      color: Color(0x2C0022FF),
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
                                                       width: 1.0,
                                                     ),
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12.0,
-                                                                12.0,
-                                                                12.0,
-                                                                12.0),
+                                                        const EdgeInsets.all(12.0),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.min,
@@ -420,12 +514,8 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                                       children: [
                                                         SelectionArea(
                                                             child: AutoSizeText(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            listViewChannelmessageRecord
-                                                                .mesage,
-                                                            'not set',
-                                                          ),
+                                                          listViewChannelmessageRecord
+                                                              .mesage,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .titleMedium
@@ -436,6 +526,8 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                                                         context)
                                                                     .primaryBtnText,
                                                                 fontSize: 14.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 lineHeight: 1.5,
                                                               ),
                                                         )),
@@ -443,130 +535,34 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      dateTimeFormat(
-                                                          'M/d h:mm a',
-                                                          listViewChannelmessageRecord
-                                                              .messagetime!),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
-                                                    ),
-                                                  ],
-                                                ),
                                               ],
                                             ),
                                           ],
                                         ),
-                                      Stack(
-                                        children: [
-                                          if (listViewChannelmessageRecord
-                                                      .mesage ==
-                                                  null ||
-                                              listViewChannelmessageRecord
-                                                      .mesage ==
-                                                  '')
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 3.0, 0.0, 0.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Container(
-                                                        width: 350.0,
-                                                        height: 250.0,
-                                                        constraints:
-                                                            BoxConstraints(
-                                                          maxWidth: () {
-                                                            if (MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .width >=
-                                                                1170.0) {
-                                                              return 700.0;
-                                                            } else if (MediaQuery
-                                                                        .sizeOf(
-                                                                            context)
-                                                                    .width <=
-                                                                470.0) {
-                                                              return 330.0;
-                                                            } else {
-                                                              return 530.0;
-                                                            }
-                                                          }(),
-                                                        ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0x2C0022FF),
-                                                          image:
-                                                              DecorationImage(
-                                                            fit: BoxFit.cover,
-                                                            image:
-                                                                Image.network(
-                                                              listViewChannelmessageRecord
-                                                                  .image,
-                                                            ).image,
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 3.0,
-                                                              color: Color(
-                                                                  0x33000000),
-                                                              offset: Offset(
-                                                                  0.0, 1.0),
-                                                            )
-                                                          ],
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      12.0),
-                                                          border: Border.all(
-                                                            color: Color(
-                                                                0x2C0022FF),
-                                                            width: 1.0,
-                                                          ),
-                                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 3.0, 20.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              dateTimeFormat(
+                                                  'M/d h:mm a',
+                                                  listViewChannelmessageRecord
+                                                      .messagetime!),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        letterSpacing: 0.0,
                                                       ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            dateTimeFormat(
-                                                                'M/d h:mm a',
-                                                                listViewChannelmessageRecord
-                                                                    .messagetime!),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
                                             ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -578,58 +574,244 @@ class _ChannelchatpageWidgetState extends State<ChannelchatpageWidget> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
+                  Expanded(
+                    child: Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              4.0, 0.0, 0.0, 0.0),
-                          child: Container(
-                            width: 360.0,
-                            height: 46.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).grayLight,
-                              borderRadius: BorderRadius.circular(27.0),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 0.0, 0.0),
-                                  child: Container(
-                                    width: 350.0,
-                                    child: Stack(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  2.0, 0.0, 0.0, 0.0),
-                                          child: Icon(
-                                            Icons.lock,
-                                            color: Color(0xFF0017FF),
-                                            size: 24.0,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 5.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 8.0, 0.0),
+                                child: SizedBox(
+                                  width: 300.0,
+                                  child: TextFormField(
+                                    controller: _model.textController,
+                                    focusNode: _model.textFieldFocusNode,
+                                    autofocus: false,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Type here',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            letterSpacing: 0.0,
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  30.0, 5.0, 0.0, 0.0),
-                                          child: Text(
-                                            'For now only verified users can type in this channel',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            letterSpacing: 0.0,
                                           ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 2.0,
                                         ),
-                                      ],
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          letterSpacing: 0.0,
+                                        ),
+                                    maxLines: null,
+                                    validator: _model.textControllerValidator
+                                        .asValidator(context),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              Stack(
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await ChannelmessageRecord.createDoc(
+                                              widget.chaneldetail!.reference)
+                                          .set(createChannelmessageRecordData(
+                                        mesage: _model.textController.text,
+                                        image: '',
+                                        messagetime: getCurrentTimestamp,
+                                      ));
+                                      setState(() {
+                                        _model.textController?.clear();
+                                      });
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'message sent',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              const Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.send,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        23.0, 0.0, 0.0, 0.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        final selectedMedia =
+                                            await selectMediaWithSourceBottomSheet(
+                                          context: context,
+                                          imageQuality: 84,
+                                          allowPhoto: true,
+                                          includeBlurHash: true,
+                                        );
+                                        if (selectedMedia != null &&
+                                            selectedMedia.every((m) =>
+                                                validateFileFormat(
+                                                    m.storagePath, context))) {
+                                          setState(() =>
+                                              _model.isDataUploading = true);
+                                          var selectedUploadedFiles =
+                                              <FFUploadedFile>[];
+
+                                          var downloadUrls = <String>[];
+                                          try {
+                                            showUploadMessage(
+                                              context,
+                                              'Uploading file...',
+                                              showLoading: true,
+                                            );
+                                            selectedUploadedFiles =
+                                                selectedMedia
+                                                    .map((m) => FFUploadedFile(
+                                                          name: m.storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: m.bytes,
+                                                          height: m.dimensions
+                                                              ?.height,
+                                                          width: m.dimensions
+                                                              ?.width,
+                                                          blurHash: m.blurHash,
+                                                        ))
+                                                    .toList();
+
+                                            downloadUrls = (await Future.wait(
+                                              selectedMedia.map(
+                                                (m) async => await uploadData(
+                                                    m.storagePath, m.bytes),
+                                              ),
+                                            ))
+                                                .where((u) => u != null)
+                                                .map((u) => u!)
+                                                .toList();
+                                          } finally {
+                                            ScaffoldMessenger.of(context)
+                                                .hideCurrentSnackBar();
+                                            _model.isDataUploading = false;
+                                          }
+                                          if (selectedUploadedFiles.length ==
+                                                  selectedMedia.length &&
+                                              downloadUrls.length ==
+                                                  selectedMedia.length) {
+                                            setState(() {
+                                              _model.uploadedLocalFile =
+                                                  selectedUploadedFiles.first;
+                                              _model.uploadedFileUrl =
+                                                  downloadUrls.first;
+                                            });
+                                            showUploadMessage(
+                                                context, 'Success!');
+                                          } else {
+                                            setState(() {});
+                                            showUploadMessage(context,
+                                                'Failed to upload data');
+                                            return;
+                                          }
+                                        }
+
+                                        if (_model.uploadedFileUrl != '') {
+                                          context.pushNamed(
+                                            'addCaptionpage',
+                                            queryParameters: {
+                                              'imageURL': serializeParam(
+                                                _model.uploadedFileUrl,
+                                                ParamType.String,
+                                              ),
+                                              'requiredChannel': serializeParam(
+                                                widget.chaneldetail,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'requiredChannel':
+                                                  widget.chaneldetail,
+                                            },
+                                          );
+                                        }
+                                      },
+                                      child: Icon(
+                                        Icons.camera_alt,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ],

@@ -1,16 +1,7 @@
-import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/components/norecords/norecords_widget.dart';
 import 'scanpage_widget.dart' show ScanpageWidget;
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ScanpageModel extends FlutterFlowModel<ScanpageWidget> {
   ///  State fields for stateful widgets in this page.
@@ -26,21 +17,17 @@ class ScanpageModel extends FlutterFlowModel<ScanpageWidget> {
   // Model for norecords component.
   late NorecordsModel norecordsModel2;
 
-  /// Initialization and disposal methods.
-
+  @override
   void initState(BuildContext context) {
     norecordsModel1 = createModel(context, () => NorecordsModel());
     norecordsModel2 = createModel(context, () => NorecordsModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     tabBarController?.dispose();
     norecordsModel1.dispose();
     norecordsModel2.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "Tuongee")
-set(APPLICATION_ID "com.flutterflow.healthai")
+set(BINARY_NAME "Tuongee Project")
+set(APPLICATION_ID "com.flutterflow.Tuongee")
 
 cmake_policy(SET CMP0063 NEW)
 

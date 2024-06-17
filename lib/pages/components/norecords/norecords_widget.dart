@@ -1,19 +1,15 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'norecords_model.dart';
 export 'norecords_model.dart';
 
 class NorecordsWidget extends StatefulWidget {
-  const NorecordsWidget({Key? key}) : super(key: key);
+  const NorecordsWidget({super.key});
 
   @override
-  _NorecordsWidgetState createState() => _NorecordsWidgetState();
+  State<NorecordsWidget> createState() => _NorecordsWidgetState();
 }
 
 class _NorecordsWidgetState extends State<NorecordsWidget> {
@@ -52,7 +48,7 @@ class _NorecordsWidgetState extends State<NorecordsWidget> {
           size: 90.0,
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -63,6 +59,7 @@ class _NorecordsWidgetState extends State<NorecordsWidget> {
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).secondaryText,
+                      letterSpacing: 0.0,
                     ),
               ),
             ],

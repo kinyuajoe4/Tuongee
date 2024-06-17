@@ -2,18 +2,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'emptymessage_model.dart';
 export 'emptymessage_model.dart';
 
 class EmptymessageWidget extends StatefulWidget {
-  const EmptymessageWidget({Key? key}) : super(key: key);
+  const EmptymessageWidget({super.key});
 
   @override
-  _EmptymessageWidgetState createState() => _EmptymessageWidgetState();
+  State<EmptymessageWidget> createState() => _EmptymessageWidgetState();
 }
 
 class _EmptymessageWidgetState extends State<EmptymessageWidget> {
@@ -52,7 +48,7 @@ class _EmptymessageWidgetState extends State<EmptymessageWidget> {
           size: 90.0,
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -63,13 +59,14 @@ class _EmptymessageWidgetState extends State<EmptymessageWidget> {
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).secondaryText,
+                      letterSpacing: 0.0,
                     ),
               ),
             ],
           ),
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,31 +75,35 @@ class _EmptymessageWidgetState extends State<EmptymessageWidget> {
                 child: Text(
                   'Seems you don\'t have any messages here,search for a doctor and get started.',
                   textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).bodySmall,
+                  style: FlutterFlowTheme.of(context).bodySmall.override(
+                        fontFamily: 'Outfit',
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ),
             ],
           ),
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
           child: FFButtonWidget(
             onPressed: () {
               print('Button pressed ...');
             },
             text: 'Find Doctor',
             options: FFButtonOptions(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-              iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+              iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
               color: FlutterFlowTheme.of(context).primary,
               textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                     fontFamily: 'Lexend Deca',
                     color: Colors.white,
                     fontSize: 16.0,
+                    letterSpacing: 0.0,
                     fontWeight: FontWeight.normal,
                   ),
               elevation: 2.0,
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Colors.transparent,
                 width: 1.0,
               ),

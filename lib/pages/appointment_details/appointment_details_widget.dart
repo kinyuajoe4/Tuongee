@@ -4,25 +4,21 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/components/edit_booking/edit_booking_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'appointment_details_model.dart';
 export 'appointment_details_model.dart';
 
 class AppointmentDetailsWidget extends StatefulWidget {
   const AppointmentDetailsWidget({
-    Key? key,
+    super.key,
     this.appointmentDetails,
-  }) : super(key: key);
+  });
 
   final DocumentReference? appointmentDetails;
 
   @override
-  _AppointmentDetailsWidgetState createState() =>
+  State<AppointmentDetailsWidget> createState() =>
       _AppointmentDetailsWidgetState();
 }
 
@@ -48,15 +44,6 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return StreamBuilder<AppointmentsRecord>(
       stream: AppointmentsRecord.getDocument(widget.appointmentDetails!),
       builder: (context, snapshot) {
@@ -102,9 +89,12 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                 ),
                 title: Text(
                   'Details',
-                  style: FlutterFlowTheme.of(context).headlineSmall,
+                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                        fontFamily: 'Outfit',
+                        letterSpacing: 0.0,
+                      ),
                 ),
-                actions: [],
+                actions: const [],
                 centerTitle: false,
                 elevation: 0.0,
               ),
@@ -114,14 +104,19 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
                             child: Text(
                               'Institution Name',
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ],
@@ -129,21 +124,18 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
                             child: Text(
-                              valueOrDefault<String>(
-                                appointmentDetailsAppointmentsRecord
-                                    .institution,
-                                'not set',
-                              ),
+                              'Doctors Appointment',
                               style: FlutterFlowTheme.of(context)
                                   .headlineSmall
                                   .override(
                                     fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
@@ -153,14 +145,19 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
                             child: Text(
                               'Type of Appointment',
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ],
@@ -168,7 +165,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -180,6 +177,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                   .headlineSmall
                                   .override(
                                     fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
@@ -189,14 +187,19 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 16.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 16.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
                             child: Text(
                               'What’s the problem?',
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ],
@@ -204,7 +207,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -212,7 +215,12 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                             child: Text(
                               appointmentDetailsAppointmentsRecord
                                   .appointmentDescription,
-                              style: FlutterFlowTheme.of(context).bodySmall,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ],
@@ -220,23 +228,28 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
                             child: Text(
                               'For',
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ],
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 12.0, 20.0, 0.0),
                         child: StreamBuilder<AppointmentsRecord>(
                           stream: AppointmentsRecord.getDocument(
@@ -262,17 +275,20 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 5.0,
                                     color: Color(0x230E151B),
-                                    offset: Offset(0.0, 2.0),
+                                    offset: Offset(
+                                      0.0,
+                                      2.0,
+                                    ),
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 12.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -299,7 +315,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -316,7 +332,11 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                                     .appointmentName,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .headlineSmall,
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -330,6 +350,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primary,
+                                                  letterSpacing: 0.0,
                                                 ),
                                           ),
                                         ],
@@ -345,17 +366,22 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 16.0, 0.0, 0.0),
                               child: Text(
                                 'When',
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                             ),
                           ),
@@ -364,7 +390,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -378,11 +404,12 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                 .override(
                                   fontFamily: 'Outfit',
                                   fontSize: 22.0,
+                                  letterSpacing: 0.0,
                                 ),
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   4.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 dateTimeFormat(
@@ -394,6 +421,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                     .override(
                                       fontFamily: 'Outfit',
                                       fontSize: 22.0,
+                                      letterSpacing: 0.0,
                                     ),
                               ),
                             ),
@@ -403,18 +431,18 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 36.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 36.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           await showModalBottomSheet(
                             isScrollControlled: true,
-                            backgroundColor: Color(0x00000000),
-                            barrierColor: Color(0x00000000),
+                            backgroundColor: const Color(0x00000000),
+                            barrierColor: const Color(0x00000000),
                             context: context,
                             builder: (context) {
                               return Padding(
                                 padding: MediaQuery.viewInsetsOf(context),
-                                child: Container(
+                                child: SizedBox(
                                   height: 720.0,
                                   child: EditBookingWidget(
                                     userAppointment:
@@ -429,14 +457,18 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                         options: FFButtonOptions(
                           width: 200.0,
                           height: 50.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
-                          textStyle: FlutterFlowTheme.of(context).titleSmall,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                           elevation: 2.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -446,7 +478,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 36.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 36.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           await appointmentDetailsAppointmentsRecord.reference
@@ -461,10 +493,11 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                       fontFamily: 'Outfit',
                                       color: FlutterFlowTheme.of(context)
                                           .alternate,
+                                      letterSpacing: 0.0,
                                     ),
                               ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor: Color(0xFFE86969),
+                              duration: const Duration(milliseconds: 4000),
+                              backgroundColor: const Color(0xFFE86969),
                             ),
                           );
                           context.pop();
@@ -473,20 +506,21 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                         options: FFButtonOptions(
                           width: 200.0,
                           height: 50.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFFDF3F3F),
+                                    color: const Color(0xFFDF3F3F),
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
                                   ),
                           elevation: 2.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),

@@ -1,34 +1,24 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/components/moreaboutchanel_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'chitchat_model.dart';
 export 'chitchat_model.dart';
 
 class ChitchatWidget extends StatefulWidget {
   const ChitchatWidget({
-    Key? key,
+    super.key,
     this.userName,
     this.userEmail,
     this.chatUser,
     this.userRef,
     this.userProfile,
     this.user,
-    this.special,
-    this.locall,
-    this.sched,
-    this.hosp,
-  }) : super(key: key);
+  });
 
   final String? userName;
   final String? userEmail;
@@ -36,13 +26,9 @@ class ChitchatWidget extends StatefulWidget {
   final DocumentReference? userRef;
   final String? userProfile;
   final DocumentReference? user;
-  final String? special;
-  final String? locall;
-  final String? sched;
-  final HospitalsRecord? hosp;
 
   @override
-  _ChitchatWidgetState createState() => _ChitchatWidgetState();
+  State<ChitchatWidget> createState() => _ChitchatWidgetState();
 }
 
 class _ChitchatWidgetState extends State<ChitchatWidget> {
@@ -70,15 +56,6 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return StreamBuilder<List<ChatsRecord>>(
       stream: queryChatsRecord(
         singleRecord: true,
@@ -87,7 +64,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: Color(0xB9FAFAFA),
+            backgroundColor: const Color(0xB9FAFAFA),
             body: Center(
               child: SizedBox(
                 width: 40.0,
@@ -117,7 +94,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                   : FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
-                backgroundColor: Color(0xB9FAFAFA),
+                backgroundColor: const Color(0xB9FAFAFA),
                 body: SafeArea(
                   top: true,
                   child: Column(
@@ -126,198 +103,160 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 3.0, 0.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return GestureDetector(
-                                  onTap: () =>
-                                      _model.unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
-                                  child: Padding(
-                                    padding: MediaQuery.viewInsetsOf(context),
-                                    child: Container(
-                                      height: 800.0,
-                                      child: MoreaboutchanelWidget(
-                                        name: widget.userName,
-                                        locality: widget.locall,
-                                        schedule: widget.sched,
-                                        image: widget.userProfile,
-                                        about: widget.special,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-                          },
-                          child: Container(
-                            height: 70.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      15.0, 0.0, 6.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.safePop();
-                                    },
-                                    child: Icon(
-                                      Icons.arrow_back_ios,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 51.0,
-                                  height: 51.0,
-                                  decoration: BoxDecoration(
+                            const EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 3.0, 0.0),
+                        child: Container(
+                          height: 70.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    15.0, 0.0, 6.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.safePop();
+                                  },
+                                  child: Icon(
+                                    Icons.arrow_back_ios,
                                     color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: Image.network(
-                                        widget.userProfile!,
-                                      ).image,
-                                    ),
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: FlutterFlowTheme.of(context).info,
-                                    ),
+                                        .secondaryText,
+                                    size: 24.0,
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 20.0, 0.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
+                              ),
+                              Container(
+                                width: 51.0,
+                                height: 51.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: Image.network(
+                                      widget.userProfile!,
+                                    ).image,
+                                  ),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context).info,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 0.0, 0.0),
+                                          child: Text(
+                                            widget.userName!,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w800,
+                                                ),
+                                          ),
+                                        ),
+                                        const Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  3.0, 0.0, 0.0, 0.0),
+                                          child: Icon(
+                                            Icons.verified_rounded,
+                                            color: Color(0xFF0055FF),
+                                            size: 20.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      '270 Followers',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            fontSize: 11.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Stack(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        20.0, 0.0, 10.0, 0.0),
+                                    child: Container(
+                                      height: 25.0,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF0A3521),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                        shape: BoxShape.rectangle,
+                                      ),
+                                      child: Stack(
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 0.0, 0.0, 0.0),
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 3.0, 0.0, 0.0),
                                             child: Text(
-                                              widget.userName!,
+                                              'Follow',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Outfit',
-                                                        fontWeight:
-                                                            FontWeight.w800,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textColor,
+                                                        letterSpacing: 0.0,
                                                       ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    3.0, 0.0, 0.0, 0.0),
-                                            child: Icon(
-                                              Icons.verified_rounded,
-                                              color: Color(0xFF0055FF),
-                                              size: 20.0,
                                             ),
                                           ),
                                         ],
                                       ),
-                                      Text(
-                                        widget.special!,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              fontSize: 11.0,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Stack(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 0.0, 10.0, 0.0),
-                                      child: Container(
-                                        height: 25.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF0A3521),
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
-                                          shape: BoxShape.rectangle,
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      16.0, 3.0, 0.0, 0.0),
-                                              child: Text(
-                                                widget.sched!
-                                                    .maybeHandleOverflow(
-                                                  maxChars: 7,
-                                                  replacement: '…',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textColor,
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               3.0, 5.0, 3.0, 0.0),
                           child: Container(
                             width: 390.0,
                             decoration: BoxDecoration(
-                              color: Color(0x2C0022FF),
+                              color: const Color(0x2C0022FF),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 10.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -374,13 +313,10 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                           currentUserReference) &&
                                                       (listViewChatMessagesRecord
                                                                   .text !=
-                                                              null &&
-                                                          listViewChatMessagesRecord
-                                                                  .text !=
                                                               ''))
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   16.0,
@@ -392,7 +328,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -404,7 +340,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                               clipBehavior: Clip
                                                                   .antiAlias,
                                                               decoration:
-                                                                  BoxDecoration(
+                                                                  const BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle,
                                                               ),
@@ -419,7 +355,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         16.0,
                                                                         0.0,
@@ -432,7 +368,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                         context)
                                                                     .secondaryBackground,
                                                                 borderRadius:
-                                                                    BorderRadius
+                                                                    const BorderRadius
                                                                         .only(
                                                                   bottomLeft: Radius
                                                                       .circular(
@@ -477,18 +413,19 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                               .text,
                                                                           textAlign:
                                                                               TextAlign.start,
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'Outfit',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
                                                                         ),
                                                                       ),
                                                                     ],
                                                                   ),
                                                                   Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            12.0,
-                                                                            12.0,
-                                                                            12.0,
+                                                                    padding:
+                                                                        const EdgeInsets.all(
                                                                             12.0),
                                                                     child: Row(
                                                                       mainAxisSize:
@@ -505,13 +442,14 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                               MainAxisAlignment.end,
                                                                           children: [
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 21.0, 0.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 21.0, 0.0),
                                                                               child: Text(
                                                                                 dateTimeFormat('jm', listViewChatMessagesRecord.timestamp!),
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Outfit',
                                                                                       color: FlutterFlowTheme.of(context).info,
                                                                                       fontSize: 12.0,
+                                                                                      letterSpacing: 0.0,
                                                                                     ),
                                                                               ),
                                                                             ),
@@ -532,13 +470,10 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                           currentUserReference) &&
                                                       (listViewChatMessagesRecord
                                                                   .text !=
-                                                              null &&
-                                                          listViewChatMessagesRecord
-                                                                  .text !=
                                                               ''))
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   16.0,
@@ -556,7 +491,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         16.0,
                                                                         0.0,
@@ -569,7 +504,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                         context)
                                                                     .secondaryBackground,
                                                                 borderRadius:
-                                                                    BorderRadius
+                                                                    const BorderRadius
                                                                         .only(
                                                                   bottomLeft: Radius
                                                                       .circular(
@@ -596,7 +531,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                             .max,
                                                                     children: [
                                                                       Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             5.0,
                                                                             0.0,
@@ -612,7 +547,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                           ),
                                                                           child:
                                                                               Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                                                 0.0,
                                                                                 0.0,
                                                                                 1.0,
@@ -620,7 +555,10 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                             child:
                                                                                 Text(
                                                                               listViewChatMessagesRecord.text,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Outfit',
+                                                                                    letterSpacing: 0.0,
+                                                                                  ),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -628,7 +566,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                     ],
                                                                   ),
                                                                   Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             2.0,
@@ -663,7 +601,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).secondaryBackground,
                                                                             borderRadius:
-                                                                                BorderRadius.only(
+                                                                                const BorderRadius.only(
                                                                               bottomLeft: Radius.circular(28.0),
                                                                               bottomRight: Radius.circular(0.0),
                                                                               topLeft: Radius.circular(0.0),
@@ -672,7 +610,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                           ),
                                                                         ),
                                                                         Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               0.0,
                                                                               5.0,
@@ -685,15 +623,16 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                                 MainAxisAlignment.end,
                                                                             children: [
                                                                               Align(
-                                                                                alignment: AlignmentDirectional(-0.45, 0.00),
+                                                                                alignment: const AlignmentDirectional(-0.45, 0.0),
                                                                                 child: Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 7.0, 0.0),
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 7.0, 0.0),
                                                                                   child: Text(
                                                                                     dateTimeFormat('jm', listViewChatMessagesRecord.timestamp!),
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                           fontFamily: 'Outfit',
-                                                                                          color: Color(0xFF0017FF),
+                                                                                          color: const Color(0xFF0017FF),
                                                                                           fontSize: 12.0,
+                                                                                          letterSpacing: 0.0,
                                                                                         ),
                                                                                   ),
                                                                                 ),
@@ -709,8 +648,8 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                           children: [
                                                                             if (chitchatChatsRecord?.messageSeen ==
                                                                                 true)
-                                                                              Align(
-                                                                                alignment: AlignmentDirectional(0.00, -0.10),
+                                                                              const Align(
+                                                                                alignment: AlignmentDirectional(0.0, -0.1),
                                                                                 child: Padding(
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 6.0, 0.0),
                                                                                   child: Icon(
@@ -737,13 +676,10 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                           currentUserReference) &&
                                                       (listViewChatMessagesRecord
                                                                   .image !=
-                                                              null &&
-                                                          listViewChatMessagesRecord
-                                                                  .image !=
                                                               ''))
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   24.0,
@@ -761,7 +697,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -773,7 +709,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                               clipBehavior: Clip
                                                                   .antiAlias,
                                                               decoration:
-                                                                  BoxDecoration(
+                                                                  const BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle,
                                                               ),
@@ -790,7 +726,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                             width: 300.0,
                                                             height: 185.0,
                                                             constraints:
-                                                                BoxConstraints(
+                                                                const BoxConstraints(
                                                               maxWidth: 260.0,
                                                             ),
                                                             decoration:
@@ -809,7 +745,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                 ).image,
                                                               ),
                                                               borderRadius:
-                                                                  BorderRadius
+                                                                  const BorderRadius
                                                                       .only(
                                                                 bottomLeft: Radius
                                                                     .circular(
@@ -825,7 +761,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                         24.0),
                                                               ),
                                                             ),
-                                                            child: Padding(
+                                                            child: const Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -846,13 +782,10 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                           currentUserReference) &&
                                                       (listViewChatMessagesRecord
                                                                   .image !=
-                                                              null &&
-                                                          listViewChatMessagesRecord
-                                                                  .image !=
                                                               ''))
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   24.0,
@@ -872,7 +805,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                             width: 300.0,
                                                             height: 185.0,
                                                             constraints:
-                                                                BoxConstraints(
+                                                                const BoxConstraints(
                                                               maxWidth: 260.0,
                                                             ),
                                                             decoration:
@@ -891,7 +824,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                 ).image,
                                                               ),
                                                               borderRadius:
-                                                                  BorderRadius
+                                                                  const BorderRadius
                                                                       .only(
                                                                 bottomLeft: Radius
                                                                     .circular(
@@ -909,7 +842,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                             ),
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -919,17 +852,17 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                 children: [
                                                                   Align(
                                                                     alignment:
-                                                                        AlignmentDirectional(
-                                                                            0.90,
+                                                                        const AlignmentDirectional(
+                                                                            0.9,
                                                                             0.85),
                                                                     child: Icon(
                                                                       Icons
                                                                           .done_all,
                                                                       color: chitchatChatsRecord?.messageSeen ==
                                                                               true
-                                                                          ? Color(
+                                                                          ? const Color(
                                                                               0xFF0D0081)
-                                                                          : Color(
+                                                                          : const Color(
                                                                               0xFF040404),
                                                                       size:
                                                                           18.0,
@@ -957,7 +890,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             10.0, 22.0, 10.0, 22.0),
                         child: Container(
                           width: double.infinity,
@@ -972,59 +905,68 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       2.0, 0.0, 14.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.textController,
                                     focusNode: _model.textFieldFocusNode,
+                                    autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       hintText: 'Type your message here..',
                                       hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: UnderlineInputBorder(
+                                          .bodySmall
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      enabledBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
-                                        borderRadius: const BorderRadius.only(
+                                        borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(4.0),
                                           topRight: Radius.circular(4.0),
                                         ),
                                       ),
-                                      focusedBorder: UnderlineInputBorder(
+                                      focusedBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
-                                        borderRadius: const BorderRadius.only(
+                                        borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(4.0),
                                           topRight: Radius.circular(4.0),
                                         ),
                                       ),
-                                      errorBorder: UnderlineInputBorder(
+                                      errorBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
-                                        borderRadius: const BorderRadius.only(
+                                        borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(4.0),
                                           topRight: Radius.circular(4.0),
                                         ),
                                       ),
-                                      focusedErrorBorder: UnderlineInputBorder(
+                                      focusedErrorBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
-                                        borderRadius: const BorderRadius.only(
+                                        borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(4.0),
                                           topRight: Radius.circular(4.0),
                                         ),
                                       ),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          letterSpacing: 0.0,
+                                        ),
                                     maxLines: 9,
                                     minLines: 1,
                                     validator: _model.textControllerValidator
@@ -1032,7 +974,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                   ),
                                 ),
                               ),
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 3.0, 0.0),
                                 child: Icon(
@@ -1041,12 +983,12 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 15.0, 0.0),
                                 child: Stack(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -1149,7 +1091,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                 getCurrentTimestamp,
                                           ));
                                         },
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.camera_alt,
                                           color: Colors.black,
                                         ),
@@ -1157,9 +1099,9 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                     ),
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(1.75, -0.50),
+                                          const AlignmentDirectional(1.75, -0.5),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             29.0, 0.0, 0.0, 0.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -1168,8 +1110,6 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             if (_model.textController.text !=
-                                                    null &&
-                                                _model.textController.text !=
                                                     '') {
                                               await ChatMessagesRecord
                                                   .collection
@@ -1210,7 +1150,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                               .primaryText,
                                                     ),
                                                   ),
-                                                  duration: Duration(
+                                                  duration: const Duration(
                                                       milliseconds: 4000),
                                                   backgroundColor:
                                                       FlutterFlowTheme.of(
@@ -1220,7 +1160,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                               );
                                             }
                                           },
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.send,
                                             color: Color(0xFF0017FF),
                                             size: 37.0,

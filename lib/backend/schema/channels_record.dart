@@ -6,13 +6,12 @@ import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 
 class ChannelsRecord extends FirestoreRecord {
   ChannelsRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -36,11 +35,23 @@ class ChannelsRecord extends FirestoreRecord {
   String get about => _about ?? '';
   bool hasAbout() => _about != null;
 
+  // "isVerified" field.
+  bool? _isVerified;
+  bool get isVerified => _isVerified ?? false;
+  bool hasIsVerified() => _isVerified != null;
+
+  // "crearedBy" field.
+  DocumentReference? _crearedBy;
+  DocumentReference? get crearedBy => _crearedBy;
+  bool hasCrearedBy() => _crearedBy != null;
+
   void _initializeFields() {
     _chanelname = snapshotData['chanelname'] as String?;
     _image = snapshotData['image'] as String?;
     _following = snapshotData['following'] as bool?;
     _about = snapshotData['about'] as String?;
+    _isVerified = snapshotData['isVerified'] as bool?;
+    _crearedBy = snapshotData['crearedBy'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -82,6 +93,8 @@ Map<String, dynamic> createChannelsRecordData({
   String? image,
   bool? following,
   String? about,
+  bool? isVerified,
+  DocumentReference? crearedBy,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -89,6 +102,8 @@ Map<String, dynamic> createChannelsRecordData({
       'image': image,
       'following': following,
       'about': about,
+      'isVerified': isVerified,
+      'crearedBy': crearedBy,
     }.withoutNulls,
   );
 
@@ -103,12 +118,20 @@ class ChannelsRecordDocumentEquality implements Equality<ChannelsRecord> {
     return e1?.chanelname == e2?.chanelname &&
         e1?.image == e2?.image &&
         e1?.following == e2?.following &&
-        e1?.about == e2?.about;
+        e1?.about == e2?.about &&
+        e1?.isVerified == e2?.isVerified &&
+        e1?.crearedBy == e2?.crearedBy;
   }
 
   @override
-  int hash(ChannelsRecord? e) => const ListEquality()
-      .hash([e?.chanelname, e?.image, e?.following, e?.about]);
+  int hash(ChannelsRecord? e) => const ListEquality().hash([
+        e?.chanelname,
+        e?.image,
+        e?.following,
+        e?.about,
+        e?.isVerified,
+        e?.crearedBy
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ChannelsRecord;

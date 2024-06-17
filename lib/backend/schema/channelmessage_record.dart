@@ -6,13 +6,12 @@ import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 
 class ChannelmessageRecord extends FirestoreRecord {
   ChannelmessageRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -31,12 +30,18 @@ class ChannelmessageRecord extends FirestoreRecord {
   DateTime? get messagetime => _messagetime;
   bool hasMessagetime() => _messagetime != null;
 
+  // "writersName" field.
+  DocumentReference? _writersName;
+  DocumentReference? get writersName => _writersName;
+  bool hasWritersName() => _writersName != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _mesage = snapshotData['mesage'] as String?;
     _image = snapshotData['image'] as String?;
     _messagetime = snapshotData['messagetime'] as DateTime?;
+    _writersName = snapshotData['writersName'] as DocumentReference?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -44,8 +49,8 @@ class ChannelmessageRecord extends FirestoreRecord {
           ? parent.collection('channelmessage')
           : FirebaseFirestore.instance.collectionGroup('channelmessage');
 
-  static DocumentReference createDoc(DocumentReference parent) =>
-      parent.collection('channelmessage').doc();
+  static DocumentReference createDoc(DocumentReference parent, {String? id}) =>
+      parent.collection('channelmessage').doc(id);
 
   static Stream<ChannelmessageRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map((s) => ChannelmessageRecord.fromSnapshot(s));
@@ -82,12 +87,14 @@ Map<String, dynamic> createChannelmessageRecordData({
   String? mesage,
   String? image,
   DateTime? messagetime,
+  DocumentReference? writersName,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'mesage': mesage,
       'image': image,
       'messagetime': messagetime,
+      'writersName': writersName,
     }.withoutNulls,
   );
 
@@ -102,12 +109,13 @@ class ChannelmessageRecordDocumentEquality
   bool equals(ChannelmessageRecord? e1, ChannelmessageRecord? e2) {
     return e1?.mesage == e2?.mesage &&
         e1?.image == e2?.image &&
-        e1?.messagetime == e2?.messagetime;
+        e1?.messagetime == e2?.messagetime &&
+        e1?.writersName == e2?.writersName;
   }
 
   @override
-  int hash(ChannelmessageRecord? e) =>
-      const ListEquality().hash([e?.mesage, e?.image, e?.messagetime]);
+  int hash(ChannelmessageRecord? e) => const ListEquality()
+      .hash([e?.mesage, e?.image, e?.messagetime, e?.writersName]);
 
   @override
   bool isValidKey(Object? o) => o is ChannelmessageRecord;

@@ -60,3 +60,20 @@ String? greetAccordingToTime(DateTime? currentTime) {
     return 'Good evening';
   }
 }
+
+FFUploadedFile? takePictureAndReturnFile(String? base64Img) {
+  // Simple custom function to take image from the CameraPhoto widget and return image as UploadedFile
+  if (base64Img == null) {
+    return null;
+  }
+  final bytes = base64.decode(base64Img.split(',').last);
+  final fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+  return FFUploadedFile(name: fileName);
+}
+
+FFUploadedFile? base64toFile(String base64Img) {
+  // convert base 64 to image file directly to png
+  final bytes = base64Decode(base64Img);
+  final file = FFUploadedFile(bytes: bytes);
+  return file;
+}

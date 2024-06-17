@@ -6,13 +6,12 @@ import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 
 class AppointmentsRecord extends FirestoreRecord {
   AppointmentsRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -46,11 +45,6 @@ class AppointmentsRecord extends FirestoreRecord {
   String get appointmentEmail => _appointmentEmail ?? '';
   bool hasAppointmentEmail() => _appointmentEmail != null;
 
-  // "institution" field.
-  String? _institution;
-  String get institution => _institution ?? '';
-  bool hasInstitution() => _institution != null;
-
   void _initializeFields() {
     _appointmentName = snapshotData['appointmentName'] as String?;
     _appointmentDescription = snapshotData['appointmentDescription'] as String?;
@@ -59,7 +53,6 @@ class AppointmentsRecord extends FirestoreRecord {
     _appointmentTime = snapshotData['appointmentTime'] as DateTime?;
     _appointmentType = snapshotData['appointmentType'] as String?;
     _appointmentEmail = snapshotData['appointmentEmail'] as String?;
-    _institution = snapshotData['institution'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -103,7 +96,6 @@ Map<String, dynamic> createAppointmentsRecordData({
   DateTime? appointmentTime,
   String? appointmentType,
   String? appointmentEmail,
-  String? institution,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -113,7 +105,6 @@ Map<String, dynamic> createAppointmentsRecordData({
       'appointmentTime': appointmentTime,
       'appointmentType': appointmentType,
       'appointmentEmail': appointmentEmail,
-      'institution': institution,
     }.withoutNulls,
   );
 
@@ -131,8 +122,7 @@ class AppointmentsRecordDocumentEquality
         e1?.appointmentPerson == e2?.appointmentPerson &&
         e1?.appointmentTime == e2?.appointmentTime &&
         e1?.appointmentType == e2?.appointmentType &&
-        e1?.appointmentEmail == e2?.appointmentEmail &&
-        e1?.institution == e2?.institution;
+        e1?.appointmentEmail == e2?.appointmentEmail;
   }
 
   @override
@@ -142,8 +132,7 @@ class AppointmentsRecordDocumentEquality
         e?.appointmentPerson,
         e?.appointmentTime,
         e?.appointmentType,
-        e?.appointmentEmail,
-        e?.institution
+        e?.appointmentEmail
       ]);
 
   @override

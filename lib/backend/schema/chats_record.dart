@@ -6,13 +6,12 @@ import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 
 class ChatsRecord extends FirestoreRecord {
   ChatsRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -51,21 +50,6 @@ class ChatsRecord extends FirestoreRecord {
   bool get messageSeen => _messageSeen ?? false;
   bool hasMessageSeen() => _messageSeen != null;
 
-  // "spec" field.
-  DocumentReference? _spec;
-  DocumentReference? get spec => _spec;
-  bool hasSpec() => _spec != null;
-
-  // "loca" field.
-  DocumentReference? _loca;
-  DocumentReference? get loca => _loca;
-  bool hasLoca() => _loca != null;
-
-  // "schedulability" field.
-  DocumentReference? _schedulability;
-  DocumentReference? get schedulability => _schedulability;
-  bool hasSchedulability() => _schedulability != null;
-
   void _initializeFields() {
     _user = snapshotData['user'] as DocumentReference?;
     _userA = snapshotData['user_a'] as DocumentReference?;
@@ -74,9 +58,6 @@ class ChatsRecord extends FirestoreRecord {
     _lastMessageTime = snapshotData['last_message_time'] as DateTime?;
     _image = snapshotData['image'] as String?;
     _messageSeen = snapshotData['message_seen'] as bool?;
-    _spec = snapshotData['spec'] as DocumentReference?;
-    _loca = snapshotData['loca'] as DocumentReference?;
-    _schedulability = snapshotData['schedulability'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -120,9 +101,6 @@ Map<String, dynamic> createChatsRecordData({
   DateTime? lastMessageTime,
   String? image,
   bool? messageSeen,
-  DocumentReference? spec,
-  DocumentReference? loca,
-  DocumentReference? schedulability,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -133,9 +111,6 @@ Map<String, dynamic> createChatsRecordData({
       'last_message_time': lastMessageTime,
       'image': image,
       'message_seen': messageSeen,
-      'spec': spec,
-      'loca': loca,
-      'schedulability': schedulability,
     }.withoutNulls,
   );
 
@@ -153,10 +128,7 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e1?.lastMessage == e2?.lastMessage &&
         e1?.lastMessageTime == e2?.lastMessageTime &&
         e1?.image == e2?.image &&
-        e1?.messageSeen == e2?.messageSeen &&
-        e1?.spec == e2?.spec &&
-        e1?.loca == e2?.loca &&
-        e1?.schedulability == e2?.schedulability;
+        e1?.messageSeen == e2?.messageSeen;
   }
 
   @override
@@ -167,10 +139,7 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e?.lastMessage,
         e?.lastMessageTime,
         e?.image,
-        e?.messageSeen,
-        e?.spec,
-        e?.loca,
-        e?.schedulability
+        e?.messageSeen
       ]);
 
   @override

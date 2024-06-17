@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>596821974378-phnfafu6ftosd6fnnuf4amkkt4aear4h.apps.googleusercontent.com</string>
+	<string>174250027381-lstiv3ajiqncecquf8pu900u18cdh0pq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.596821974378-phnfafu6ftosd6fnnuf4amkkt4aear4h</string>
+	<string>com.googleusercontent.apps.174250027381-lstiv3ajiqncecquf8pu900u18cdh0pq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>174250027381-14nqoe7als7sqsbes6clejpqfc1pg7pm.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAKyGopSErcWyOF9wC0hzxo4Ye1B0FKgHI</string>
+	<string>AIzaSyD-GB0IaGaR3Kl9oVcixm-xVyI-k_lziRU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>596821974378</string>
+	<string>174250027381</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.flutterflow.healthai</string>
+	<string>com.flutterflow.Tuongee</string>
 	<key>PROJECT_ID</key>
-	<string>newstart-637b5</string>
+	<string>newstart-d676d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>newstart-637b5.appspot.com</string>
+	<string>newstart-d676d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:596821974378:ios:a6c43fa99a381e2d301913</string>
+	<string>1:174250027381:ios:942ef6f3e188ed5a79cb3c</string>
 </dict>
 </plist>

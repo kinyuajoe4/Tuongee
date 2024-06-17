@@ -1,22 +1,18 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'moreaboutchanel_model.dart';
 export 'moreaboutchanel_model.dart';
 
 class MoreaboutchanelWidget extends StatefulWidget {
   const MoreaboutchanelWidget({
-    Key? key,
+    super.key,
     this.name,
     this.locality,
     this.schedule,
     this.image,
     this.about,
-  }) : super(key: key);
+  });
 
   final String? name;
   final String? locality;
@@ -25,7 +21,7 @@ class MoreaboutchanelWidget extends StatefulWidget {
   final String? about;
 
   @override
-  _MoreaboutchanelWidgetState createState() => _MoreaboutchanelWidgetState();
+  State<MoreaboutchanelWidget> createState() => _MoreaboutchanelWidgetState();
 }
 
 class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
@@ -55,7 +51,7 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -66,15 +62,15 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: 160.0,
               child: Stack(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.00, -1.00),
+                    alignment: const AlignmentDirectional(0.0, -1.0),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(0.0),
                         bottomRight: Radius.circular(0.0),
                         topLeft: Radius.circular(8.0),
@@ -89,10 +85,10 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.00, 1.00),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 24.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,7 +103,7 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   widget.schedule!,
@@ -117,6 +113,7 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
                                         fontFamily: 'Outfit',
                                         color: FlutterFlowTheme.of(context)
                                             .secondary,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
                                       ),
                                 ),
@@ -124,7 +121,7 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 12.0),
                             child: Container(
                               width: 40.0,
@@ -136,9 +133,9 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
                                     FlutterFlowTheme.of(context).secondary,
                                     FlutterFlowTheme.of(context).alternate
                                   ],
-                                  stops: [0.0, 0.3, 1.0],
-                                  begin: AlignmentDirectional(1.0, 0.98),
-                                  end: AlignmentDirectional(-1.0, -0.98),
+                                  stops: const [0.0, 0.3, 1.0],
+                                  begin: const AlignmentDirectional(1.0, 0.98),
+                                  end: const AlignmentDirectional(-1.0, -0.98),
                                 ),
                                 shape: BoxShape.circle,
                               ),
@@ -149,10 +146,9 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-0.93, -1.08),
+                    alignment: const AlignmentDirectional(-0.93, -1.08),
                     child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 2.0, 2.0),
+                      padding: const EdgeInsets.all(2.0),
                       child: Container(
                         width: 40.0,
                         height: 40.0,
@@ -185,13 +181,16 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
                   child: Text(
                     widget.name!,
-                    style: FlutterFlowTheme.of(context).titleLarge,
+                    style: FlutterFlowTheme.of(context).titleLarge.override(
+                          fontFamily: 'Poppins',
+                          letterSpacing: 0.0,
+                        ),
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 3.0, 0.0, 0.0),
                   child: Icon(
                     Icons.verified_outlined,
@@ -202,10 +201,13 @@ class _MoreaboutchanelWidgetState extends State<MoreaboutchanelWidget> {
               ],
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 0.0),
               child: Text(
                 ' A trained and verified  healthcare professional who has undergone rigorous education, clinical training, and examination to achieve expertise as a${widget.about}',
-                style: FlutterFlowTheme.of(context).labelMedium,
+                style: FlutterFlowTheme.of(context).labelMedium.override(
+                      fontFamily: 'Poppins',
+                      letterSpacing: 0.0,
+                    ),
               ),
             ),
           ],

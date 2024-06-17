@@ -2,19 +2,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'nopage_model.dart';
 export 'nopage_model.dart';
 
 class NopageWidget extends StatefulWidget {
-  const NopageWidget({Key? key}) : super(key: key);
+  const NopageWidget({super.key});
 
   @override
-  _NopageWidgetState createState() => _NopageWidgetState();
+  State<NopageWidget> createState() => _NopageWidgetState();
 }
 
 class _NopageWidgetState extends State<NopageWidget> {
@@ -39,15 +35,6 @@ class _NopageWidgetState extends State<NopageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return Title(
         title: 'nopage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -66,7 +53,7 @@ class _NopageWidgetState extends State<NopageWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -89,24 +76,26 @@ class _NopageWidgetState extends State<NopageWidget> {
                           fontFamily: 'Outfit',
                           color: FlutterFlowTheme.of(context).primaryBtnText,
                           fontSize: 32.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                     child: Text(
                       'Under Development',
                       style: FlutterFlowTheme.of(context).titleSmall.override(
                             fontFamily: 'Outfit',
                             color: FlutterFlowTheme.of(context).primaryBtnText,
                             fontSize: 20.0,
+                            letterSpacing: 0.0,
                             fontWeight: FontWeight.w300,
                           ),
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 44.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 44.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         context.safePop();
@@ -114,17 +103,18 @@ class _NopageWidgetState extends State<NopageWidget> {
                       text: 'Go Back',
                       options: FFButtonOptions(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primaryBtnText,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Outfit',
                                   color: FlutterFlowTheme.of(context).secondary,
+                                  letterSpacing: 0.0,
                                 ),
                         elevation: 3.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),

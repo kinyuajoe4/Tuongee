@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'lat_lng.dart' as latlng;
 
@@ -30,6 +34,29 @@ enum GoogleMarkerColor {
   rose,
 }
 
+@immutable
+class MarkerImage {
+  const MarkerImage({
+    required this.imagePath,
+    required this.isAssetImage,
+    this.size = 20.0,
+  });
+  final String imagePath;
+  final bool isAssetImage;
+  final double size;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is MarkerImage &&
+          imagePath == other.imagePath &&
+          isAssetImage == other.isAssetImage &&
+          size == other.size);
+
+  @override
+  int get hashCode => Object.hash(imagePath, isAssetImage, size);
+}
+
 class FlutterFlowMarker {
   const FlutterFlowMarker(this.markerId, this.location, [this.onTap]);
   final String markerId;
@@ -44,6 +71,7 @@ class FlutterFlowGoogleMap extends StatefulWidget {
     this.initialLocation,
     this.markers = const [],
     this.markerColor = GoogleMarkerColor.red,
+    this.markerImage,
     this.mapType = MapType.normal,
     this.style = GoogleMapStyle.standard,
     this.initialZoom = 12,
@@ -55,14 +83,15 @@ class FlutterFlowGoogleMap extends StatefulWidget {
     this.showMapToolbar = false,
     this.showTraffic = false,
     this.centerMapOnMarkerTap = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Completer<GoogleMapController> controller;
   final Function(latlng.LatLng)? onCameraIdle;
   final latlng.LatLng? initialLocation;
   final Iterable<FlutterFlowMarker> markers;
   final GoogleMarkerColor markerColor;
+  final MarkerImage? markerImage;
   final MapType mapType;
   final GoogleMapStyle style;
   final double initialZoom;
@@ -85,7 +114,53 @@ class _FlutterFlowGoogleMapState extends State<FlutterFlowGoogleMap> {
       widget.initialLocation?.toGoogleMaps() ?? const LatLng(0.0, 0.0);
 
   late Completer<GoogleMapController> _controller;
+  BitmapDescriptor? _markerDescriptor;
   late LatLng currentMapCenter;
+
+  void initializeMarkerBitmap() {
+    final markerImage = widget.markerImage;
+
+    if (markerImage == null) {
+      _markerDescriptor = BitmapDescriptor.defaultMarkerWithHue(
+        googleMarkerColorMap[widget.markerColor]!,
+      );
+      return;
+    }
+
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final markerImageSize = Size.square(markerImage.size);
+      var imageProvider = markerImage.isAssetImage
+          ? Image.asset(markerImage.imagePath).image
+          : CachedNetworkImageProvider(markerImage.imagePath);
+      if (!kIsWeb) {
+        // workaround for https://github.com/flutter/flutter/issues/34657 to
+        // enable marker resizing on Android and iOS.
+        final targetHeight =
+            (markerImage.size * MediaQuery.of(context).devicePixelRatio)
+                .toInt();
+        imageProvider = ResizeImage(
+          imageProvider,
+          height: targetHeight,
+          policy: ResizeImagePolicy.fit,
+          allowUpscaling: true,
+        );
+      }
+      final imageConfiguration =
+          createLocalImageConfiguration(context, size: markerImageSize);
+      imageProvider
+          .resolve(imageConfiguration)
+          .addListener(ImageStreamListener((img, _) async {
+        final bytes = await img.image.toByteData(format: ImageByteFormat.png);
+        if (bytes != null && mounted) {
+          _markerDescriptor = BitmapDescriptor.fromBytes(
+            bytes.buffer.asUint8List(),
+            size: markerImageSize,
+          );
+          setState(() {});
+        }
+      }));
+    });
+  }
 
   void onCameraIdle() => widget.onCameraIdle?.call(currentMapCenter.toLatLng());
 
@@ -94,52 +169,61 @@ class _FlutterFlowGoogleMapState extends State<FlutterFlowGoogleMap> {
     super.initState();
     currentMapCenter = initialPosition;
     _controller = widget.controller;
+    initializeMarkerBitmap();
+  }
+
+  @override
+  void didUpdateWidget(FlutterFlowGoogleMap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Rebuild the marker bitmap if the marker image changes.
+    if (widget.markerImage != oldWidget.markerImage) {
+      initializeMarkerBitmap();
+      setState(() {});
+    }
   }
 
   @override
   Widget build(BuildContext context) => AbsorbPointer(
-        absorbing: !widget.allowInteraction,
-        child: GoogleMap(
-          onMapCreated: (controller) async {
-            _controller.complete(controller);
-            await controller.setMapStyle(googleMapStyleStrings[widget.style]);
-          },
-          onCameraIdle: onCameraIdle,
-          onCameraMove: (position) => currentMapCenter = position.target,
-          initialCameraPosition: CameraPosition(
-            target: initialPosition,
-            zoom: initialZoom,
-          ),
-          mapType: widget.mapType,
-          zoomGesturesEnabled: widget.allowZoom,
-          zoomControlsEnabled: widget.showZoomControls,
-          myLocationEnabled: widget.showLocation,
-          compassEnabled: widget.showCompass,
-          mapToolbarEnabled: widget.showMapToolbar,
-          trafficEnabled: widget.showTraffic,
-          markers: widget.markers
-              .map(
-                (m) => Marker(
-                  markerId: MarkerId(m.markerId),
-                  position: m.location.toGoogleMaps(),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      googleMarkerColorMap[widget.markerColor]!),
-                  onTap: () async {
-                    await m.onTap?.call();
-                    if (widget.centerMapOnMarkerTap) {
-                      final controller = await _controller.future;
-                      await controller.animateCamera(
-                        CameraUpdate.newLatLng(m.location.toGoogleMaps()),
-                      );
-                      currentMapCenter = m.location.toGoogleMaps();
-                      onCameraIdle();
-                    }
-                  },
-                ),
-              )
-              .toSet(),
+      absorbing: !widget.allowInteraction,
+      child: GoogleMap(
+        onMapCreated: (controller) async {
+          _controller.complete(controller);
+          await controller.setMapStyle(googleMapStyleStrings[widget.style]);
+        },
+        onCameraIdle: onCameraIdle,
+        onCameraMove: (position) => currentMapCenter = position.target,
+        initialCameraPosition: CameraPosition(
+          target: initialPosition,
+          zoom: initialZoom,
         ),
-      );
+        mapType: widget.mapType,
+        zoomGesturesEnabled: widget.allowZoom,
+        zoomControlsEnabled: widget.showZoomControls,
+        myLocationEnabled: widget.showLocation,
+        compassEnabled: widget.showCompass,
+        mapToolbarEnabled: widget.showMapToolbar,
+        trafficEnabled: widget.showTraffic,
+        markers: widget.markers
+            .map(
+              (m) => Marker(
+                markerId: MarkerId(m.markerId),
+                position: m.location.toGoogleMaps(),
+                icon: _markerDescriptor ?? BitmapDescriptor.defaultMarker,
+                onTap: () async {
+                  if (widget.centerMapOnMarkerTap) {
+                    final controller = await _controller.future;
+                    await controller.animateCamera(
+                      CameraUpdate.newLatLng(m.location.toGoogleMaps()),
+                    );
+                    currentMapCenter = m.location.toGoogleMaps();
+                    onCameraIdle();
+                  }
+                  await m.onTap?.call();
+                },
+              ),
+            )
+            .toSet(),
+      ));
 }
 
 extension ToGoogleMapsLatLng on latlng.LatLng {

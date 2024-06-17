@@ -1,17 +1,7 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/components/empty_list/empty_list_widget.dart';
 import '/pages/components/norecords/norecords_widget.dart';
 import 'categoriespage_widget.dart' show CategoriespageWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class CategoriespageModel extends FlutterFlowModel<CategoriespageWidget> {
   ///  State fields for stateful widgets in this page.
@@ -39,8 +29,7 @@ class CategoriespageModel extends FlutterFlowModel<CategoriespageWidget> {
   // Model for norecords component.
   late NorecordsModel norecordsModel6;
 
-  /// Initialization and disposal methods.
-
+  @override
   void initState(BuildContext context) {
     norecordsModel1 = createModel(context, () => NorecordsModel());
     norecordsModel2 = createModel(context, () => NorecordsModel());
@@ -50,6 +39,7 @@ class CategoriespageModel extends FlutterFlowModel<CategoriespageWidget> {
     norecordsModel6 = createModel(context, () => NorecordsModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     textFieldFocusNode?.dispose();
@@ -63,8 +53,4 @@ class CategoriespageModel extends FlutterFlowModel<CategoriespageWidget> {
     norecordsModel5.dispose();
     norecordsModel6.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

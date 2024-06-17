@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -11,7 +11,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start OpenAI ChatGPT Group Code
 
 class OpenAIChatGPTGroup {
-  static String baseUrl = 'https://api.openai.com/v1';
+  static String getBaseUrl() => 'https://api.openai.com/v1';
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
   };
@@ -21,21 +21,23 @@ class OpenAIChatGPTGroup {
 class SendFullPromptCall {
   Future<ApiCallResponse> call({
     String? apiKey = '',
-    dynamic? promptJson,
+    dynamic promptJson,
   }) async {
+    final baseUrl = OpenAIChatGPTGroup.getBaseUrl();
+
     final prompt = _serializeJson(promptJson);
     final ffApiRequestBody = '''
 {
   "model": "gpt-3.5-turbo",
-  "messages": ${prompt}
+  "messages": $prompt
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Send Full Prompt',
-      apiUrl: '${OpenAIChatGPTGroup.baseUrl}/chat/completions',
+      apiUrl: '$baseUrl/chat/completions',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer sk-1N15gEjz',
+        'Authorization': 'Bearer',
       },
       params: {},
       body: ffApiRequestBody,
@@ -44,6 +46,7 @@ class SendFullPromptCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -70,13 +73,14 @@ class OpenAimodelCall {
       apiUrl: 'https://api.openai.com/v1/models',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer sk-1N15gEjz',
+        'Authorization': 'Bearer',
       },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -88,16 +92,15 @@ class TextcompletionCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "model": "${model}",
-  "prompt": "${prompt}"
+  "model": "$model",
+  "prompt": "$prompt"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'textcompletion',
       apiUrl: 'https://api.openai.com/v1/completions',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization':
-            'Bearer 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',
+        'Authorization': 'Bearer',
       },
       params: {},
       body: ffApiRequestBody,
@@ -106,6 +109,7 @@ class TextcompletionCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -135,16 +139,16 @@ class TexteditCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "model": "${model}",
-  "input": "${input}",
-"instruction": "${instruction}"
+  "model": "$model",
+  "input": "$input",
+"instruction": "$instruction"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'textedit',
       apiUrl: 'https://api.openai.com/v1/edits',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer sk-1N15gEjz',
+        'Authorization': 'Bearer',
       },
       params: {},
       body: ffApiRequestBody,
@@ -153,6 +157,7 @@ class TexteditCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -173,14 +178,14 @@ class ImagegenerationCall {
     final ffApiRequestBody = '''
 {
   
-  "prompt": "${prompt}"
+  "prompt": "$prompt"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'imagegeneration',
       apiUrl: 'https://api.openai.com/v1/images/generations',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer sk-1N15gEjz',
+        'Authorization': 'Bearer',
       },
       params: {},
       body: ffApiRequestBody,
@@ -189,6 +194,7 @@ class ImagegenerationCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -214,11 +220,21 @@ class ApiPagingParams {
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
 }
 
+String _toEncodable(dynamic item) {
+  if (item is DocumentReference) {
+    return item.path;
+  }
+  return item;
+}
+
 String _serializeList(List? list) {
   list ??= <String>[];
   try {
-    return json.encode(list);
+    return json.encode(list, toEncodable: _toEncodable);
   } catch (_) {
+    if (kDebugMode) {
+      print("List serialization failed. Returning empty list.");
+    }
     return '[]';
   }
 }
@@ -226,8 +242,11 @@ String _serializeList(List? list) {
 String _serializeJson(dynamic jsonVar, [bool isList = false]) {
   jsonVar ??= (isList ? [] : {});
   try {
-    return json.encode(jsonVar);
+    return json.encode(jsonVar, toEncodable: _toEncodable);
   } catch (_) {
+    if (kDebugMode) {
+      print("Json serialization failed. Returning empty json.");
+    }
     return isList ? '[]' : '{}';
   }
 }

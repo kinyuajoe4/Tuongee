@@ -2,18 +2,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'display_model.dart';
 export 'display_model.dart';
 
 class DisplayWidget extends StatefulWidget {
-  const DisplayWidget({Key? key}) : super(key: key);
+  const DisplayWidget({super.key});
 
   @override
-  _DisplayWidgetState createState() => _DisplayWidgetState();
+  State<DisplayWidget> createState() => _DisplayWidgetState();
 }
 
 class _DisplayWidgetState extends State<DisplayWidget> {
@@ -43,7 +39,7 @@ class _DisplayWidgetState extends State<DisplayWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
       child: Container(
         width: 300.0,
         height: 300.0,
@@ -56,7 +52,7 @@ class _DisplayWidgetState extends State<DisplayWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(125.0, 12.0, 0.0, 3.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(125.0, 12.0, 0.0, 3.0),
               child: Container(
                 width: 100.0,
                 height: 100.0,
@@ -72,30 +68,33 @@ class _DisplayWidgetState extends State<DisplayWidget> {
                   }(),
                 ),
                 decoration: BoxDecoration(
-                  color: Color(0xFF040404),
+                  color: const Color(0xFF040404),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: Image.asset(
-                      'assets/images/bot.jpg',
+                    image: Image.network(
+                      'https://cdn.vectorstock.com/i/preview-1x/36/64/flat-chat-bot-for-web-design-isometric-vector-42563664.webp',
                     ).image,
                   ),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       blurRadius: 3.0,
                       color: Color(0xFF272737),
-                      offset: Offset(0.0, 1.0),
+                      offset: Offset(
+                        0.0,
+                        1.0,
+                      ),
                     )
                   ],
                   borderRadius: BorderRadius.circular(12.0),
                   border: Border.all(
-                    color: Color(0xB91726D0),
+                    color: const Color(0xB91726D0),
                     width: 1.0,
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10.0, 4.0, 10.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 4.0, 10.0, 0.0),
               child: Container(
                 width: 300.0,
                 decoration: BoxDecoration(
@@ -106,14 +105,14 @@ class _DisplayWidgetState extends State<DisplayWidget> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 0.0),
                   child: Stack(
                     children: [
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 3.0, 10.0, 0.0, 0.0),
                             child: SelectionArea(
                                 child: AutoSizeText(
@@ -122,14 +121,16 @@ class _DisplayWidgetState extends State<DisplayWidget> {
                                   .titleMedium
                                   .override(
                                     fontFamily: 'Outfit',
-                                    color: FlutterFlowTheme.of(context).success,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
                                     lineHeight: 1.5,
                                   ),
                             )),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: SelectionArea(
                                 child: AutoSizeText(
@@ -138,8 +139,9 @@ class _DisplayWidgetState extends State<DisplayWidget> {
                                   .titleMedium
                                   .override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFF0055FF),
+                                    color: const Color(0xFF0055FF),
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
                                     lineHeight: 1.5,
                                   ),
                             )),
@@ -148,17 +150,19 @@ class _DisplayWidgetState extends State<DisplayWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(3.0, 30.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(3.0, 30.0, 0.0, 0.0),
                         child: SelectionArea(
                             child: AutoSizeText(
                           ' is able to converse and interact with human users using written  languages🤯',
-                          style:
-                              FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Outfit',
-                                    color: FlutterFlowTheme.of(context).success,
-                                    fontSize: 16.0,
-                                    lineHeight: 1.5,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                fontFamily: 'Outfit',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16.0,
+                                letterSpacing: 0.0,
+                                lineHeight: 1.5,
+                              ),
                         )),
                       ),
                     ],

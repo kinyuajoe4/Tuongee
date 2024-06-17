@@ -1,18 +1,14 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'norecords_copy_model.dart';
 export 'norecords_copy_model.dart';
 
 class NorecordsCopyWidget extends StatefulWidget {
-  const NorecordsCopyWidget({Key? key}) : super(key: key);
+  const NorecordsCopyWidget({super.key});
 
   @override
-  _NorecordsCopyWidgetState createState() => _NorecordsCopyWidgetState();
+  State<NorecordsCopyWidget> createState() => _NorecordsCopyWidgetState();
 }
 
 class _NorecordsCopyWidgetState extends State<NorecordsCopyWidget> {
@@ -51,7 +47,7 @@ class _NorecordsCopyWidgetState extends State<NorecordsCopyWidget> {
           size: 90.0,
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -62,6 +58,7 @@ class _NorecordsCopyWidgetState extends State<NorecordsCopyWidget> {
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).secondaryText,
+                      letterSpacing: 0.0,
                     ),
               ),
             ],

@@ -1,19 +1,15 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'noresults_model.dart';
 export 'noresults_model.dart';
 
 class NoresultsWidget extends StatefulWidget {
-  const NoresultsWidget({Key? key}) : super(key: key);
+  const NoresultsWidget({super.key});
 
   @override
-  _NoresultsWidgetState createState() => _NoresultsWidgetState();
+  State<NoresultsWidget> createState() => _NoresultsWidgetState();
 }
 
 class _NoresultsWidgetState extends State<NoresultsWidget> {
@@ -52,7 +48,7 @@ class _NoresultsWidgetState extends State<NoresultsWidget> {
           size: 90.0,
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -63,6 +59,7 @@ class _NoresultsWidgetState extends State<NoresultsWidget> {
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).secondaryText,
+                      letterSpacing: 0.0,
                     ),
               ),
             ],

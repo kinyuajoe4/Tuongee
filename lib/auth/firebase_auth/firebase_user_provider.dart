@@ -5,9 +5,10 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class TuongeeFirebaseUser extends BaseAuthUser {
-  TuongeeFirebaseUser(this.user);
+class TuongeeProjectFirebaseUser extends BaseAuthUser {
+  TuongeeProjectFirebaseUser(this.user);
   User? user;
+  @override
   bool get loggedIn => user != null;
 
   @override
@@ -53,17 +54,18 @@ class TuongeeFirebaseUser extends BaseAuthUser {
 
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
-  static BaseAuthUser fromFirebaseUser(User? user) => TuongeeFirebaseUser(user);
+  static BaseAuthUser fromFirebaseUser(User? user) =>
+      TuongeeProjectFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> tuongeeFirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> tuongeeProjectFirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = TuongeeFirebaseUser(user);
+        currentUser = TuongeeProjectFirebaseUser(user);
         return currentUser!;
       },
     );

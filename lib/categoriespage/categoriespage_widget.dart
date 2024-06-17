@@ -2,23 +2,19 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/components/empty_list/empty_list_widget.dart';
 import '/pages/components/norecords/norecords_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'categoriespage_model.dart';
 export 'categoriespage_model.dart';
 
 class CategoriespageWidget extends StatefulWidget {
-  const CategoriespageWidget({Key? key}) : super(key: key);
+  const CategoriespageWidget({super.key});
 
   @override
-  _CategoriespageWidgetState createState() => _CategoriespageWidgetState();
+  State<CategoriespageWidget> createState() => _CategoriespageWidgetState();
 }
 
 class _CategoriespageWidgetState extends State<CategoriespageWidget>
@@ -52,15 +48,6 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return Title(
         title: 'categoriespage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -74,22 +61,31 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 8.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 8.0),
                       child: TextFormField(
                         controller: _model.textController,
                         focusNode: _model.textFieldFocusNode,
+                        autofocus: false,
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Search here  ',
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Poppins',
+                                    letterSpacing: 0.0,
+                                  ),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Poppins',
+                                    letterSpacing: 0.0,
+                                  ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).secondaryText,
@@ -118,14 +114,17 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                             ),
                             borderRadius: BorderRadius.circular(12.0),
                           ),
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
                               20.0, 0.0, 0.0, 0.0),
                           suffixIcon: Icon(
                             Icons.search_rounded,
                             color: FlutterFlowTheme.of(context).secondaryText,
                           ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Outfit',
+                              letterSpacing: 0.0,
+                            ),
                         cursorColor: FlutterFlowTheme.of(context).primary,
                         validator:
                             _model.textControllerValidator.asValidator(context),
@@ -137,37 +136,45 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 0.0),
                       child: Text(
                         'Categories',
-                        style: FlutterFlowTheme.of(context).labelMedium,
+                        style:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Poppins',
+                                  letterSpacing: 0.0,
+                                ),
                       ),
                     ),
                     Expanded(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                         child: Column(
                           children: [
                             Align(
-                              alignment: Alignment(-1.0, 0),
+                              alignment: const Alignment(-1.0, 0),
                               child: TabBar(
                                 isScrollable: true,
                                 labelColor:
                                     FlutterFlowTheme.of(context).success,
                                 unselectedLabelColor:
                                     FlutterFlowTheme.of(context).primary,
-                                labelPadding: EdgeInsetsDirectional.fromSTEB(
+                                labelPadding: const EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelLarge,
-                                unselectedLabelStyle: TextStyle(),
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelLarge
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      letterSpacing: 0.0,
+                                    ),
+                                unselectedLabelStyle: const TextStyle(),
                                 indicatorColor:
                                     FlutterFlowTheme.of(context).secondary,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 16.0, 0.0),
                                 tabs: [
-                                  Tab(
+                                  const Tab(
                                     text: 'Appointment',
                                     icon: Icon(
                                       Icons.calendar_month_sharp,
@@ -182,29 +189,40 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                           FlutterFlowTheme.of(context).success,
                                     ),
                                   ),
-                                  Tab(
+                                  const Tab(
                                     text: 'Family',
                                     icon: Icon(
                                       Icons.family_restroom_rounded,
                                     ),
                                   ),
-                                  Tab(
+                                  const Tab(
                                     text: 'Vaccine',
                                     icon: Icon(
                                       Icons.vaccines_rounded,
                                     ),
                                   ),
-                                  Tab(
+                                  const Tab(
                                     text: 'X-Ray',
                                   ),
-                                  Tab(
+                                  const Tab(
                                     text: 'Dentisry',
                                   ),
-                                  Tab(
+                                  const Tab(
                                     text: 'Wellness',
                                   ),
                                 ],
                                 controller: _model.tabBarController,
+                                onTap: (i) async {
+                                  [
+                                    () async {},
+                                    () async {},
+                                    () async {},
+                                    () async {},
+                                    () async {},
+                                    () async {},
+                                    () async {}
+                                  ][i]();
+                                },
                               ),
                             ),
                             Expanded(
@@ -249,7 +267,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                 snapshot.data!;
                                             if (listViewAppointmentsRecordList
                                                 .isEmpty) {
-                                              return Center(
+                                              return const Center(
                                                 child: EmptyListWidget(),
                                               );
                                             }
@@ -266,7 +284,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                     listViewAppointmentsRecordList[
                                                         listViewIndex];
                                                 return Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(16.0, 5.0, 16.0,
                                                           12.0),
                                                   child: StreamBuilder<
@@ -330,13 +348,15 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .lineColor,
-                                                            boxShadow: [
+                                                            boxShadow: const [
                                                               BoxShadow(
                                                                 blurRadius: 4.0,
                                                                 color: Color(
                                                                     0x230E151B),
                                                                 offset: Offset(
-                                                                    0.0, 2.0),
+                                                                  0.0,
+                                                                  2.0,
+                                                                ),
                                                               )
                                                             ],
                                                             borderRadius:
@@ -346,12 +366,8 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        12.0,
-                                                                        12.0,
-                                                                        12.0,
-                                                                        12.0),
+                                                                const EdgeInsets.all(
+                                                                    12.0),
                                                             child: Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
@@ -371,7 +387,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                     Expanded(
                                                                       child:
                                                                           Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             4.0,
                                                                             0.0,
                                                                             0.0,
@@ -380,8 +396,12 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                             Text(
                                                                           listViewAppointmentsRecord
                                                                               .appointmentType,
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).headlineSmall,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .headlineSmall
+                                                                              .override(
+                                                                                fontFamily: 'Outfit',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -399,7 +419,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                 Expanded(
                                                                   child:
                                                                       Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             4.0,
                                                                             4.0,
@@ -419,6 +439,8 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                                 'Outfit',
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).primaryBtnText,
+                                                                            letterSpacing:
+                                                                                0.0,
                                                                           ),
                                                                     ),
                                                                   ),
@@ -440,7 +462,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                       ),
                                                                       child:
                                                                           Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             8.0,
                                                                             0.0,
                                                                             16.0,
@@ -456,17 +478,18 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                               size: 19.0,
                                                                             ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 4.0, 0.0, 4.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 4.0, 0.0, 4.0),
                                                                               child: Text(
                                                                                 dateTimeFormat('MMMEd', listViewAppointmentsRecord.appointmentTime!),
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Outfit',
                                                                                       fontSize: 11.0,
+                                                                                      letterSpacing: 0.0,
                                                                                     ),
                                                                               ),
                                                                             ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                               child: FaIcon(
                                                                                 FontAwesomeIcons.solidClock,
                                                                                 color: FlutterFlowTheme.of(context).secondaryText,
@@ -474,12 +497,13 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                               ),
                                                                             ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                                                                               child: Text(
                                                                                 dateTimeFormat('jm', appointmentCardAppointmentsRecord.appointmentTime!),
                                                                                 style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                       fontFamily: 'Outfit',
                                                                                       fontSize: 11.0,
+                                                                                      letterSpacing: 0.0,
                                                                                     ),
                                                                               ),
                                                                             ),
@@ -488,7 +512,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                       ),
                                                                     ),
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           30.0,
                                                                           0.0,
                                                                           3.0,
@@ -509,7 +533,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                       ),
                                                                     ),
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           0.0,
@@ -518,13 +542,17 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                           Text(
                                                                         'confirmed',
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
                                                                       ),
                                                                     ),
                                                                   ],
                                                                 ),
                                                                 Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           4.0,
@@ -536,7 +564,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                             .max,
                                                                     children: [
                                                                       Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             5.0,
                                                                             0.0,
                                                                             0.0,
@@ -552,20 +580,20 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             3.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
                                                                         child:
                                                                             Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            appointmentCardAppointmentsRecord.institution,
-                                                                            'not set',
-                                                                          ),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                          'Hello World',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'Outfit',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -590,12 +618,12 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 200.0,
                                         child: wrapWithModel(
                                           model: _model.norecordsModel1,
                                           updateCallback: () => setState(() {}),
-                                          child: NorecordsWidget(),
+                                          child: const NorecordsWidget(),
                                         ),
                                       ),
                                     ],
@@ -604,12 +632,12 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 200.0,
                                         child: wrapWithModel(
                                           model: _model.norecordsModel2,
                                           updateCallback: () => setState(() {}),
-                                          child: NorecordsWidget(),
+                                          child: const NorecordsWidget(),
                                         ),
                                       ),
                                     ],
@@ -618,12 +646,12 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 200.0,
                                         child: wrapWithModel(
                                           model: _model.norecordsModel3,
                                           updateCallback: () => setState(() {}),
-                                          child: NorecordsWidget(),
+                                          child: const NorecordsWidget(),
                                         ),
                                       ),
                                     ],
@@ -632,12 +660,12 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 200.0,
                                         child: wrapWithModel(
                                           model: _model.norecordsModel4,
                                           updateCallback: () => setState(() {}),
-                                          child: NorecordsWidget(),
+                                          child: const NorecordsWidget(),
                                         ),
                                       ),
                                     ],
@@ -646,12 +674,12 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 200.0,
                                         child: wrapWithModel(
                                           model: _model.norecordsModel5,
                                           updateCallback: () => setState(() {}),
-                                          child: NorecordsWidget(),
+                                          child: const NorecordsWidget(),
                                         ),
                                       ),
                                     ],
@@ -660,12 +688,12 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 200.0,
                                         child: wrapWithModel(
                                           model: _model.norecordsModel6,
                                           updateCallback: () => setState(() {}),
-                                          child: NorecordsWidget(),
+                                          child: const NorecordsWidget(),
                                         ),
                                       ),
                                     ],

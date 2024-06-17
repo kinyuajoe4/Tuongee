@@ -4,24 +4,19 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/components/book_appointment/book_appointment_widget.dart';
 import '/pages/components/empty_list/empty_list_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'my_appointments_model.dart';
 export 'my_appointments_model.dart';
 
 class MyAppointmentsWidget extends StatefulWidget {
-  const MyAppointmentsWidget({Key? key}) : super(key: key);
+  const MyAppointmentsWidget({super.key});
 
   @override
-  _MyAppointmentsWidgetState createState() => _MyAppointmentsWidgetState();
+  State<MyAppointmentsWidget> createState() => _MyAppointmentsWidgetState();
 }
 
 class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
@@ -30,46 +25,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'iconOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(77.0, 0.0),
-        ),
-      ],
-    ),
-    'listViewOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(-0.0, 51.0),
-          end: Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(1.0, 1.0),
-          end: Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -81,6 +37,46 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
       length: 2,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
+    animationsMap.addAll({
+      'iconOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 0.0),
+            end: const Offset(77.0, 0.0),
+          ),
+        ],
+      ),
+      'listViewOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(-0.0, 51.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          ScaleEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(1.0, 1.0),
+            end: const Offset(1.0, 1.0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -94,15 +90,6 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return Title(
         title: 'myAppointments',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -114,12 +101,12 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
               await showModalBottomSheet(
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
-                barrierColor: Color(0x00000000),
+                barrierColor: const Color(0x00000000),
                 context: context,
                 builder: (context) {
                   return Padding(
                     padding: MediaQuery.viewInsetsOf(context),
-                    child: Container(
+                    child: SizedBox(
                       height: double.infinity,
                       child: BookAppointmentWidget(
                         userProfile: currentUserReference,
@@ -143,21 +130,26 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(7.0, 10.0, 0.0, 11.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(7.0, 10.0, 0.0, 11.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'schedule',
-                          style: FlutterFlowTheme.of(context).headlineLarge,
+                          style: FlutterFlowTheme.of(context)
+                              .headlineLarge
+                              .override(
+                                fontFamily: 'Poppins',
+                                letterSpacing: 0.0,
+                              ),
                         ),
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 1.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 1.0, 0.0, 0.0),
                         child: Icon(
                           Icons.calendar_month_sharp,
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -175,20 +167,24 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                   ),
                   child: Container(
                     height: 200.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Column(
                       children: [
                         Align(
-                          alignment: Alignment(0.0, 0),
+                          alignment: const Alignment(0.0, 0),
                           child: FlutterFlowButtonTabBar(
                             useToggleButtonStyle: false,
-                            labelStyle:
-                                FlutterFlowTheme.of(context).titleMedium,
-                            unselectedLabelStyle: TextStyle(),
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0.0,
+                                ),
+                            unselectedLabelStyle: const TextStyle(),
                             labelColor: FlutterFlowTheme.of(context).textColor,
                             unselectedLabelColor:
                                 FlutterFlowTheme.of(context).secondaryText,
-                            backgroundColor: Color(0xFF031031),
+                            backgroundColor: const Color(0xFF031031),
                             unselectedBackgroundColor:
                                 FlutterFlowTheme.of(context).alternate,
                             borderColor: FlutterFlowTheme.of(context).primary,
@@ -197,11 +193,10 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                             borderWidth: 2.0,
                             borderRadius: 8.0,
                             elevation: 0.0,
-                            buttonMargin: EdgeInsetsDirectional.fromSTEB(
+                            buttonMargin: const EdgeInsetsDirectional.fromSTEB(
                                 8.0, 0.0, 8.0, 0.0),
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                4.0, 4.0, 4.0, 4.0),
-                            tabs: [
+                            padding: const EdgeInsets.all(4.0),
+                            tabs: const [
                               Tab(
                                 text: 'Upcoming',
                               ),
@@ -210,6 +205,9 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                               ),
                             ],
                             controller: _model.tabBarController,
+                            onTap: (i) async {
+                              [() async {}, () async {}][i]();
+                            },
                           ),
                         ),
                         Expanded(
@@ -258,7 +256,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                             snapshot.data!;
                                         if (listViewAppointmentsRecordList
                                             .isEmpty) {
-                                          return Center(
+                                          return const Center(
                                             child: EmptyListWidget(),
                                           );
                                         }
@@ -275,7 +273,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                 listViewAppointmentsRecordList[
                                                     listViewIndex];
                                             return Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 7.0, 16.0, 12.0),
                                               child: StreamBuilder<
@@ -337,13 +335,15 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .lineColor,
-                                                        boxShadow: [
+                                                        boxShadow: const [
                                                           BoxShadow(
                                                             blurRadius: 4.0,
                                                             color: Color(
                                                                 0x230E151B),
                                                             offset: Offset(
-                                                                0.0, 2.0),
+                                                              0.0,
+                                                              2.0,
+                                                            ),
                                                           )
                                                         ],
                                                         borderRadius:
@@ -351,13 +351,8 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                 .circular(8.0),
                                                       ),
                                                       child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    12.0,
-                                                                    12.0,
-                                                                    12.0),
+                                                        padding: const EdgeInsets.all(
+                                                            12.0),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -376,7 +371,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                 Expanded(
                                                                   child:
                                                                       Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             4.0,
                                                                             0.0,
@@ -387,7 +382,13 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                           .appointmentType,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .headlineSmall,
+                                                                          .headlineSmall
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Outfit',
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -404,7 +405,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                             Expanded(
                                                               child: Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             4.0,
                                                                             4.0,
@@ -424,6 +425,8 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                             'Outfit',
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .textColor,
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                       ),
                                                                 ),
                                                               ),
@@ -446,7 +449,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                   ),
                                                                   child:
                                                                       Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             8.0,
                                                                             0.0,
@@ -458,7 +461,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                               .max,
                                                                       children: [
                                                                         Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               8.0,
                                                                               4.0,
                                                                               0.0,
@@ -467,12 +470,14 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                               Text(
                                                                             dateTimeFormat('MMMEd',
                                                                                 listViewAppointmentsRecord.appointmentTime!),
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodyMedium,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Outfit',
+                                                                                  letterSpacing: 0.0,
+                                                                                ),
                                                                           ),
                                                                         ),
                                                                         Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               4.0,
                                                                               0.0,
                                                                               0.0,
@@ -481,8 +486,10 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                               Text(
                                                                             dateTimeFormat('jm',
                                                                                 appointmentCardAppointmentsRecord.appointmentTime!),
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodySmall,
+                                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                  fontFamily: 'Outfit',
+                                                                                  letterSpacing: 0.0,
+                                                                                ),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -493,7 +500,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           10.0,
@@ -513,22 +520,23 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                     size: 24.0,
                                                                   ),
                                                                   Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             7.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
                                                                     child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        appointmentCardAppointmentsRecord
-                                                                            .institution,
-                                                                        'not set',
-                                                                      ),
+                                                                      'Hello World',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodyMedium,
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Outfit',
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -554,7 +562,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           20.0, 5.0, 20.0, 24.0),
                                       child: StreamBuilder<
                                           List<AppointmentsRecord>>(
@@ -593,7 +601,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                               snapshot.data!;
                                           if (listViewAppointmentsRecordList
                                               .isEmpty) {
-                                            return Center(
+                                            return const Center(
                                               child: EmptyListWidget(),
                                             );
                                           }
@@ -610,7 +618,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                   listViewAppointmentsRecordList[
                                                       listViewIndex];
                                               return Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 5.0, 0.0, 8.0),
                                                 child: StreamBuilder<
@@ -684,13 +692,15 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .lineColor,
-                                                          boxShadow: [
+                                                          boxShadow: const [
                                                             BoxShadow(
                                                               blurRadius: 4.0,
                                                               color: Color(
                                                                   0x230F1113),
                                                               offset: Offset(
-                                                                  0.0, 2.0),
+                                                                0.0,
+                                                                2.0,
+                                                              ),
                                                             )
                                                           ],
                                                           borderRadius:
@@ -700,12 +710,8 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      12.0,
-                                                                      12.0,
-                                                                      12.0,
-                                                                      12.0),
+                                                              const EdgeInsets.all(
+                                                                  12.0),
                                                           child: Column(
                                                             mainAxisSize:
                                                                 MainAxisSize
@@ -722,7 +728,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                   Expanded(
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           4.0,
                                                                           0.0,
                                                                           0.0,
@@ -732,7 +738,11 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                         listViewAppointmentsRecord
                                                                             .appointmentType,
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .headlineSmall,
+                                                                            .headlineSmall
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -748,7 +758,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                               ),
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             8.0,
@@ -776,7 +786,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                             MainAxisSize.max,
                                                                         children: [
                                                                           Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                                                 8.0,
                                                                                 4.0,
                                                                                 8.0,
@@ -784,11 +794,14 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                             child:
                                                                                 Text(
                                                                               dateTimeFormat('MMMEd', listViewAppointmentsRecord.appointmentTime!),
-                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                              style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                    fontFamily: 'Outfit',
+                                                                                    letterSpacing: 0.0,
+                                                                                  ),
                                                                             ),
                                                                           ),
                                                                           Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                                                 0.0,
                                                                                 0.0,
                                                                                 8.0,
@@ -796,14 +809,17 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                             child:
                                                                                 Text(
                                                                               dateTimeFormat('jm', listViewAppointmentsRecord.appointmentTime!),
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Outfit',
+                                                                                    letterSpacing: 0.0,
+                                                                                  ),
                                                                             ),
                                                                           ),
                                                                         ],
                                                                       ),
                                                                     ),
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           8.0,
                                                                           0.0,
                                                                           0.0,
@@ -812,13 +828,17 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                           Text(
                                                                         'For',
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
                                                                       ),
                                                                     ),
                                                                     Expanded(
                                                                       child:
                                                                           Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             4.0,
                                                                             0.0,
                                                                             0.0,
@@ -832,6 +852,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                               .override(
                                                                                 fontFamily: 'Outfit',
                                                                                 color: FlutterFlowTheme.of(context).accent2,
+                                                                                letterSpacing: 0.0,
                                                                               ),
                                                                         ),
                                                                       ),
@@ -841,7 +862,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                               ),
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             8.0,
@@ -862,21 +883,20 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                           24.0,
                                                                     ),
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           2.0,
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
                                                                       child:
                                                                           Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          listViewAppointmentsRecord
-                                                                              .institution,
-                                                                          'not set',
-                                                                        ),
+                                                                        'Hello World',
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
                                                                       ),
                                                                     ),
                                                                   ],

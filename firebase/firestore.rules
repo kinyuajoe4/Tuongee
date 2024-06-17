@@ -4,8 +4,8 @@ service cloud.firestore {
     match /users/{document} {
       allow create: if request.auth.uid == document;
       allow read: if true;
-      allow write: if request.auth.uid == document;
-      allow delete: if false;
+      allow write: if true;
+      allow delete: if request.auth.uid == document;
     }
 
     match /appointments/{document} {
@@ -30,20 +30,6 @@ service cloud.firestore {
     }
 
     match /chat_messages/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
-    }
-
-    match /reviews/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
-    }
-
-    match /hospitals/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
@@ -76,11 +62,11 @@ service cloud.firestore {
     }
 
 
-    match /ambulance/{document} {
+    match /courses/{document} {
       allow create: if true;
       allow read: if true;
-      allow write: if true;
-      allow delete: if true;
+      allow write: if false;
+      allow delete: if false;
     }
   }
 }

@@ -4,28 +4,24 @@ import '/components/doc_details_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/components/norecords/norecords_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
 import 'activeusers_model.dart';
 export 'activeusers_model.dart';
 
 class ActiveusersWidget extends StatefulWidget {
   const ActiveusersWidget({
-    Key? key,
+    super.key,
     this.search,
-  }) : super(key: key);
+  });
 
   final String? search;
 
   @override
-  _ActiveusersWidgetState createState() => _ActiveusersWidgetState();
+  State<ActiveusersWidget> createState() => _ActiveusersWidgetState();
 }
 
 class _ActiveusersWidgetState extends State<ActiveusersWidget> {
@@ -53,15 +49,6 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return Title(
         title: 'activeusers',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -79,12 +66,12 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -104,19 +91,23 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                         onTap: () async {
                                           context.safePop();
                                         },
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.arrow_back,
                                           color: Color(0xB91726D0),
                                           size: 24.0,
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           'Active Health proffesionals',
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -128,7 +119,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                 borderRadius: 30.0,
                                 borderWidth: 1.0,
                                 buttonSize: 48.0,
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.keyboard_control,
                                   color: Color(0xFF1A1F24),
                                   size: 27.0,
@@ -145,13 +136,13 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 14.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 14.0, 0.0),
                     child: TextFormField(
                       controller: _model.textController,
                       focusNode: _model.textFieldFocusNode,
                       onChanged: (_) => EasyDebounce.debounce(
                         '_model.textController',
-                        Duration(milliseconds: 2000),
+                        const Duration(milliseconds: 2000),
                         () async {
                           // SACH
                           await queryUsersRecordOnce()
@@ -162,10 +153,10 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                       .map(
                                         (record) => TextSearchItem.fromTerms(
                                             record, [
-                                          record.displayName!,
-                                          record.speciality!,
-                                          record.locality!,
-                                          record.schedule!
+                                          record.displayName,
+                                          record.speciality,
+                                          record.locality,
+                                          record.schedule
                                         ]),
                                       )
                                       .toList(),
@@ -178,48 +169,55 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                   (_, __) => _model.simpleSearchResults = [])
                               .whenComplete(() => setState(() {}));
 
-                          setState(() {
-                            _model.listsearch = false;
-                          });
+                          _model.listsearch = false;
+                          setState(() {});
                         },
                       ),
+                      autofocus: false,
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: '\nsearch your desired medical proffesional',
-                        hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                        hintStyle:
+                            FlutterFlowTheme.of(context).bodySmall.override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0.0,
+                                ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0xB91726D0),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(12.0),
                         ),
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.search,
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Outfit',
+                            letterSpacing: 0.0,
+                          ),
                       validator:
                           _model.textControllerValidator.asValidator(context),
                     ),
@@ -261,7 +259,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                 (u) => u.uid != currentUserUid)
                                             .toList();
                                     if (listViewUsersRecordList.isEmpty) {
-                                      return NorecordsWidget();
+                                      return const NorecordsWidget();
                                     }
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
@@ -274,7 +272,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                 listViewIndex];
                                         return Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 12.0, 0.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -302,7 +300,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                       padding: MediaQuery
                                                           .viewInsetsOf(
                                                               context),
-                                                      child: Container(
+                                                      child: SizedBox(
                                                         height: 400.0,
                                                         child: DocDetailsWidget(
                                                           docdetails:
@@ -325,9 +323,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                     BorderRadius.circular(10.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 16.0, 16.0, 16.0),
+                                                padding: const EdgeInsets.all(16.0),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -376,7 +372,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           12.0,
                                                                           0.0,
@@ -396,10 +392,14 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                                         listViewUsersRecord
                                                                             .displayName,
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             3.0,
                                                                             0.0,
                                                                             0.0,
@@ -426,7 +426,9 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                                           fontFamily:
                                                                               'Outfit',
                                                                           color:
-                                                                              Color(0xFF0D0081),
+                                                                              const Color(0xFF0D0081),
+                                                                          letterSpacing:
+                                                                              0.0,
                                                                         ),
                                                                   ),
                                                                   Text(
@@ -440,6 +442,8 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                                               'Outfit',
                                                                           color:
                                                                               FlutterFlowTheme.of(context).success,
+                                                                          letterSpacing:
+                                                                              0.0,
                                                                         ),
                                                                   ),
                                                                 ],
@@ -449,7 +453,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                         ),
                                                       ],
                                                     ),
-                                                    Column(
+                                                    const Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       mainAxisAlignment:
@@ -490,7 +494,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                             searchresults[searchresultsIndex];
                                         return Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 12.0, 0.0, 0.0),
                                           child: Container(
                                             width: 100.0,
@@ -502,9 +506,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                   BorderRadius.circular(10.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      16.0, 16.0, 16.0, 16.0),
+                                              padding: const EdgeInsets.all(16.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
@@ -552,7 +554,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         12.0,
                                                                         0.0,
@@ -568,7 +570,13 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                                       .displayName,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyMedium,
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Outfit',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
                                                                 ),
                                                                 Text(
                                                                   searchresultsItem
@@ -579,8 +587,10 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                                       .override(
                                                                         fontFamily:
                                                                             'Outfit',
-                                                                        color: Color(
+                                                                        color: const Color(
                                                                             0xFF0D0081),
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                       ),
                                                                 ),
                                                                 Text(
@@ -594,6 +604,8 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                                             'Outfit',
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .success,
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                       ),
                                                                 ),
                                                               ],
@@ -603,7 +615,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Column(
+                                                  const Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     mainAxisAlignment:
