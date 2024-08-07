@@ -45,39 +45,11 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
     super.initState();
     _model = createModel(context, () => BookAppointmentModel());
 
-    _model.personsNameFocusNode ??= FocusNode();
-
     _model.problemDescriptionTextController ??= TextEditingController();
     _model.problemDescriptionFocusNode ??= FocusNode();
 
     animationsMap.addAll({
-      'textFieldOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 9.0),
-            end: const Offset(0.0, 0.0),
-          ),
-          ScaleEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(1.0, 1.0),
-            end: const Offset(1.0, 1.0),
-          ),
-        ],
-      ),
-      'dropDownOnPageLoadAnimation1': AnimationInfo(
+      'dropDownOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -129,59 +101,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
           ),
         ],
       ),
-      'dropDownOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 40.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 40.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
-          ),
-          ScaleEffect(
-            curve: Curves.easeInOut,
-            delay: 40.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(1.0, 1.0),
-            end: const Offset(1.0, 1.0),
-          ),
-        ],
-      ),
-      'dropDownOnPageLoadAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 40.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 40.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
-          ),
-          ScaleEffect(
-            curve: Curves.easeInOut,
-            delay: 40.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(1.0, 1.0),
-            end: const Offset(1.0, 1.0),
-          ),
-        ],
-      ),
-      'textFieldOnPageLoadAnimation2': AnimationInfo(
+      'textFieldOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -401,75 +321,6 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 16.0, 0.0, 0.0),
-                              child: TextFormField(
-                                controller: _model.personsNameTextController ??=
-                                    TextEditingController(
-                                  text: columnUsersRecord.displayName,
-                                ),
-                                focusNode: _model.personsNameFocusNode,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Booking For',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 24.0, 0.0, 24.0),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                validator: _model
-                                    .personsNameTextControllerValidator
-                                    .asValidator(context),
-                              ).animateOnPageLoad(animationsMap[
-                                  'textFieldOnPageLoadAnimation1']!),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 'Institution Name',
@@ -532,7 +383,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                 isSearchable: true,
                                 isMultiSelect: false,
                               ).animateOnPageLoad(animationsMap[
-                                  'dropDownOnPageLoadAnimation1']!),
+                                  'dropDownOnPageLoadAnimation']!),
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
@@ -723,160 +574,6 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                               ).animateOnPageLoad(animationsMap[
                                   'containerOnPageLoadAnimation']!),
                             ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 6.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Type',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              fontSize: 17.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 1.0, 0.0, 0.0),
-                                      child: FlutterFlowDropDown<String>(
-                                        controller: _model
-                                                .typeValueController ??=
-                                            FormFieldController<String>(null),
-                                        options: const [
-                                          'Doctors Visit',
-                                          'Routine Checkup',
-                                          'CT Scan',
-                                          'X-Ray',
-                                          'Blood Test',
-                                          'Urine Test',
-                                          'MRI',
-                                          'Ultra Sound',
-                                          'ECG'
-                                        ],
-                                        onChanged: (val) => setState(
-                                            () => _model.typeValue = val),
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.4,
-                                        height: 60.0,
-                                        searchTextStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                            ),
-                                        hintText: ' Appointm.',
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .grayLight,
-                                          size: 15.0,
-                                        ),
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        elevation: 3.0,
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                        borderWidth: 2.0,
-                                        borderRadius: 8.0,
-                                        margin: const EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 4.0, 16.0, 4.0),
-                                        hidesUnderline: true,
-                                        isSearchable: true,
-                                        isMultiSelect: false,
-                                      ).animateOnPageLoad(animationsMap[
-                                          'dropDownOnPageLoadAnimation2']!),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 6.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Duration',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              fontSize: 17.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          33.0, 1.0, 0.0, 0.0),
-                                      child: FlutterFlowDropDown<String>(
-                                        controller: _model
-                                                .durationValueController ??=
-                                            FormFieldController<String>(null),
-                                        options: const ['15', '30', '45', '60'],
-                                        onChanged: (val) => setState(
-                                            () => _model.durationValue = val),
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.4,
-                                        height: 60.0,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                            ),
-                                        hintText: 'Duration',
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .grayLight,
-                                          size: 15.0,
-                                        ),
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        elevation: 3.0,
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                        borderWidth: 2.0,
-                                        borderRadius: 8.0,
-                                        margin: const EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 4.0, 16.0, 4.0),
-                                        hidesUnderline: true,
-                                        isSearchable: false,
-                                        isMultiSelect: false,
-                                      ).animateOnPageLoad(animationsMap[
-                                          'dropDownOnPageLoadAnimation3']!),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 4.0, 0.0, 0.0),
@@ -957,7 +654,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                     .problemDescriptionTextControllerValidator
                                     .asValidator(context),
                               ).animateOnPageLoad(animationsMap[
-                                  'textFieldOnPageLoadAnimation2']!),
+                                  'textFieldOnPageLoadAnimation']!),
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1002,22 +699,8 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                   ).animateOnPageLoad(animationsMap[
                                       'buttonOnPageLoadAnimation1']!),
                                   FFButtonWidget(
-                                    onPressed: () async {
-                                      await AppointmentsRecord.collection
-                                          .doc()
-                                          .set(createAppointmentsRecordData(
-                                            appointmentType: _model.typeValue,
-                                            appointmentTime: _model.datePicked,
-                                            appointmentName: _model
-                                                .personsNameTextController.text,
-                                            appointmentDescription: _model
-                                                .problemDescriptionTextController
-                                                .text,
-                                            appointmentEmail: currentUserEmail,
-                                            appointmentPerson:
-                                                currentUserReference,
-                                          ));
-                                      context.pop();
+                                    onPressed: () {
+                                      print('Button pressed ...');
                                     },
                                     text: 'Book Now',
                                     options: FFButtonOptions(
