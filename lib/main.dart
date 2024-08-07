@@ -26,8 +26,8 @@ void main() async {
   await appState.initializePersistedState();
 
   await revenue_cat.initialize(
-    "wertyhjk",
-    "ertyuiop",
+    "goog_gdlNPysbQBUNeomxabEavunQUjq",
+    "goog_gdlNPysbQBUNeomxabEavunQUjq",
     debugLogEnabled: true,
     loadDataAfterLaunch: true,
   );
@@ -141,7 +141,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'homePage': const HomePageWidget(),
       'channelsPage': const ChannelsPageWidget(),
-      'kafengo': const KafengoWidget(),
+      'AsistantBot': const AsistantBotWidget(),
       'profilePage': const ProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -227,14 +227,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.chat_bubble,
+                  FontAwesomeIcons.bookReader,
                   color: currentIndex == 2
                       ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).accent2,
                   size: 24.0,
                 ),
                 Text(
-                  'chat bot',
+                  'Assistant Bot',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2

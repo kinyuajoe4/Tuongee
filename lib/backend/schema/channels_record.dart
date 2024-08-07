@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
 class ChannelsRecord extends FirestoreRecord {
   ChannelsRecord._(
@@ -45,6 +45,11 @@ class ChannelsRecord extends FirestoreRecord {
   DocumentReference? get crearedBy => _crearedBy;
   bool hasCrearedBy() => _crearedBy != null;
 
+  // "allowWriters" field.
+  bool? _allowWriters;
+  bool get allowWriters => _allowWriters ?? false;
+  bool hasAllowWriters() => _allowWriters != null;
+
   void _initializeFields() {
     _chanelname = snapshotData['chanelname'] as String?;
     _image = snapshotData['image'] as String?;
@@ -52,6 +57,7 @@ class ChannelsRecord extends FirestoreRecord {
     _about = snapshotData['about'] as String?;
     _isVerified = snapshotData['isVerified'] as bool?;
     _crearedBy = snapshotData['crearedBy'] as DocumentReference?;
+    _allowWriters = snapshotData['allowWriters'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -95,6 +101,7 @@ Map<String, dynamic> createChannelsRecordData({
   String? about,
   bool? isVerified,
   DocumentReference? crearedBy,
+  bool? allowWriters,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -104,6 +111,7 @@ Map<String, dynamic> createChannelsRecordData({
       'about': about,
       'isVerified': isVerified,
       'crearedBy': crearedBy,
+      'allowWriters': allowWriters,
     }.withoutNulls,
   );
 
@@ -120,7 +128,8 @@ class ChannelsRecordDocumentEquality implements Equality<ChannelsRecord> {
         e1?.following == e2?.following &&
         e1?.about == e2?.about &&
         e1?.isVerified == e2?.isVerified &&
-        e1?.crearedBy == e2?.crearedBy;
+        e1?.crearedBy == e2?.crearedBy &&
+        e1?.allowWriters == e2?.allowWriters;
   }
 
   @override
@@ -130,7 +139,8 @@ class ChannelsRecordDocumentEquality implements Equality<ChannelsRecord> {
         e?.following,
         e?.about,
         e?.isVerified,
-        e?.crearedBy
+        e?.crearedBy,
+        e?.allowWriters
       ]);
 
   @override

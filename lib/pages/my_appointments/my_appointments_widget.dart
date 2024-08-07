@@ -260,6 +260,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                             child: EmptyListWidget(),
                                           );
                                         }
+
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,
                                           shrinkWrap: true,
@@ -299,8 +300,10 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                       ),
                                                     );
                                                   }
+
                                                   final appointmentCardAppointmentsRecord =
                                                       snapshot.data!;
+
                                                   return InkWell(
                                                     splashColor:
                                                         Colors.transparent,
@@ -468,7 +471,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                               4.0),
                                                                           child:
                                                                               Text(
-                                                                            dateTimeFormat('MMMEd',
+                                                                            dateTimeFormat("MMMEd",
                                                                                 listViewAppointmentsRecord.appointmentTime!),
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                   fontFamily: 'Outfit',
@@ -484,7 +487,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                               0.0),
                                                                           child:
                                                                               Text(
-                                                                            dateTimeFormat('jm',
+                                                                            dateTimeFormat("jm",
                                                                                 appointmentCardAppointmentsRecord.appointmentTime!),
                                                                             style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                   fontFamily: 'Outfit',
@@ -605,6 +608,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                               child: EmptyListWidget(),
                                             );
                                           }
+
                                           return ListView.builder(
                                             padding: EdgeInsets.zero,
                                             shrinkWrap: true,
@@ -658,6 +662,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                             ? appointmentCardAppointmentsRecordList
                                                                 .first
                                                             : null;
+
                                                     return InkWell(
                                                       splashColor:
                                                           Colors.transparent,
@@ -793,7 +798,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                                 4.0),
                                                                             child:
                                                                                 Text(
-                                                                              dateTimeFormat('MMMEd', listViewAppointmentsRecord.appointmentTime!),
+                                                                              dateTimeFormat("MMMEd", listViewAppointmentsRecord.appointmentTime!),
                                                                               style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                     fontFamily: 'Outfit',
                                                                                     letterSpacing: 0.0,
@@ -808,7 +813,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget>
                                                                                 0.0),
                                                                             child:
                                                                                 Text(
-                                                                              dateTimeFormat('jm', listViewAppointmentsRecord.appointmentTime!),
+                                                                              dateTimeFormat("jm", listViewAppointmentsRecord.appointmentTime!),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
                                                                                     letterSpacing: 0.0,

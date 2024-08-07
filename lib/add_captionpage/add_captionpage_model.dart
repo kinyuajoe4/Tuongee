@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class AddCaptionpageModel extends FlutterFlowModel<AddCaptionpageWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
@@ -19,7 +18,6 @@ class AddCaptionpageModel extends FlutterFlowModel<AddCaptionpageWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
   }

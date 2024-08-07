@@ -183,6 +183,7 @@ class _MakeChannelWidgetState extends State<MakeChannelWidget> {
                               fontFamily: 'Poppins',
                               fontSize: 15.0,
                               letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
                             ),
                       ),
                     ),

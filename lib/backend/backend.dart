@@ -14,6 +14,8 @@ import 'schema/campaigns_record.dart';
 import 'schema/channels_record.dart';
 import 'schema/channelmessage_record.dart';
 import 'schema/courses_record.dart';
+import 'schema/diary_inputs_record.dart';
+import 'schema/mood_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -31,6 +33,8 @@ export 'schema/campaigns_record.dart';
 export 'schema/channels_record.dart';
 export 'schema/channelmessage_record.dart';
 export 'schema/courses_record.dart';
+export 'schema/diary_inputs_record.dart';
+export 'schema/mood_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -363,6 +367,80 @@ Future<List<CoursesRecord>> queryCoursesRecordOnce({
     queryCollectionOnce(
       CoursesRecord.collection,
       CoursesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query DiaryInputsRecords (as a Stream and as a Future).
+Future<int> queryDiaryInputsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DiaryInputsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DiaryInputsRecord>> queryDiaryInputsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DiaryInputsRecord.collection,
+      DiaryInputsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DiaryInputsRecord>> queryDiaryInputsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DiaryInputsRecord.collection,
+      DiaryInputsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query MoodRecords (as a Stream and as a Future).
+Future<int> queryMoodRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      MoodRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<MoodRecord>> queryMoodRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      MoodRecord.collection,
+      MoodRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<MoodRecord>> queryMoodRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      MoodRecord.collection,
+      MoodRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

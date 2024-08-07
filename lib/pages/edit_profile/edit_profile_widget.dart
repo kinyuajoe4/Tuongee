@@ -81,7 +81,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             ),
           );
         }
+
         final editProfileUsersRecord = snapshot.data!;
+
         return Title(
             title: 'editProfile',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),

@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
 class ChannelmessageRecord extends FirestoreRecord {
   ChannelmessageRecord._(
@@ -31,9 +31,14 @@ class ChannelmessageRecord extends FirestoreRecord {
   bool hasMessagetime() => _messagetime != null;
 
   // "writersName" field.
-  DocumentReference? _writersName;
-  DocumentReference? get writersName => _writersName;
+  String? _writersName;
+  String get writersName => _writersName ?? '';
   bool hasWritersName() => _writersName != null;
+
+  // "writersImage" field.
+  String? _writersImage;
+  String get writersImage => _writersImage ?? '';
+  bool hasWritersImage() => _writersImage != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
@@ -41,7 +46,8 @@ class ChannelmessageRecord extends FirestoreRecord {
     _mesage = snapshotData['mesage'] as String?;
     _image = snapshotData['image'] as String?;
     _messagetime = snapshotData['messagetime'] as DateTime?;
-    _writersName = snapshotData['writersName'] as DocumentReference?;
+    _writersName = snapshotData['writersName'] as String?;
+    _writersImage = snapshotData['writersImage'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -87,7 +93,8 @@ Map<String, dynamic> createChannelmessageRecordData({
   String? mesage,
   String? image,
   DateTime? messagetime,
-  DocumentReference? writersName,
+  String? writersName,
+  String? writersImage,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -95,6 +102,7 @@ Map<String, dynamic> createChannelmessageRecordData({
       'image': image,
       'messagetime': messagetime,
       'writersName': writersName,
+      'writersImage': writersImage,
     }.withoutNulls,
   );
 
@@ -110,12 +118,13 @@ class ChannelmessageRecordDocumentEquality
     return e1?.mesage == e2?.mesage &&
         e1?.image == e2?.image &&
         e1?.messagetime == e2?.messagetime &&
-        e1?.writersName == e2?.writersName;
+        e1?.writersName == e2?.writersName &&
+        e1?.writersImage == e2?.writersImage;
   }
 
   @override
-  int hash(ChannelmessageRecord? e) => const ListEquality()
-      .hash([e?.mesage, e?.image, e?.messagetime, e?.writersName]);
+  int hash(ChannelmessageRecord? e) => const ListEquality().hash(
+      [e?.mesage, e?.image, e?.messagetime, e?.writersName, e?.writersImage]);
 
   @override
   bool isValidKey(Object? o) => o is ChannelmessageRecord;

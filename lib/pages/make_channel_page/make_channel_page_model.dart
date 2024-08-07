@@ -18,6 +18,8 @@ class MakeChannelPageModel extends FlutterFlowModel<MakeChannelPageWidget> {
   FocusNode? yourEmailFocusNode;
   TextEditingController? yourEmailTextController;
   String? Function(BuildContext, String?)? yourEmailTextControllerValidator;
+  // State field(s) for Switch widget.
+  bool? switchValue;
 
   @override
   void initState(BuildContext context) {}

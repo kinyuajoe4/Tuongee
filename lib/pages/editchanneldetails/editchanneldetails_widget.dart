@@ -44,6 +44,7 @@ class _EditchanneldetailsWidgetState extends State<EditchanneldetailsWidget> {
         TextEditingController(text: widget.channeldocpassed?.about);
     _model.yourEmailFocusNode ??= FocusNode();
 
+    _model.switchValue = widget.channeldocpassed!.allowWriters;
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -75,7 +76,9 @@ class _EditchanneldetailsWidgetState extends State<EditchanneldetailsWidget> {
             ),
           );
         }
+
         final editchanneldetailsUsersRecord = snapshot.data!;
+
         return Title(
             title: 'editchanneldetails',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -388,6 +391,78 @@ class _EditchanneldetailsWidgetState extends State<EditchanneldetailsWidget> {
                                   validator: _model
                                       .yourEmailTextControllerValidator
                                       .asValidator(context),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        Text(
+                                          'Who can send messages?',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Switch.adaptive(
+                                      value: _model.switchValue!,
+                                      onChanged: (newValue) async {
+                                        setState(() =>
+                                            _model.switchValue = newValue);
+                                      },
+                                      activeColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      activeTrackColor:
+                                          FlutterFlowTheme.of(context).accent1,
+                                      inactiveTrackColor:
+                                          FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      inactiveThumbColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                    ),
+                                    Stack(
+                                      children: [
+                                        if (_model.switchValue == true)
+                                          Text(
+                                            'Set to Anyone',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        if (_model.switchValue == false)
+                                          Text(
+                                            'Only me',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                               Padding(

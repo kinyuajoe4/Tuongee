@@ -289,8 +289,15 @@ extension FFTextEditingControllerExt on TextEditingController? {
 }
 
 extension IterableExt<T> on Iterable<T> {
-  List<T> sortedList<S extends Comparable>([S Function(T)? keyOf]) => toList()
-    ..sort(keyOf == null ? null : ((a, b) => keyOf(a).compareTo(keyOf(b))));
+  List<T> sortedList<S extends Comparable>(
+      {S Function(T)? keyOf, bool desc = false}) {
+    final sortedAscending = toList()
+      ..sort(keyOf == null ? null : ((a, b) => keyOf(a).compareTo(keyOf(b))));
+    if (desc) {
+      return sortedAscending.reversed.toList();
+    }
+    return sortedAscending;
+  }
 
   List<S> mapIndexed<S>(S Function(int, T) func) => toList()
       .asMap()
@@ -345,6 +352,14 @@ extension FFStringExt on String {
 
 extension ListFilterExt<T> on Iterable<T?> {
   List<T> get withoutNulls => where((s) => s != null).map((e) => e!).toList();
+}
+
+extension MapFilterExtensions<T> on Map<String, T?> {
+  Map<String, T> get withoutNulls => Map.fromEntries(
+        entries
+            .where((e) => e.value != null)
+            .map((e) => MapEntry(e.key, e.value as T)),
+      );
 }
 
 extension MapListContainsExt on List<dynamic> {

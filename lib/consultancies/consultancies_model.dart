@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class ConsultanciesModel extends FlutterFlowModel<ConsultanciesWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -25,7 +24,6 @@ class ConsultanciesModel extends FlutterFlowModel<ConsultanciesWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     norecordsModel1.dispose();
     norecordsModel2.dispose();

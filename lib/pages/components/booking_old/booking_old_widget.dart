@@ -82,7 +82,9 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                 ),
               );
             }
+
             final columnUsersRecord = snapshot.data!;
+
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -438,7 +440,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                                           20.0, 4.0, 0.0, 0.0),
                                       child: Text(
                                         dateTimeFormat(
-                                            'MMMMEEEEd', _model.datePicked),
+                                            "MMMMEEEEd", _model.datePicked),
                                         style: FlutterFlowTheme.of(context)
                                             .bodySmall
                                             .override(

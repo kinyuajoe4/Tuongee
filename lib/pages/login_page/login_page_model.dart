@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class LoginPageModel extends FlutterFlowModel<LoginPageWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -47,7 +46,6 @@ class LoginPageModel extends FlutterFlowModel<LoginPageWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     emailAddressLoginFocusNode?.dispose();
     emailAddressLoginTextController?.dispose();

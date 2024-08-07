@@ -1,5 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/components/main_logo/main_logo_widget.dart';
+import '/pages/main_logo/main_logo_widget.dart';
 import 'find_symptoms_widget.dart' show FindSymptomsWidget;
 import 'package:flutter/material.dart';
 

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class ChannelchatpageModel extends FlutterFlowModel<ChannelchatpageWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
@@ -20,7 +19,6 @@ class ChannelchatpageModel extends FlutterFlowModel<ChannelchatpageWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
   }

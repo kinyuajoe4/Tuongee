@@ -74,6 +74,7 @@ class _DocDetailsWidgetState extends State<DocDetailsWidget> {
           final cardTask3ChatsRecord = cardTask3ChatsRecordList.isNotEmpty
               ? cardTask3ChatsRecordList.first
               : null;
+
           return Container(
             width: double.infinity,
             decoration: BoxDecoration(

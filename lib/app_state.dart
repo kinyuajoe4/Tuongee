@@ -39,4 +39,34 @@ class FFAppState extends ChangeNotifier {
   set selectedChannelDetails(DocumentReference? value) {
     _selectedChannelDetails = value;
   }
+
+  String _threadID = '';
+  String get threadID => _threadID;
+  set threadID(String value) {
+    _threadID = value;
+  }
+
+  String _FeelingsToday = '';
+  String get FeelingsToday => _FeelingsToday;
+  set FeelingsToday(String value) {
+    _FeelingsToday = value;
+  }
+
+  String _thoughts = '';
+  String get thoughts => _thoughts;
+  set thoughts(String value) {
+    _thoughts = value;
+  }
+
+  String _apiKey = 'sk-None-P8PAWgDoctvfnpKBLkoAT3BlbkFJcwO40u2LKT31MgWcUJEX';
+  String get apiKey => _apiKey;
+  set apiKey(String value) {
+    _apiKey = value;
+  }
+
+  String _assistantId = 'asst_G891aoxUyjcTLTFWK51sF6g1';
+  String get assistantId => _assistantId;
+  set assistantId(String value) {
+    _assistantId = value;
+  }
 }

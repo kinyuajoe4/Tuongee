@@ -295,6 +295,16 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                child: Text(
+                  'Book Appointment',
+                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                        fontFamily: 'Outfit',
+                        letterSpacing: 0.0,
+                      ),
+                ),
+              ),
               Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
                 height: 710.0,
@@ -325,7 +335,9 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                           ),
                         );
                       }
+
                       final columnUsersRecord = snapshot.data!;
+
                       return SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -338,19 +350,6 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                               endIndent: 150.0,
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 0.0),
-                              child: Text(
-                                'Book Appointment',
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineSmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -644,7 +643,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                                             .fromSTEB(20.0, 4.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      dateTimeFormat('MMMEd',
+                                                      dateTimeFormat("MMMEd",
                                                           _model.datePicked),
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -667,7 +666,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                                             .fromSTEB(2.0, 4.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      dateTimeFormat('jm',
+                                                      dateTimeFormat("jm",
                                                           _model.datePicked),
                                                       style: FlutterFlowTheme
                                                               .of(context)

@@ -10,7 +10,6 @@ class ChannelsPageModel extends FlutterFlowModel<ChannelsPageWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for chanelsearch widget.
   FocusNode? chanelsearchFocusNode;
   TextEditingController? chanelsearchTextController;
@@ -26,7 +25,6 @@ class ChannelsPageModel extends FlutterFlowModel<ChannelsPageWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     chanelsearchFocusNode?.dispose();
     chanelsearchTextController?.dispose();
   }

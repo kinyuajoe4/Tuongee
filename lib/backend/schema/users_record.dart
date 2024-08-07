@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -96,6 +95,11 @@ class UsersRecord extends FirestoreRecord {
   String get tittle => _tittle ?? '';
   bool hasTittle() => _tittle != null;
 
+  // "subcribedToCourse" field.
+  bool? _subcribedToCourse;
+  bool get subcribedToCourse => _subcribedToCourse ?? false;
+  bool hasSubcribedToCourse() => _subcribedToCourse != null;
+
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
@@ -113,6 +117,7 @@ class UsersRecord extends FirestoreRecord {
     _schedule = snapshotData['schedule'] as String?;
     _ordertime = snapshotData['ordertime'] as DateTime?;
     _tittle = snapshotData['tittle'] as String?;
+    _subcribedToCourse = snapshotData['subcribedToCourse'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -165,6 +170,7 @@ Map<String, dynamic> createUsersRecordData({
   String? schedule,
   DateTime? ordertime,
   String? tittle,
+  bool? subcribedToCourse,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -184,6 +190,7 @@ Map<String, dynamic> createUsersRecordData({
       'schedule': schedule,
       'ordertime': ordertime,
       'tittle': tittle,
+      'subcribedToCourse': subcribedToCourse,
     }.withoutNulls,
   );
 
@@ -210,7 +217,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.locality == e2?.locality &&
         e1?.schedule == e2?.schedule &&
         e1?.ordertime == e2?.ordertime &&
-        e1?.tittle == e2?.tittle;
+        e1?.tittle == e2?.tittle &&
+        e1?.subcribedToCourse == e2?.subcribedToCourse;
   }
 
   @override
@@ -230,7 +238,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.locality,
         e?.schedule,
         e?.ordertime,
-        e?.tittle
+        e?.tittle,
+        e?.subcribedToCourse
       ]);
 
   @override

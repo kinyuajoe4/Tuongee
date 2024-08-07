@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -11,33 +12,76 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start OpenAI ChatGPT Group Code
 
 class OpenAIChatGPTGroup {
-  static String getBaseUrl() => 'https://api.openai.com/v1';
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://api.openai.com/v1';
   static Map<String, String> headers = {
-    'Content-Type': 'application/json',
+    'Authorization': 'Bearer [token]',
+    'OpenAI-Beta': 'assistants=v1',
   };
-  static SendFullPromptCall sendFullPromptCall = SendFullPromptCall();
+  static ThreadsCall threadsCall = ThreadsCall();
+  static MessageCall messageCall = MessageCall();
+  static RunCall runCall = RunCall();
+  static RetrieverunCall retrieverunCall = RetrieverunCall();
+  static MessagesCall messagesCall = MessagesCall();
 }
 
-class SendFullPromptCall {
+class ThreadsCall {
   Future<ApiCallResponse> call({
-    String? apiKey = '',
-    dynamic promptJson,
+    String? token = '',
   }) async {
-    final baseUrl = OpenAIChatGPTGroup.getBaseUrl();
+    final baseUrl = OpenAIChatGPTGroup.getBaseUrl(
+      token: token,
+    );
 
-    final prompt = _serializeJson(promptJson);
-    final ffApiRequestBody = '''
-{
-  "model": "gpt-3.5-turbo",
-  "messages": $prompt
-}''';
     return ApiManager.instance.makeApiCall(
-      callName: 'Send Full Prompt',
-      apiUrl: '$baseUrl/chat/completions',
+      callName: 'threads',
+      apiUrl: '$baseUrl/threads',
       callType: ApiCallType.POST,
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer',
+        'Authorization': 'Bearer $token',
+        'OpenAI-Beta': 'assistants=v1',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic threadId(dynamic response) => getJsonField(
+        response,
+        r'''$.id''',
+      );
+}
+
+class MessageCall {
+  Future<ApiCallResponse> call({
+    String? threadId = '',
+    String? content = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OpenAIChatGPTGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "role": "user",
+  "content": "$content"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'message',
+      apiUrl: '$baseUrl/threads/$threadId/messages',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'OpenAI-Beta': 'assistants=v1',
       },
       params: {},
       body: ffApiRequestBody,
@@ -46,21 +90,118 @@ class SendFullPromptCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class RunCall {
+  Future<ApiCallResponse> call({
+    String? threadId = '',
+    String? assistantId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OpenAIChatGPTGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "assistant_id": "$assistantId"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'run',
+      apiUrl: '$baseUrl/threads/$threadId/runs',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'OpenAI-Beta': 'assistants=v1',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
 
-  dynamic createdTimestamp(dynamic response) => getJsonField(
+  dynamic runId(dynamic response) => getJsonField(
         response,
-        r'''$.created''',
+        r'''$.id''',
       );
-  dynamic role(dynamic response) => getJsonField(
+}
+
+class RetrieverunCall {
+  Future<ApiCallResponse> call({
+    String? threadId = '',
+    String? runId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OpenAIChatGPTGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'retrieverun',
+      apiUrl: '$baseUrl/threads/$threadId/runs/$runId',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'OpenAI-Beta': 'assistants=v1',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic status(dynamic response) => getJsonField(
         response,
-        r'''$.choices[:].message.role''',
+        r'''$.status''',
       );
-  dynamic content(dynamic response) => getJsonField(
+}
+
+class MessagesCall {
+  Future<ApiCallResponse> call({
+    String? threadId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OpenAIChatGPTGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'messages',
+      apiUrl: '$baseUrl/threads/$threadId/messages',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'OpenAI-Beta': 'assistants=v1',
+      },
+      params: {
+        'limit': 1,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic data(dynamic response) => getJsonField(
         response,
-        r'''$.choices[:].message.content''',
+        r'''$.data[0].content[0]''',
       );
 }
 
@@ -73,13 +214,15 @@ class OpenAimodelCall {
       apiUrl: 'https://api.openai.com/v1/models',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer',
+        'Authorization':
+            'Bearer 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',
       },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -100,7 +243,8 @@ class TextcompletionCall {
       apiUrl: 'https://api.openai.com/v1/completions',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer',
+        'Authorization':
+            'Bearer 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',
       },
       params: {},
       body: ffApiRequestBody,
@@ -109,6 +253,7 @@ class TextcompletionCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -148,7 +293,8 @@ class TexteditCall {
       apiUrl: 'https://api.openai.com/v1/edits',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer',
+        'Authorization':
+            'Bearer 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',
       },
       params: {},
       body: ffApiRequestBody,
@@ -157,6 +303,7 @@ class TexteditCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -185,7 +332,8 @@ class ImagegenerationCall {
       apiUrl: 'https://api.openai.com/v1/images/generations',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer',
+        'Authorization':
+            'Bearer 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',
       },
       params: {},
       body: ffApiRequestBody,
@@ -194,6 +342,7 @@ class ImagegenerationCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }

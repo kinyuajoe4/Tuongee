@@ -261,7 +261,9 @@ class _CategoriesWidgetState extends State<CategoriesWidget>
             ),
           );
         }
+
         final categoriesUsersRecord = snapshot.data!;
+
         return Title(
             title: 'categories',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),

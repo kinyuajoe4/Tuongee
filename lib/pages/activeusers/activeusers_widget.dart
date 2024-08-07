@@ -53,9 +53,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
         title: 'activeusers',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -261,6 +259,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                     if (listViewUsersRecordList.isEmpty) {
                                       return const NorecordsWidget();
                                     }
+
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
@@ -288,13 +287,8 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                                 context: context,
                                                 builder: (context) {
                                                   return GestureDetector(
-                                                    onTap: () => _model
-                                                            .unfocusNode
-                                                            .canRequestFocus
-                                                        ? FocusScope.of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode)
-                                                        : FocusScope.of(context)
+                                                    onTap: () =>
+                                                        FocusScope.of(context)
                                                             .unfocus(),
                                                     child: Padding(
                                                       padding: MediaQuery
@@ -483,6 +477,7 @@ class _ActiveusersWidgetState extends State<ActiveusersWidget> {
                                   builder: (context) {
                                     final searchresults =
                                         _model.simpleSearchResults.toList();
+
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,

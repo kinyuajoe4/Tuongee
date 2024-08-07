@@ -63,7 +63,9 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
             ),
           );
         }
+
         final appointmentDetailsAppointmentsRecord = snapshot.data!;
+
         return Title(
             title: 'appointmentDetails',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -268,7 +270,9 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                 ),
                               );
                             }
+
                             final containerAppointmentsRecord = snapshot.data!;
+
                             return Container(
                               width: double.infinity,
                               height: 60.0,
@@ -396,7 +400,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                         children: [
                           Text(
                             dateTimeFormat(
-                                'MMMEd',
+                                "MMMEd",
                                 appointmentDetailsAppointmentsRecord
                                     .appointmentTime!),
                             style: FlutterFlowTheme.of(context)
@@ -413,7 +417,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                   4.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 dateTimeFormat(
-                                    'jm',
+                                    "jm",
                                     appointmentDetailsAppointmentsRecord
                                         .appointmentTime!),
                                 style: FlutterFlowTheme.of(context)

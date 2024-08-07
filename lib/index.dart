@@ -47,3 +47,18 @@ export '/add_captionpage/add_captionpage_widget.dart' show AddCaptionpageWidget;
 export '/testchannel/testchannel_widget.dart' show TestchannelWidget;
 export '/pages/editchanneldetails/editchanneldetails_widget.dart'
     show EditchanneldetailsWidget;
+export '/pages/kafengo_copy/kafengo_copy_widget.dart' show KafengoCopyWidget;
+export '/create_diary_entry/create_diary_entry_widget.dart'
+    show CreateDiaryEntryWidget;
+export '/chhose_mood/chhose_mood_widget.dart' show ChhoseMoodWidget;
+export '/create_diary_entry_copy/create_diary_entry_copy_widget.dart'
+    show CreateDiaryEntryCopyWidget;
+export '/thoughts/thoughts_widget.dart' show ThoughtsWidget;
+export '/therapeutic_questions/therapeutic_questions_widget.dart'
+    show TherapeuticQuestionsWidget;
+export '/asistant_bot/asistant_bot_widget.dart' show AsistantBotWidget;
+export '/pages/diary/diary_widget.dart' show DiaryWidget;
+export '/swabir/swabir_widget.dart' show SwabirWidget;
+export '/admindashoard/admindashoard_widget.dart' show AdmindashoardWidget;
+export '/shock_page/shock_page_widget.dart' show ShockPageWidget;
+export '/content1/content1_widget.dart' show Content1Widget;

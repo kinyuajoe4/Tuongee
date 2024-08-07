@@ -85,13 +85,12 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
         final chitchatChatsRecord = chitchatChatsRecordList.isNotEmpty
             ? chitchatChatsRecordList.first
             : null;
+
         return Title(
             title: 'chitchat',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: const Color(0xB9FAFAFA),
@@ -292,6 +291,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                         List<ChatMessagesRecord>
                                             listViewChatMessagesRecordList =
                                             snapshot.data!;
+
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,
                                           shrinkWrap: true,
@@ -444,7 +444,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                             Padding(
                                                                               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 21.0, 0.0),
                                                                               child: Text(
-                                                                                dateTimeFormat('jm', listViewChatMessagesRecord.timestamp!),
+                                                                                dateTimeFormat("jm", listViewChatMessagesRecord.timestamp!),
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Outfit',
                                                                                       color: FlutterFlowTheme.of(context).info,
@@ -627,7 +627,7 @@ class _ChitchatWidgetState extends State<ChitchatWidget> {
                                                                                 child: Padding(
                                                                                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 7.0, 0.0),
                                                                                   child: Text(
-                                                                                    dateTimeFormat('jm', listViewChatMessagesRecord.timestamp!),
+                                                                                    dateTimeFormat("jm", listViewChatMessagesRecord.timestamp!),
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                           fontFamily: 'Outfit',
                                                                                           color: const Color(0xFF0017FF),

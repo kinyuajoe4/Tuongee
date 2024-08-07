@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class MedrefillModel extends FlutterFlowModel<MedrefillWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -25,7 +24,6 @@ class MedrefillModel extends FlutterFlowModel<MedrefillWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     norecordsModel1.dispose();
     norecordsModel2.dispose();

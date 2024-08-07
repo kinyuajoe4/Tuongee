@@ -234,14 +234,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'kafengo',
           path: '/kafengo',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'kafengo')
-              : KafengoWidget(
-                  tittle: params.getParam(
-                    'tittle',
-                    ParamType.String,
-                  ),
-                ),
+          builder: (context, params) => KafengoWidget(
+            tittle: params.getParam(
+              'tittle',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: 'review',
@@ -297,10 +295,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/channelchatpage',
           asyncParams: {
             'chaneldetail': getDoc(['channels'], ChannelsRecord.fromSnapshot),
+            'user': getDoc(['users'], UsersRecord.fromSnapshot),
           },
           builder: (context, params) => ChannelchatpageWidget(
             chaneldetail: params.getParam(
               'chaneldetail',
+              ParamType.Document,
+            ),
+            user: params.getParam(
+              'user',
               ParamType.Document,
             ),
           ),
@@ -434,6 +437,94 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'kafengoCopy',
+          path: '/kafengoCopy',
+          builder: (context, params) => KafengoCopyWidget(
+            tittle: params.getParam(
+              'tittle',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'CreateDiaryEntry',
+          path: '/createDiaryEntry',
+          builder: (context, params) => const CreateDiaryEntryWidget(),
+        ),
+        FFRoute(
+          name: 'chhoseMood',
+          path: '/chhoseMood',
+          builder: (context, params) => const ChhoseMoodWidget(),
+        ),
+        FFRoute(
+          name: 'CreateDiaryEntryCopy',
+          path: '/createDiaryEntryCopy',
+          builder: (context, params) => CreateDiaryEntryCopyWidget(
+            passedDoc: params.getParam(
+              'passedDoc',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['mood'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Thoughts',
+          path: '/thoughts',
+          builder: (context, params) => ThoughtsWidget(
+            paasedDoc: params.getParam(
+              'paasedDoc',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['mood'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'TherapeuticQuestions',
+          path: '/therapeuticQuestions',
+          builder: (context, params) => TherapeuticQuestionsWidget(
+            passeddoc: params.getParam(
+              'passeddoc',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['mood'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'AsistantBot',
+          path: '/asistantBot',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'AsistantBot')
+              : const AsistantBotWidget(),
+        ),
+        FFRoute(
+          name: 'Diary',
+          path: '/diary',
+          builder: (context, params) => const DiaryWidget(),
+        ),
+        FFRoute(
+          name: 'swabir',
+          path: '/swabir',
+          builder: (context, params) => const SwabirWidget(),
+        ),
+        FFRoute(
+          name: 'admindashoard',
+          path: '/admindashoard',
+          builder: (context, params) => const AdmindashoardWidget(),
+        ),
+        FFRoute(
+          name: 'ShockPage',
+          path: '/shockPage',
+          builder: (context, params) => const ShockPageWidget(),
+        ),
+        FFRoute(
+          name: 'content1',
+          path: '/content1',
+          builder: (context, params) => const Content1Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -553,6 +644,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -571,6 +663,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }

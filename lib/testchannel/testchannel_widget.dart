@@ -39,9 +39,7 @@ class _TestchannelWidgetState extends State<TestchannelWidget> {
         title: 'testchannel',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -81,6 +79,7 @@ class _TestchannelWidgetState extends State<TestchannelWidget> {
                   }
                   List<ChannelsRecord> columnChannelsRecordList =
                       snapshot.data!;
+
                   return Column(
                     mainAxisSize: MainAxisSize.max,
                     children: List.generate(columnChannelsRecordList.length,

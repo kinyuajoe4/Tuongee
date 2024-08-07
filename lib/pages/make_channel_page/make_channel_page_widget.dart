@@ -39,6 +39,7 @@ class _MakeChannelPageWidgetState extends State<MakeChannelPageWidget> {
     _model.yourEmailTextController ??= TextEditingController();
     _model.yourEmailFocusNode ??= FocusNode();
 
+    _model.switchValue = false;
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -70,7 +71,9 @@ class _MakeChannelPageWidgetState extends State<MakeChannelPageWidget> {
             ),
           );
         }
+
         final makeChannelPageUsersRecord = snapshot.data!;
+
         return Title(
             title: 'makeChannelPage',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -387,6 +390,50 @@ class _MakeChannelPageWidgetState extends State<MakeChannelPageWidget> {
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Allow people to send messages in your channel.',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Switch.adaptive(
+                                      value: _model.switchValue!,
+                                      onChanged: (newValue) async {
+                                        setState(() =>
+                                            _model.switchValue = newValue);
+                                      },
+                                      activeColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      activeTrackColor:
+                                          FlutterFlowTheme.of(context).accent1,
+                                      inactiveTrackColor:
+                                          FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      inactiveThumbColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 24.0, 0.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -401,6 +448,7 @@ class _MakeChannelPageWidgetState extends State<MakeChannelPageWidget> {
                                               .yourEmailTextController.text,
                                           isVerified: false,
                                           crearedBy: currentUserReference,
+                                          allowWriters: _model.switchValue,
                                         ));
 
                                     context.pushNamed('channelsPage');

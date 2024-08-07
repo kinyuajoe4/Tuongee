@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/pages/components/empty_list/empty_list_widget.dart';
-import '/pages/components/noresults/noresults_widget.dart';
+import '/pages/noresults/noresults_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -84,9 +84,7 @@ class _ChannelsPageWidgetState extends State<ChannelsPageWidget>
         title: 'channelsPage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -428,6 +426,7 @@ class _ChannelsPageWidgetState extends State<ChannelsPageWidget>
                                 if (listViewChannelsRecordList.isEmpty) {
                                   return const EmptyListWidget();
                                 }
+
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   shrinkWrap: true,
@@ -459,8 +458,10 @@ class _ChannelsPageWidgetState extends State<ChannelsPageWidget>
                                               ),
                                             );
                                           }
+
                                           final containerChannelsRecord =
                                               snapshot.data!;
+
                                           return InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -696,6 +697,7 @@ class _ChannelsPageWidgetState extends State<ChannelsPageWidget>
                                 if (showsearchresult.isEmpty) {
                                   return const NoresultsWidget();
                                 }
+
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   shrinkWrap: true,
@@ -727,8 +729,10 @@ class _ChannelsPageWidgetState extends State<ChannelsPageWidget>
                                               ),
                                             );
                                           }
+
                                           final containerChannelsRecord =
                                               snapshot.data!;
+
                                           return InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -979,10 +983,7 @@ class _ChannelsPageWidgetState extends State<ChannelsPageWidget>
                             context: context,
                             builder: (context) {
                               return GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
+                                onTap: () => FocusScope.of(context).unfocus(),
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
                                   child: const MakeChannelWidget(),

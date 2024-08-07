@@ -62,7 +62,9 @@ class _AppointmentDetailsProfileWidgetState
             ),
           );
         }
+
         final appointmentDetailsProfileAppointmentsRecord = snapshot.data!;
+
         return Title(
             title: 'appointmentDetailsProfile',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -230,8 +232,10 @@ class _AppointmentDetailsProfileWidgetState
                                   ),
                                 );
                               }
+
                               final containerAppointmentsRecord =
                                   snapshot.data!;
+
                               return Material(
                                 color: Colors.transparent,
                                 elevation: 3.0,
@@ -367,7 +371,7 @@ class _AppointmentDetailsProfileWidgetState
                         children: [
                           Text(
                             dateTimeFormat(
-                                'yMMMd',
+                                "yMMMd",
                                 appointmentDetailsProfileAppointmentsRecord
                                     .appointmentTime!),
                             style: FlutterFlowTheme.of(context)
@@ -382,7 +386,7 @@ class _AppointmentDetailsProfileWidgetState
                                 4.0, 0.0, 0.0, 0.0),
                             child: Text(
                               dateTimeFormat(
-                                  'jm',
+                                  "jm",
                                   appointmentDetailsProfileAppointmentsRecord
                                       .appointmentTime!),
                               style: FlutterFlowTheme.of(context)

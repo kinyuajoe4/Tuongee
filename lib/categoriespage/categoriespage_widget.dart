@@ -52,9 +52,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
         title: 'categoriespage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -271,6 +269,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                 child: EmptyListWidget(),
                                               );
                                             }
+
                                             return ListView.builder(
                                               padding: EdgeInsets.zero,
                                               shrinkWrap: true,
@@ -311,8 +310,10 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                           ),
                                                         );
                                                       }
+
                                                       final appointmentCardAppointmentsRecord =
                                                           snapshot.data!;
+
                                                       return InkWell(
                                                         splashColor:
                                                             Colors.transparent,
@@ -480,7 +481,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                             Padding(
                                                                               padding: const EdgeInsetsDirectional.fromSTEB(5.0, 4.0, 0.0, 4.0),
                                                                               child: Text(
-                                                                                dateTimeFormat('MMMEd', listViewAppointmentsRecord.appointmentTime!),
+                                                                                dateTimeFormat("MMMEd", listViewAppointmentsRecord.appointmentTime!),
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Outfit',
                                                                                       fontSize: 11.0,
@@ -499,7 +500,7 @@ class _CategoriespageWidgetState extends State<CategoriespageWidget>
                                                                             Padding(
                                                                               padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                                                                               child: Text(
-                                                                                dateTimeFormat('jm', appointmentCardAppointmentsRecord.appointmentTime!),
+                                                                                dateTimeFormat("jm", appointmentCardAppointmentsRecord.appointmentTime!),
                                                                                 style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                       fontFamily: 'Outfit',
                                                                                       fontSize: 11.0,
